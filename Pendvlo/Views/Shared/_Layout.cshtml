@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Customer.css")">
+
+    @if (IsSectionDefined("header"))
+    {
+        @RenderSection("header", required: false)
+    }
+
+</head>
+<body>
+
+    @if (IsSectionDefined("mainMenu"))
+    {
+        @RenderSection("mainMenu", required: false)
+    }
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    @* Sweet alerts *@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+
+    <script type="text/JavaScript">
+
+        $(document).ready(function () {
+
+            var trigger = $('.hamburger'),
+                overlay = $('.overlay'),
+                isClosed = false;
+
+            trigger.click(function () {
+                hamburger_cross();
+            });
+
+            function hamburger_cross() {
+
+                if (isClosed == true) {
+                    overlay.hide();
+                    trigger.removeClass('is-open');
+                    trigger.addClass('is-closed');
+                    isClosed = false;
+                } else {
+                    overlay.show();
+                    trigger.removeClass('is-closed');
+                    trigger.addClass('is-open');
+                    isClosed = true;
+                }
+            }
+
+            $('[data-toggle="offcanvas"]').click(function () {
+                $('#wrapper').toggleClass('toggled');
+            });
+
+            /*
+                Clic on logout menu
+             */
+            $("#logoutMenu").click(function () {
+
+                /*
+                    Validate if really close session
+                    */
+                swal({
+                    title: "¿Seguro que quieres continuar?",
+                    text: "",
+                    icon: "",
+                    buttons: [
+                        'No',
+                        'Si'
+                    ],
+                    dangerMode: false,
+                }).then(function (isConfirm) {
+                    if (isConfirm) {
+                        window.location = "/login/logout";
+                    } else {
+
+                    }
+                })
+            });
+
+            /*
+               Clic on customers menu
+            */
+            $("#clientesMenu").click(function () {
+
+                /*
+                    Go to clientes view
+                    */
+                window.location = "/customer";
+            });
+
+            /*
+               Clic on home menu
+            */
+            $("#homeMenu").click(function () {
+
+                /*
+                    Go to home view
+                    */
+                window.location = "/";
+            });
+
+            /*
+               Clic on products menu
+            */
+            $("#productsMenu").click(function () {
+
+                /*
+                    Go to home view
+                    */
+                window.location = "/products";
+            });
+
+            /*
+               Clic on users menu
+            */
+            $("#usersMenu").click(function () {
+
+                /*
+                    Go to home view
+                    */
+                window.location = "/users";
+            });
+
+            @if (IsSectionDefined("documentReady"))
+            {
+                @RenderSection("documentReady", required: false)
+            }
+        });
+
+    </script>
+
+</body>
+</html>
