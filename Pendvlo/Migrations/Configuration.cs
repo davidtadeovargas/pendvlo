@@ -23,6 +23,22 @@ namespace Pendvlo.Migrations
             context.Users.AddOrUpdate(x => x.ID,
                 new User() { ID = 1, Name = "admin", User_ = "admin", Password = "123456789", Sales = 1 }
                 );
+
+            /*
+                Modules
+             */
+            context.Modules.AddOrUpdate(x => x.ID,
+                new Module { ID = 0, Name = "Produccion" }
+                );
+            context.Modules.AddOrUpdate(x => x.ID,
+                new Module { ID = 1, Name = "Almacen" }
+                );
+            context.Modules.AddOrUpdate(x => x.ID,
+                new Module { ID = 2, Name = "Ventas" }
+                );
+            context.Modules.AddOrUpdate(x => x.ID,
+                new Module { ID = 3, Name = "Administracion" }
+                );
         }
     }
 }

@@ -143,7 +143,9 @@
     <Compile Include="DAL\DBContext.cs" />
     <Compile Include="DAL\DBInitializer.cs" />
     <Compile Include="DAL\Repository\LoginReposotiry.cs" />
+    <Compile Include="DAL\Repository\ModulesRepository.cs" />
     <Compile Include="DAL\Repository\Repository.cs" />
+    <Compile Include="DAL\Repository\UsersRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -155,11 +157,16 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Http\DeleteUserRequestModel.cs" />
     <Compile Include="Models\Http\LoginRequestModel.cs" />
+    <Compile Include="Models\Http\NewUserRequestModel.cs" />
     <Compile Include="Models\Http\Result.cs" />
     <Compile Include="Models\Module.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Views\TYPE.cs" />
+    <Compile Include="Models\Views\UsersIndexViewModel.cs" />
+    <Compile Include="Models\Views\UsersViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +223,8 @@
     <Content Include="Content\sweetalert\docs.css" />
     <Content Include="Content\sweetalert\sweet-alert.css" />
     <Content Include="Content\sweetalert\thumbs-up.jpg" />
+    <Content Include="Content\Users.css" />
+    <Content Include="Content\UsersIndex.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -328,11 +337,11 @@
     <Content Include="Views\Shared\MainMenu\_ProductsMenu.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Shared\MainMenu\_UsersMenu.cshtml" />
+    <Content Include="Views\Users\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Production\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />

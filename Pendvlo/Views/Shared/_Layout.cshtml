@@ -144,6 +144,34 @@
                 window.location = "/users";
             });
 
+            /*
+                Clic on view all users menu
+             */
+            $("#viewUsersMenu").click(function () {
+                window.location = "/Users";
+            });
+        
+            /*
+                Clic on new user menu
+             */
+            $("#newUserMenu").click(function () {
+                window.location = "/Users/NewUserView";
+            });
+
+            /*
+                Clic on edit user menu
+             */
+            $("#editUserMenu").click(function () {
+                window.location = "/Users/EditUserView";
+            });
+
+            /*
+                Clic on delete user menu
+             */
+            $("#deleteUserMenu").click(function () {
+                window.location = "/Users/DeleteUserView";
+            }); 
+
             @if (IsSectionDefined("documentReady"))
             {
                 @RenderSection("documentReady", required: false)

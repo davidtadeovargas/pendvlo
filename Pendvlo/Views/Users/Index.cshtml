@@ -1,8 +1,30 @@
-﻿
+﻿@model Pendvlo.Models.Views.UsersIndexViewModel
+
 @{
-    ViewBag.Title = "Usuarios";
+    string tittle = "";
+    string url = "";
+
+    if (Model.Type == Pendvlo.Models.Views.TYPE.NEW)
+    {
+        tittle = "Nuevo";
+        url = "/users/NewUser";
+    }
+    else if (Model.Type == Pendvlo.Models.Views.TYPE.MODIFY)
+    {
+        tittle = "Modificar";
+    }
+    else
+    {
+        tittle = "Undefined";
+    }
+
+    ViewBag.Title = tittle + " Usuario";
 }
 
+@section header{
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/UsersIndex.css")">
+}
 
 @section mainMenu{
 
@@ -21,10 +43,134 @@
     </button>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h1>Usuarios</h1>
+            <div class="col-md-4">
+                <div class="form_main">
+                    <h4 class="heading">
+                        <strong>@tittle</strong> Usuario<span></span>
+                    </h4>
+                    <div class="form">
+                        <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
+                            <input id="name" type="text" required="" placeholder="Nombre" value="" name="name" class="txt">
+                            <input id="user" type="text" required="" placeholder="Usuario" value="" name="mob" class="txt">
+                            <input id="password" type="password" required="" placeholder="Password" value="" name="email" class="txt"><div class="clearfix"></div><br />
+                            <input id="sales" type="checkbox" name="module" value="" checked> Vendedor<div class="clearfix"></div><br />
+                            Departamento:
+                            <select id="module">
+                                @foreach (var Module in Model.Modules)
+                                {
+                                    <option value="volvo" data-id="@Module.ID">@Module.Name</option>
+                                }                                                               
+                            </select><div class="clearfix"></div><br />
+                            <input type="submit" value="Guardar" name="submit" class="txt2" id="btnSave">
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- /#page-content-wrapper -->
+
+<script type="text/JavaScript">
+
+    $(document).ready(function () {
+
+        /*
+            Clic en save button
+         */
+        $("#btnSave").click(function (e) {
+
+            e.preventDefault();
+
+            /*
+                Validate all fields are filled
+             */
+            var name = $("#name").val();
+            var user = $("#user").val();
+            var password = $("#password").val();
+            var sales = $("#sales").prop('checked') == true ? 1:0;
+            var module = $('#module').find(":selected").attr("data-id");
+
+            if (name === "" || name === 'undefined') {
+                swal("Ingresa el nombre");
+                $("#name").focus();                
+                return;
+            }
+            if (user === "" || user === 'undefined') {
+                swal("Ingresa el usuario");
+                $("#user").focus();
+                return;
+            }
+            if (password === "" || password === 'undefined') {
+                swal("Ingresa el password");
+                $("#password").focus();
+                return;
+            }
+            if (module === "" || module === 'undefined') {
+                swal("Selecciona el departamento");
+                $("#module").focus();
+                return;                
+            }
+
+            /*
+                Validate if continue
+                */
+            swal({
+                title: "¿Seguro que quieres continuar?",
+                text: "",
+                icon: "",
+                buttons: [
+                    'No',
+                    'Si'
+                ],
+                dangerMode: false,
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+
+                    /*
+                    Save the user in the server
+                    */
+                $.ajax({
+                    type: "POST",
+                    url: "@url",
+                    contentType: "application/json; charset=utf-8",
+                    data: '{"name":"' + name + '","user":"' + user + '","password":"' + password + '","sales":"' + sales + '","module":"' + module + '"}',
+                    dataType: "html",
+                    success: function (result) {
+                        var json = JSON.parse(result);
+                        if (json.Result_ == 1) {
+                            swal("Usuario creado correctamente");
+                            clearAllFields();                        
+                        }
+                        else {
+                            swal(json.error);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert(error);
+                        console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
+                    }
+                        });
+
+                } else {
+                    //Nothing to do
+                }
+                })            
+        });    
+
+        
+        /*
+            Clear all the fields
+         */
+        function clearAllFields() {
+
+            $("#name").val("");
+            $("#user").val("");
+            $("#password").val("");
+            $('#sales').prop('checked', true);            
+            $("#module").val($("#module option:first").val());            
+        }
+    });
+
+</script>

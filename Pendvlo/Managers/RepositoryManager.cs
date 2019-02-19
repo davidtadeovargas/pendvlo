@@ -18,6 +18,8 @@ namespace Pendvlo.Managers
             List of all the repositories
              */
         public LoginReposotiry LoginRepository { get; set; }
+        public UsersRepository UsersRepository { get; set; }
+        public ModulesRepository ModulesRepository { get; set; }
 
 
 
@@ -25,6 +27,8 @@ namespace Pendvlo.Managers
         RepositoryManager()
         {
             LoginRepository = new LoginReposotiry(dBContext);
+            UsersRepository = new UsersRepository(dBContext);
+            ModulesRepository = new ModulesRepository(dBContext);
         }
 
         public static RepositoryManager Instance

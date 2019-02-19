@@ -10,5 +10,12 @@ namespace Pendvlo.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public DateTime Created { get; set; }
+
+
+
+        public Module()
+        {
+            Created = DateTime.Now;
+        }
     }
 }

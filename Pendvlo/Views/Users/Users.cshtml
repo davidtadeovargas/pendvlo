@@ -1,0 +1,293 @@
+﻿@model Pendvlo.Models.Views.UsersViewModel
+
+@{    
+    /*
+        Set the table title
+     */
+    string title = "undefined";
+    string type = "";
+    if (Model.Type==Pendvlo.Models.Views.TYPE.LIST)
+    {
+        title = "USUARIOS";
+    }
+    else if (Model.Type == Pendvlo.Models.Views.TYPE.MODIFY)
+    {
+        title = "EDITAR USUARIO";
+        type = "TYPE.MODIFY";
+    }
+    else if (Model.Type == Pendvlo.Models.Views.TYPE.DELETE)
+    {
+        title = "ELIMINAR USUARIO";
+        type = "TYPE.DELETE";
+    }
+
+    ViewBag.Title = title;
+}
+
+@section header{
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Users.css")">
+}
+
+@section mainMenu{
+
+    @{
+        Html.RenderPartial("MainMenu/_UsersMenu");
+    }
+}
+
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+    <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+        <span class="hamb-top"></span>
+        <span class="hamb-middle"></span>
+        <span class="hamb-bottom"></span>
+    </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form_main">
+                    <h4 class="heading">
+                        <strong>@title</strong><span></span>
+                    </h4>
+
+
+
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <form action="#" method="get">
+                                <div class="input-group">
+                                    <!-- USE TWITTER TYPEAHEAD JSON WITH API TO SEARCH -->
+                                    <input class="form-control" id="system-search" name="q" placeholder="Search for" required>
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-9">
+                            <table class="table table-list-search" id="tableUsers">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Usuario</th>
+                                        <th>Password</th>
+                                        <th>Departamento</th>
+                                        <th>Fecha Creacion</th>                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var User in Model.Users)
+                                    {
+                                        var id = @User.ID;
+                                        var name = @User.Name;
+                                        var user = @User.User_;
+                                        var password = @User.Password;
+                                        var module = @User.Module==null?"No asignado": @User.Module.Name;
+                                        var created = @User.Created;
+
+                                        <tr data-id="@id">
+                                            <td>@name</td>
+                                            <td>@user</td>
+                                            <td>@password</td>
+                                            <td>@module</td>
+                                            <td>@created</td>
+                                        </tr>
+                                    }
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-info" id="btnContinue">Continuar</button>
+                            </div>                            
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /#page-content-wrapper -->
+
+<script type="text/JavaScript">
+
+    var TYPE = {
+        DELETE: 1,
+        MODIFY: 2
+    };
+
+    var type = @type;
+
+    $(document).ready(function () {
+
+        var activeSystemClass = $('.list-group-item.active');
+        var selectedTableId = -1;
+        var currentSelectedTD = null;
+
+        //something is entered in search form
+        $('#system-search').keyup(function () {
+            var that = this;
+            // affect all table rows on in systems table
+            var tableBody = $('.table-list-search tbody');
+            var tableRowsClass = $('.table-list-search tbody tr');
+            $('.search-sf').remove();
+            tableRowsClass.each(function (i, val) {
+
+                //Lower text for case insensitive
+                var rowText = $(val).text().toLowerCase();
+                var inputText = $(that).val().toLowerCase();
+                if (inputText != '') {
+                    $('.search-query-sf').remove();
+                    tableBody.prepend('<tr class="search-query-sf"><td colspan="6"><strong>Searching for: "'
+                        + $(that).val()
+                        + '"</strong></td></tr>');
+                }
+                else {
+                    $('.search-query-sf').remove();
+                }
+
+                if (rowText.indexOf(inputText) == -1) {
+                    //hide rows
+                    tableRowsClass.eq(i).hide();
+
+                }
+                else {
+                    $('.search-sf').remove();
+                    tableRowsClass.eq(i).show();
+                }
+            });
+            //all tr elements are hidden
+            if (tableRowsClass.children(':visible').length == 0) {
+                tableBody.append('<tr class="search-sf"><td class="text-muted" colspan="6">No entries found.</td></tr>');
+            }
+        });
+
+        /*
+            When selecting a row in the table
+         */
+        $("#tableUsers tbody tr").click(function () {
+           
+            /*
+                Change the selected color
+             */
+            $("#tableUsers tr").removeClass("highlight");
+            var selected = $(this).hasClass("highlight");
+            $("#data tr").removeClass("highlight");
+            if (!selected) {
+                $(this).addClass("highlight");
+            }
+
+            selectedTableId = $(this).attr("data-id"); //Id of the user
+
+            /*
+                Save the current row for deletion
+             */
+            currentSelectedTD = $(this);
+        });
+
+        /*
+            Clic in continue button
+         */
+        $("#btnContinue").click(function () {
+
+            /*
+             * Validate selection in the table
+             */
+            if (selectedTableId == -1) {
+                swal("Selecciona un usuario");
+                return;
+            }
+
+            /*
+                Continue to delete or to edit depending type
+             */
+            if (type == TYPE.MODIFY) {
+                editType();
+            }
+            else if (type == TYPE.DELETE) {
+                deleteType();
+            }
+
+        });
+
+        //When the user selected to edit the user
+        function editType() {
+
+        }
+
+        //When the user selected to delete the user
+        function deleteType() {
+
+            /*
+                Question if continue or not
+             */
+            swal({
+                title: "¿Seguro que quieres continuar?",
+                text: "",
+                icon: "",
+                buttons: [
+                    'No',
+                    'Si'
+                ],
+                dangerMode: false,
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+                    deleteUser();
+                } else {
+
+                }
+            })
+        }
+
+
+        /*
+            Delete a user from the server
+         */
+        function deleteUser(){
+
+            $.ajax({
+                type: "POST",
+                url: "/users/DeleteUser",
+                contentType: "application/json; charset=utf-8",
+                data: '{"id":"' + selectedTableId + '"}',
+                dataType: "html",
+                success: function (result) {
+                    var json = JSON.parse(result);
+                    if (json.Result_ == 1) {
+                        swal("Usuario eliminado correctamente");
+                        currentSelectedTD.remove();
+                    }
+                    else {
+                        swal(json.error);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                    console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
+                }
+            });
+        }
+    });
+
+
+
+
+
+
+</script>
