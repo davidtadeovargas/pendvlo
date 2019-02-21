@@ -5,9 +5,10 @@ using System.Web;
 
 namespace Pendvlo.Models.Views
 {
-    public class UsersViewModel
+    public class CustomerIndexViewModel
     {
+        public TYPE Type { get; set; }
+        public Customer Customer { get; set; }
         public List<User> Users { get; set; }
-        public TYPE Type { get; set; }        
     }
 }

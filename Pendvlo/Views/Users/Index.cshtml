@@ -4,21 +4,61 @@
     string tittle = "";
     string url = "";
 
+    var module = -1;
+    var moduleName = "";
+    var salesChecked = "";
+    var readOnly = "";
+    var styleReadOnly = "";
+    var successMessage = "";
+    var readOnlyAdmin = "";
+    var disabledAdmin = "";
+    var user = "";
+    var userName = "";
+    var password = "";
+
+    var edition = 0;
+
     if (Model.Type == Pendvlo.Models.Views.TYPE.NEW)
     {
         tittle = "Nuevo";
         url = "/users/NewUser";
+        salesChecked = "checked";
+        successMessage = "Usuario creado correctamente";
+
+        ViewBag.Title = tittle + " Usuario";
     }
     else if (Model.Type == Pendvlo.Models.Views.TYPE.MODIFY)
     {
-        tittle = "Modificar";
+        /*
+            Admin user can not be modified
+         */
+        if (Model.User.User_ == "admin")
+        {
+            readOnlyAdmin = "readonly";
+            disabledAdmin = "disabled";
+        }
+
+        edition = 1;
+
+        user = Model.User.User_;
+        userName = Model.User.Name;
+        password = @Model.User.Password;
+
+        tittle = "Editar Usuario";
+        module = Model.User.Module == null?-1: Model.User.Module.ID;
+        moduleName = Model.User.Module == null?"":Model.User.Module.Name;
+        salesChecked = Model.User.Sales == 1 ? "checked" : "";
+        readOnly = "readonly";
+        styleReadOnly = "noEditableField";
+        url = "/users/EditUser";
+        successMessage = "Usuario editado correctamente";
+
+        ViewBag.Title = tittle + " Usuario " + Model.User.Name;
     }
     else
     {
         tittle = "Undefined";
     }
-
-    ViewBag.Title = tittle + " Usuario";
 }
 
 @section header{
@@ -46,22 +86,22 @@
             <div class="col-md-4">
                 <div class="form_main">
                     <h4 class="heading">
-                        <strong>@tittle</strong> Usuario<span></span>
+                        <strong>@tittle</strong> @user<span></span>
                     </h4>
                     <div class="form">
                         <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
-                            <input id="name" type="text" required="" placeholder="Nombre" value="" name="name" class="txt">
-                            <input id="user" type="text" required="" placeholder="Usuario" value="" name="mob" class="txt">
-                            <input id="password" type="password" required="" placeholder="Password" value="" name="email" class="txt"><div class="clearfix"></div><br />
-                            <input id="sales" type="checkbox" name="module" value="" checked> Vendedor<div class="clearfix"></div><br />
+                            <input id="name" type="text" required="" placeholder="Nombre" value="@userName" name="name" class="txt" @readOnlyAdmin>
+                            <input id="user" type="text" required="" placeholder="Usuario" value="@user" name="mob" class="txt @styleReadOnly" @readOnly>
+                            <input id="password" type="password" required="" placeholder="Password" value="@password" name="email" class="txt" @readOnlyAdmin><div class="clearfix"></div><br />
+                            <input id="sales" type="checkbox" name="module" value="" @salesChecked @disabledAdmin> Vendedor<div class="clearfix"></div><br />
                             Departamento:
-                            <select id="module">
+                            <select id="module" @disabledAdmin>
                                 @foreach (var Module in Model.Modules)
                                 {
-                                    <option value="volvo" data-id="@Module.ID">@Module.Name</option>
+                                    <option value="@Module.ID" data-id="@Module.ID">@Module.Name</option>
                                 }                                                               
                             </select><div class="clearfix"></div><br />
-                            <input type="submit" value="Guardar" name="submit" class="txt2" id="btnSave">
+                            <input type="submit" value="Guardar" name="submit" class="txt2" id="btnSave" @disabledAdmin>
                         </form>
                     </div>
                 </div>
@@ -74,7 +114,17 @@
 
 <script type="text/JavaScript">
 
+    var module = @module;
+    var moduleName = "@moduleName";
+
     $(document).ready(function () {
+
+        /*
+            Select the current user module
+            */
+        if (module != -1) {
+            $("#module").val(module);
+        }
 
         /*
             Clic en save button
@@ -90,7 +140,7 @@
             var user = $("#user").val();
             var password = $("#password").val();
             var sales = $("#sales").prop('checked') == true ? 1:0;
-            var module = $('#module').find(":selected").attr("data-id");
+            module = $('#module').find(":selected").attr("data-id");
 
             if (name === "" || name === 'undefined') {
                 swal("Ingresa el nombre");
@@ -131,46 +181,48 @@
                     /*
                     Save the user in the server
                     */
-                $.ajax({
-                    type: "POST",
-                    url: "@url",
-                    contentType: "application/json; charset=utf-8",
-                    data: '{"name":"' + name + '","user":"' + user + '","password":"' + password + '","sales":"' + sales + '","module":"' + module + '"}',
-                    dataType: "html",
-                    success: function (result) {
-                        var json = JSON.parse(result);
-                        if (json.Result_ == 1) {
-                            swal("Usuario creado correctamente");
-                            clearAllFields();                        
+                    $.ajax({
+                        type: "POST",
+                        url: "@url",
+                        contentType: "application/json; charset=utf-8",
+                        data: '{"name":"' + name + '","user":"' + user + '","password":"' + password + '","sales":"' + sales + '","module":"' + module + '"}',
+                        dataType: "html",
+                        success: function (result) {
+                            var json = JSON.parse(result);
+                            if (json.Result_ == 1) {
+                                swal("@successMessage");
+                                if (edition == 0) { //Only clear fields when it is a new user
+                                    clearAllFields();
+                                }                                
+                            }
+                            else {
+                                swal(json.error);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            alert(error);
+                            console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
                         }
-                        else {
-                            swal(json.error);
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        alert(error);
-                        console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
+                            });
+
+                    } else {
+                        //Nothing to do
                     }
-                        });
-
-                } else {
-                    //Nothing to do
-                }
                 })            
-        });    
+        });        
+               
+    });
 
-        
-        /*
+    /*
             Clear all the fields
          */
-        function clearAllFields() {
+    function clearAllFields() {
 
-            $("#name").val("");
-            $("#user").val("");
-            $("#password").val("");
-            $('#sales').prop('checked', true);            
-            $("#module").val($("#module option:first").val());            
-        }
-    });
+        $("#name").val("");
+        $("#user").val("");
+        $("#password").val("");
+        $('#sales').prop('checked', true);
+        $("#module").val($("#module option:first").val());
+    }
 
 </script>

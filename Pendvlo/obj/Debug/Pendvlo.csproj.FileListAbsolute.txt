@@ -83,4 +83,5 @@ C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\EntityFramework.SqlServer.xml
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\obj\Debug\Pendvlo.Migrations.initial.resources
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\obj\Debug\Pendvlo.csproj.GenerateResource.cache
+C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\obj\Debug\Pendvlo.Migrations.inita.resources
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\obj\Debug\Pendvlo.csprojAssemblyReference.cache

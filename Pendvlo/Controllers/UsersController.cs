@@ -19,23 +19,7 @@ namespace Pendvlo.Controllers
 
             return Users(usersViewModel);
         }
-
-        /*
-            Create a new user view
-             */
-        public ActionResult NewUserView()
-        {
-            /*
-                Get all the modules
-             */
-            var modules = RepositoryManager.Instance.ModulesRepository.getModules();
-
-            UsersIndexViewModel usersViewModel = new UsersIndexViewModel();
-            usersViewModel.Type = TYPE.NEW;
-            usersViewModel.Modules = modules;
-
-            return View("~/Views/Users/Index.cshtml", usersViewModel);
-        }
+        
 
         /*
             Create a new user
@@ -97,7 +81,64 @@ namespace Pendvlo.Controllers
         }
 
         /*
-            Edit a new user view
+            Edit a new user
+             */
+        public ActionResult EditUser(EditUserRequestModel editUserRequestModel)
+        {
+            try
+            {
+                /*
+                Validate all fields are filled
+             */
+                if (editUserRequestModel.Name == null || editUserRequestModel.Name == "")
+                {
+                    return Json(JSONManager.JsonFail("Need Name"));
+                }
+                if (editUserRequestModel.User == null || editUserRequestModel.User == "")
+                {
+                    return Json(JSONManager.JsonFail("Need User"));
+                }
+                if (editUserRequestModel.Password == null || editUserRequestModel.Password == "")
+                {
+                    return Json(JSONManager.JsonFail("Need Password"));
+                }
+
+                /*
+                    Get the user from db
+                 */
+                var User_ = RepositoryManager.Instance.UsersRepository.getUserByUser(editUserRequestModel.User);
+                if (User_ == null)
+                {
+                    return Json(JSONManager.JsonFail("User not found"));
+                }
+
+                /*
+                    Edit the new user
+                 */
+
+                Module module_ = RepositoryManager.Instance.ModulesRepository.getByID(editUserRequestModel.Module);
+
+                User_.Name = editUserRequestModel.Name;                
+                User_.Password = editUserRequestModel.Password;
+                User_.Sales = editUserRequestModel.Sales;
+                User_.Module = module_;
+
+                RepositoryManager.Instance.UsersRepository.editUser(User_);
+
+                /*
+                    Return all is ok
+                 */
+                return Json(JSONManager.JsonOk());
+            }
+            catch (Exception e)
+            {
+                return Json(JSONManager.JsonFail(e.Message));
+            }
+
+        }
+
+        /*
+            Edit a user view
              */
         public ActionResult EditUserView()
         {
@@ -106,6 +147,46 @@ namespace Pendvlo.Controllers
 
             return Users(usersViewModel);           
         }
+
+        private ActionResult UsersIndex(TYPE type, int ID = -1)
+        {
+            /*
+                Get all the modules
+             */
+            var modules = RepositoryManager.Instance.ModulesRepository.getModules();
+
+            UsersIndexViewModel usersViewModel = new UsersIndexViewModel();
+            usersViewModel.Type = type;
+            usersViewModel.Modules = modules;
+
+            /*
+                Get the complete information from the user 
+             */
+            if (ID != -1)
+            {
+                User User_ = RepositoryManager.Instance.UsersRepository.getUserByID(ID);
+                usersViewModel.User = User_;
+            }            
+
+            return View("~/Views/Users/Index.cshtml", usersViewModel);
+        }
+
+        /*
+            Create a new user view
+             */
+        public ActionResult NewUserView()
+        {
+            return UsersIndex(TYPE.NEW);
+        }
+
+        /*
+            Edit a user in Index
+             */
+        public ActionResult EditUserIndex(int ID)
+        {
+            return UsersIndex(TYPE.MODIFY,ID);
+        }
+
 
         /*
             Delete a user view
@@ -162,7 +243,7 @@ namespace Pendvlo.Controllers
         /*
             View all users
              */
-        public ActionResult Users(UsersViewModel usersViewModel)
+        private ActionResult Users(UsersViewModel usersViewModel)
         {
             /*
                 Get all the users

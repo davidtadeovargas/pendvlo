@@ -70,6 +70,15 @@
     color: #5793ef;
     transition: all 0.5s ease 0s;
 }
-.noEditableField {
-    background-color: lightgray;
+
+tr td{
+    cursor:pointer;
 }
+
+.highlight {
+    background-color: lightgrey;
+}
+
+
+
+

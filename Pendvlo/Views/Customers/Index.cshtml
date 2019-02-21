@@ -1,0 +1,250 @@
+﻿@model Pendvlo.Models.Views.CustomerIndexViewModel
+
+@{
+    string tittle = "";
+    string url = "";
+
+    var customer = -1;
+    var customerName = "";
+    var readOnly = "";
+    var successMessage = "";
+    var userID = -1;
+
+    var styleReadOnly = "";
+
+    /*
+        Form values
+     */
+    var name = "";
+    var rfc = "";
+    var address = "";
+    var phone = "";
+    var city = "";
+    var state = "";
+
+    var edition = 0;
+
+    if (Model.Type == Pendvlo.Models.Views.TYPE.NEW)
+    {
+        tittle = "Nuevo";
+        url = "/customers/NewCustomer";
+        successMessage = "Cliente creado correctamente";
+
+        ViewBag.Title = tittle + " Cliente";
+    }
+    else if (Model.Type == Pendvlo.Models.Views.TYPE.MODIFY)
+    {
+        customer = Model.Customer.ID;
+        customerName = Model.Customer.Name;
+
+        tittle = "Editar Cliente";
+        userID = Model.Customer.SalesMan == null ? -1 : Model.Customer.SalesMan.ID;
+        readOnly = "readonly";
+        url = "/customers/EditCustomer";
+        successMessage = "Cliente editado correctamente";
+
+        ViewBag.Title = tittle + " Cliente " + Model.Customer.Name;
+
+        styleReadOnly = "noEditableField";
+
+        edition = 1;
+
+        //Fill form values
+        name = Model.Customer.Name;
+        rfc = Model.Customer.RFC;
+        address = Model.Customer.Address;
+        phone = Model.Customer.Phone;
+        city = Model.Customer.City;
+        state = Model.Customer.State;
+    }
+    else
+    {
+        tittle = "Undefined";
+    }
+}
+
+@section header{
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/CustomersIndex.css")">
+}
+
+@section mainMenu{
+
+    @{
+        Html.RenderPartial("MainMenu/_CustomersMenu");
+    }
+}
+
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+    <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+        <span class="hamb-top"></span>
+        <span class="hamb-middle"></span>
+        <span class="hamb-bottom"></span>
+    </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form_main">
+                    <h4 class="heading">
+                        <strong>@tittle</strong> 
+                        @if (customer != -1) {
+                            <div>@customer</div>
+                           }
+                        <span></span>
+                    </h4>
+                    <div class="form">
+                        <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
+                            <input id="name" style="text-transform:uppercase" type="text" required="" placeholder="Razon Social" value="@name" name="name" class="txt">
+                            <input id="rfc" style="text-transform:uppercase" type="text" required="" placeholder="RFC" value="@rfc" name="mob" class="txt @styleReadOnly" @readOnly>
+                            <input id="address" type="text" required="" placeholder="Direccion" value="@address" name="email" class="txt"><div class="clearfix"></div>
+                            <input id="phone" type="text" required="" placeholder="Telefono" value="@phone" name="email" class="txt"><div class="clearfix"></div>
+                            <input id="city" style="text-transform:uppercase" type="text" required="" placeholder="Ciudad" value="@city" name="email" class="txt"><div class="clearfix"></div>
+                            <input id="state" style="text-transform:uppercase" type="text" required="" placeholder="Estado" value="@state" name="email" class="txt"><div class="clearfix"></div>
+                            Vendedor:
+                            <select id="users">
+                                @foreach (var User in Model.Users)
+                                {
+                                    <option value="@User.ID" data-id="@User.ID">@User.Name</option>
+                                }
+                            </select><div class="clearfix"></div><br />
+                            <input type="submit" value="Guardar" name="submit" class="txt2" id="btnSave">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /#page-content-wrapper -->
+
+<script type="text/JavaScript">
+
+    var userID = @userID;
+    var edition = @edition;
+
+    $(document).ready(function () {
+
+        /*
+            Select the current user module
+            */
+        if (userID != -1) {
+            $("#users").val(userID);
+        }
+
+        /*
+            Clic en save button
+         */
+        $("#btnSave").click(function (e) {
+
+            e.preventDefault();
+
+            /*
+                Validate all fields are filled
+             */
+            var name = $("#name").val();
+            var rfc = $("#rfc").val();
+            var address = $("#address").val();
+            var phone = $("#phone").val();
+            var city = $("#city").val();
+            var state = $("#state").val();
+            userID = $('#users').find(":selected").attr("data-id");
+
+            if (name === "" || name === 'undefined') {
+                swal("Ingresa el nombre");
+                $("#name").focus();
+                return;
+            }
+            if (rfc === "" || rfc === 'undefined') {
+                swal("Ingresa el RFC");
+                $("#rfc").focus();
+                return;
+            }
+            if (address === "" || address === 'undefined') {
+                swal("Ingresa la direccion");
+                $("#address").focus();
+                return;
+            }
+            if (phone === "" || phone === 'undefined') {
+                swal("Ingresa el telefono");
+                $("#phone").focus();
+                return;
+            }
+            if (city === "" || city === 'undefined') {
+                swal("Ingresa la ciudad");
+                $("#city").focus();
+                return;
+            }
+            if (state === "" || state === 'undefined') {
+                swal("Ingresa el estado");
+                $("#state").focus();
+                return;
+            }
+
+            /*
+                Validate if continue
+                */
+            swal({
+                title: "¿Seguro que quieres continuar?",
+                text: "",
+                icon: "",
+                buttons: [
+                    'No',
+                    'Si'
+                ],
+                dangerMode: false,
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+
+                    /*
+                    Save the user in the server
+                    */
+                    $.ajax({
+                        type: "POST",
+                        url: "@url",
+                        contentType: "application/json; charset=utf-8",
+                        data: '{"name":"' + name + '","rfc":"' + rfc + '","address":"' + address + '","phone":"' + phone + '","city":"' + city + '","state":"' + state + '","userID":"' + userID + '"}',
+                        dataType: "html",
+                        success: function (result) {
+                            var json = JSON.parse(result);
+                            if (json.Result_ == 1) {
+                                swal("@successMessage");
+                                if (edition==0) { //Only clear fields when it is a new customer
+                                    clearAllFields();
+                                }
+                            }
+                            else {
+                                swal(json.error);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            alert(error);
+                            console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
+                        }
+                            });
+
+                    } else {
+                        //Nothing to do
+                    }
+                })
+        });
+
+    });
+
+    /*
+            Clear all the fields
+         */
+    function clearAllFields() {
+
+        $("#name").val("");
+        $("#rfc").val("");
+        $("#address").val("");
+        $('#phone').val('');
+        $('#city').val('');
+        $('#state').val('');
+        $("#users").val($("#users option:first").val());
+    }
+
+</script>

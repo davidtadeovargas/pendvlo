@@ -1,4 +1,4 @@
-﻿@model Pendvlo.Models.Views.UsersViewModel
+﻿@model Pendvlo.Models.Views.CustomersViewModel
 
 @{    
     var removeContinueBtn = 0;
@@ -10,18 +10,18 @@
     string type = "";
     if (Model.Type==Pendvlo.Models.Views.TYPE.LIST)
     {
-        title = "USUARIOS";
+        title = "CLIENTES";
         removeContinueBtn = 1;
         type = "TYPE.VIEW";
     }
     else if (Model.Type == Pendvlo.Models.Views.TYPE.MODIFY)
     {
-        title = "EDITAR USUARIO";
+        title = "EDITAR CLIENTE";
         type = "TYPE.MODIFY";
     }
     else if (Model.Type == Pendvlo.Models.Views.TYPE.DELETE)
     {
-        title = "ELIMINAR USUARIO";
+        title = "ELIMINAR CLIENTE";
         type = "TYPE.DELETE";
     }
 
@@ -30,13 +30,13 @@
 
 @section header{
 
-    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Users.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Customers.css")">
 }
 
 @section mainMenu{
 
     @{
-        Html.RenderPartial("MainMenu/_UsersMenu");
+        Html.RenderPartial("MainMenu/_CustomersMenu");
     }
 }
 
@@ -75,33 +75,43 @@
                             </form>
                         </div>
                         <div class="col-md-9">
-                            <table class="table table-list-search" id="tableUsers">
+                            <table class="table table-list-search" id="tableCustomers">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Usuario</th>
-                                        <th>Password</th>
-                                        <th>Departamento</th>
-                                        <th>Fecha Creacion</th>                                        
+                                        <th>Razon Social</th>
+                                        <th>RFC</th>
+                                        <th>Direccion</th>
+                                        <th>Telefono</th>
+                                        <th>Ciudad</th>
+                                        <th>Estado</th>
+                                        <th>Vendedor</th>
+                                        <th>Fecha Creacion</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var User in Model.Users)
+                                    @foreach (var Customer in Model.Customers)
                                     {
-                                        var id = @User.ID;
-                                        var name = @User.Name;
-                                        var user = @User.User_;
-                                        var password = @User.Password;
-                                        var module = @User.Module==null?"No asignado": @User.Module.Name;
-                                        var created = @User.Created;
+                                        var id = @Customer.ID;
+                                        var name = @Customer.Name;
+                                        var rfc = @Customer.RFC;
+                                        var address = @Customer.Address;
+                                        var phone = @Customer.Phone;
+                                        var city = @Customer.City;
+                                        var state = @Customer.State;
+                                        var salesMan = @Customer.SalesMan==null?"": @Customer.SalesMan.Name;
+                                        var created = @Customer.Created;
 
-                                        <tr data-id="@id">
-                                            <td>@name</td>
-                                            <td>@user</td>
-                                            <td>@password</td>
-                                            <td>@module</td>
-                                            <td>@created</td>
-                                        </tr>
+                                    <tr data-id="@id">
+                                        no b
+                                        <td>@name</td>
+                                        <td>@rfc</td>
+                                        <td>@address</td>
+                                        <td>@phone</td>
+                                        <td>@city</td>
+                                        <td>@state</td>
+                                        <td>@salesMan</td>
+                                        <td>@created</td>
+                                    </tr>
                                     }
                                     
                                 </tbody>
@@ -147,7 +157,7 @@
         var currentSelectedTD = null;
 
         /*
-            Only when is list users button continue has not to be visible
+            Only when is list customers button continue has not to be visible
          */
         if (removeContinueBtn) {
             $("#btnContinue").remove();
@@ -194,12 +204,12 @@
         /*
             When selecting a row in the table
          */
-        $("#tableUsers tbody tr").click(function () {
+        $("#tableCustomers tbody tr").click(function () {
            
             /*
                 Change the selected color
              */
-            $("#tableUsers tr").removeClass("highlight");
+            $("#tableCustomers tr").removeClass("highlight");
             var selected = $(this).hasClass("highlight");
             $("#data tr").removeClass("highlight");
             if (!selected) {
@@ -223,7 +233,7 @@
              * Validate selection in the table
              */
             if (selectedTableId == -1) {
-                swal("Selecciona un usuario");
+                swal("Selecciona un cliente");
                 return;
             }
 
@@ -239,13 +249,13 @@
 
         });
 
-        //When the user selected to edit the user
+        //When the user selected to edit
         function editType() {
 
-            window.location = "/users/EditUserIndex?ID=" + selectedTableId;
+            window.location = "/customers/EditCustomerIndex?ID=" + selectedTableId;
         }
 
-        //When the user selected to delete the user
+        //When the user selected to delete
         function deleteType() {
 
             /*
@@ -262,7 +272,7 @@
                 dangerMode: false,
             }).then(function (isConfirm) {
                 if (isConfirm) {
-                    deleteUser();
+                    deleteCustomer();
                 } else {
 
                 }
@@ -271,20 +281,20 @@
 
 
         /*
-            Delete a user from the server
+            Delete a customer from the server
          */
-        function deleteUser(){
+        function deleteCustomer(){
 
             $.ajax({
                 type: "POST",
-                url: "/users/DeleteUser",
+                url: "/users/DeleteCustomer",
                 contentType: "application/json; charset=utf-8",
                 data: '{"id":"' + selectedTableId + '"}',
                 dataType: "html",
                 success: function (result) {
                     var json = JSON.parse(result);
                     if (json.Result_ == 1) {
-                        swal("Usuario eliminado correctamente");
+                        swal("Cliente eliminado correctamente");
                         currentSelectedTD.remove();
                     }
                     else {

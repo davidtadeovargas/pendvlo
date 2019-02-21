@@ -15,5 +15,11 @@ namespace Pendvlo.Models
         public string City { get; set; }
         public string State { get; set; }
         public User SalesMan { get; set; }
+        public DateTime Created { get; set; }
+
+        public Customer()
+        {
+            Created = DateTime.Now;
+        }
     }
 }

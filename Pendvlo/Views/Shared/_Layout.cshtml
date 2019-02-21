@@ -108,7 +108,7 @@
                 /*
                     Go to clientes view
                     */
-                window.location = "/customer";
+                window.location = "/customers";
             });
 
             /*
@@ -170,7 +170,21 @@
              */
             $("#deleteUserMenu").click(function () {
                 window.location = "/Users/DeleteUserView";
-            }); 
+            });
+            
+            /*  
+                Clic on new customer menu
+             */
+            $("#newCustomerMenu").click(function () {
+                window.location = "/customers/NewCustomerView";
+            });
+            
+            /*  
+                Clic on edit customer menu
+             */
+            $("#editCustomerMenu").click(function () {
+                window.location = "/customers/EditCustomerView";
+            });        
 
             @if (IsSectionDefined("documentReady"))
             {

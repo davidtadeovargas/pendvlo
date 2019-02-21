@@ -20,6 +20,7 @@ namespace Pendvlo.Managers
         public LoginReposotiry LoginRepository { get; set; }
         public UsersRepository UsersRepository { get; set; }
         public ModulesRepository ModulesRepository { get; set; }
+        public CustomersRepository CustomersRepository { get; set; }
 
 
 
@@ -29,6 +30,7 @@ namespace Pendvlo.Managers
             LoginRepository = new LoginReposotiry(dBContext);
             UsersRepository = new UsersRepository(dBContext);
             ModulesRepository = new ModulesRepository(dBContext);
+            CustomersRepository = new CustomersRepository(dBContext);
         }
 
         public static RepositoryManager Instance

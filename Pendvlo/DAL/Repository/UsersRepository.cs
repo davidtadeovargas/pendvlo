@@ -33,6 +33,16 @@ namespace Pendvlo.DAL.Repository
         }
 
         /*
+         Edit a new user
+             */
+        public int editUser(User User_)
+        {
+            DBContext.Entry(User_).State = System.Data.Entity.EntityState.Modified;
+            var result = DBContext.SaveChanges();
+            return result;
+        }
+
+        /*
          Get user by name
              */
         public User getUserByUser(string user)
