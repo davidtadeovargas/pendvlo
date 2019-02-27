@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Pendvlo.Controllers
 {
-    public class CustomersController : Controller
+    public class CustomersController : BaseController
     {
         // GET: Customer
         public ActionResult Index()
@@ -31,9 +31,9 @@ namespace Pendvlo.Controllers
                 /*
                 Validate all fields are filled
              */
-                if (NewCustomerRequestModel_.name == null || NewCustomerRequestModel_.name == "")
+                if (NewCustomerRequestModel_.razon == null || NewCustomerRequestModel_.razon == "")
                 {
-                    return Json(JSONManager.JsonFail("Need Name"));
+                    return Json(JSONManager.JsonFail("Need razon"));
                 }
                 if (NewCustomerRequestModel_.rfc == null || NewCustomerRequestModel_.rfc == "")
                 {
@@ -42,7 +42,7 @@ namespace Pendvlo.Controllers
                 if (NewCustomerRequestModel_.address == null || NewCustomerRequestModel_.address == "")
                 {
                     return Json(JSONManager.JsonFail("Need Address"));
-                }
+                }                
                 if (NewCustomerRequestModel_.phone == null || NewCustomerRequestModel_.phone == "")
                 {
                     return Json(JSONManager.JsonFail("Need phone"));
@@ -54,7 +54,11 @@ namespace Pendvlo.Controllers
                 if (NewCustomerRequestModel_.state == null || NewCustomerRequestModel_.state == "")
                 {
                     return Json(JSONManager.JsonFail("Need state"));
-                }                
+                }
+                if (NewCustomerRequestModel_.email == null || NewCustomerRequestModel_.email == "")
+                {
+                    return Json(JSONManager.JsonFail("Need email"));
+                }
 
                 /*
                     Validate if the customer exists
@@ -75,12 +79,16 @@ namespace Pendvlo.Controllers
                 }
 
                 Customer_ = new Customer();
+                Customer_.RazonSocial = NewCustomerRequestModel_.razon;
                 Customer_.Name = NewCustomerRequestModel_.name;
                 Customer_.RFC = NewCustomerRequestModel_.rfc;
                 Customer_.Address = NewCustomerRequestModel_.address;
+                Customer_.CP = NewCustomerRequestModel_.CP;
                 Customer_.Phone = NewCustomerRequestModel_.phone;
                 Customer_.City = NewCustomerRequestModel_.city;
                 Customer_.State = NewCustomerRequestModel_.state;
+                Customer_.email = NewCustomerRequestModel_.email;
+                Customer_.Invoice = NewCustomerRequestModel_.invoice == 1 ? true:false;
                 Customer_.SalesMan = user_;
 
                 RepositoryManager.Instance.CustomersRepository.newCustomer(Customer_);
@@ -138,9 +146,9 @@ namespace Pendvlo.Controllers
                 /*
                 Validate all fields are filled
              */
-                if (EditCustomerRequestModel_.name == null || EditCustomerRequestModel_.name == "")
+                if (EditCustomerRequestModel_.razon == null || EditCustomerRequestModel_.razon == "")
                 {
-                    return Json(JSONManager.JsonFail("Need Name"));
+                    return Json(JSONManager.JsonFail("Need razon"));
                 }
                 if (EditCustomerRequestModel_.rfc == null || EditCustomerRequestModel_.rfc == "")
                 {
@@ -162,6 +170,10 @@ namespace Pendvlo.Controllers
                 {
                     return Json(JSONManager.JsonFail("Need state"));
                 }
+                if (EditCustomerRequestModel_.email == null || EditCustomerRequestModel_.email == "")
+                {
+                    return Json(JSONManager.JsonFail("Need email"));
+                }
 
                 /*
                     Get the customer from db
@@ -178,12 +190,16 @@ namespace Pendvlo.Controllers
 
                 User User_= RepositoryManager.Instance.UsersRepository.getUserByID(EditCustomerRequestModel_.ID);
 
+                Customer_.RazonSocial = EditCustomerRequestModel_.razon;
                 Customer_.Name = EditCustomerRequestModel_.name;
                 Customer_.RFC = EditCustomerRequestModel_.rfc;
                 Customer_.Address = EditCustomerRequestModel_.address;
+                Customer_.CP = EditCustomerRequestModel_.CP;
                 Customer_.Phone = EditCustomerRequestModel_.phone;
                 Customer_.City = EditCustomerRequestModel_.city;
                 Customer_.State = EditCustomerRequestModel_.state;
+                Customer_.email = EditCustomerRequestModel_.email;
+                Customer_.Invoice = EditCustomerRequestModel_.invoice==1?true:false;
                 Customer_.SalesMan = User_;
 
                 RepositoryManager.Instance.CustomersRepository.editCustomer(Customer_);
@@ -209,6 +225,14 @@ namespace Pendvlo.Controllers
             CustomersViewModel_.Type = TYPE.MODIFY;
 
             return Customers(CustomersViewModel_);
+        }
+
+        /*
+            View a customer in read only view
+             */
+        public ActionResult ViewCustomer(int ID)
+        {
+            return CustomersIndex(TYPE.VIEW, ID);
         }
 
         /*

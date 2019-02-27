@@ -5,12 +5,9 @@ using System.Web;
 
 namespace Pendvlo.Models.Views
 {
-    public enum TYPE
+    public class ProductsViewModel
     {
-        NEW,
-        MODIFY,
-        DELETE,
-        LIST,
-        VIEW
+        public TYPE Type { get; set; }
+        public List<Product> Products{ get; set; }
     }
 }

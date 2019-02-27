@@ -12,23 +12,34 @@
 
     var styleReadOnly = "";
 
+    var onlyForView = "";
+    var stylOnlyForView = "";
+    var disableForView = "";
+
+    var fillData = false;
+
     /*
         Form values
      */
+    var razon = "";
     var name = "";
     var rfc = "";
     var address = "";
+    var CP = "";
     var phone = "";
     var city = "";
     var state = "";
+    var email = "";
+    var invoiceChecked = "";
 
     var edition = 0;
 
     if (Model.Type == Pendvlo.Models.Views.TYPE.NEW)
     {
-        tittle = "Nuevo";
+        tittle = "Nuevo Cliente";
         url = "/customers/NewCustomer";
         successMessage = "Cliente creado correctamente";
+        invoiceChecked = "checked";
 
         ViewBag.Title = tittle + " Cliente";
     }
@@ -37,29 +48,54 @@
         customer = Model.Customer.ID;
         customerName = Model.Customer.Name;
 
-        tittle = "Editar Cliente";
+        tittle = "Editar Cliente ";
         userID = Model.Customer.SalesMan == null ? -1 : Model.Customer.SalesMan.ID;
         readOnly = "readonly";
         url = "/customers/EditCustomer";
         successMessage = "Cliente editado correctamente";
 
-        ViewBag.Title = tittle + " Cliente " + Model.Customer.Name;
+        ViewBag.Title = tittle + Model.Customer.Name;
 
         styleReadOnly = "noEditableField";
 
-        edition = 1;
+        fillData = true;
 
-        //Fill form values
-        name = Model.Customer.Name;
-        rfc = Model.Customer.RFC;
-        address = Model.Customer.Address;
-        phone = Model.Customer.Phone;
-        city = Model.Customer.City;
-        state = Model.Customer.State;
+        edition = 1;
+    }
+    else if (Model.Type == Pendvlo.Models.Views.TYPE.VIEW)
+    {
+        customer = Model.Customer.ID;
+        customerName = Model.Customer.Name;
+
+        tittle = "Ver Cliente";
+        userID = Model.Customer.SalesMan == null ? -1 : Model.Customer.SalesMan.ID;
+
+        ViewBag.Title = tittle + " Cliente " + Model.Customer.Name;
+
+        onlyForView = "readonly";
+        stylOnlyForView = "noEditableField";
+        disableForView = "disabled";
+
+        fillData = true;
     }
     else
     {
         tittle = "Undefined";
+    }
+
+    if (fillData)
+    {
+        //Fill form values
+        razon = Model.Customer.RazonSocial;
+        name = Model.Customer.Name;
+        rfc = Model.Customer.RFC;
+        address = Model.Customer.Address;
+        CP = Model.Customer.CP == -1 ? "" : Model.Customer.CP.ToString();
+        phone = Model.Customer.Phone;
+        city = Model.Customer.City;
+        state = Model.Customer.State;
+        invoiceChecked = Model.Customer.Invoice ? "checked" : "";
+        email = Model.Customer.email;
     }
 }
 
@@ -88,28 +124,32 @@
             <div class="col-md-4">
                 <div class="form_main">
                     <h4 class="heading">
-                        <strong>@tittle</strong> 
+                        <strong>@tittle</strong> <div class="clearfix"></div>
                         @if (customer != -1) {
-                            <div>@customer</div>
+                            <div></div>
                            }
                         <span></span>
                     </h4>
                     <div class="form">
                         <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
-                            <input id="name" style="text-transform:uppercase" type="text" required="" placeholder="Razon Social" value="@name" name="name" class="txt">
-                            <input id="rfc" style="text-transform:uppercase" type="text" required="" placeholder="RFC" value="@rfc" name="mob" class="txt @styleReadOnly" @readOnly>
-                            <input id="address" type="text" required="" placeholder="Direccion" value="@address" name="email" class="txt"><div class="clearfix"></div>
-                            <input id="phone" type="text" required="" placeholder="Telefono" value="@phone" name="email" class="txt"><div class="clearfix"></div>
-                            <input id="city" style="text-transform:uppercase" type="text" required="" placeholder="Ciudad" value="@city" name="email" class="txt"><div class="clearfix"></div>
-                            <input id="state" style="text-transform:uppercase" type="text" required="" placeholder="Estado" value="@state" name="email" class="txt"><div class="clearfix"></div>
+                            <input id="razon" style="text-transform:uppercase" type="text" required="" placeholder="Razon Social" value="@razon" name="razon" class="txt @stylOnlyForView" @onlyForView>
+                            <input id="name" style="text-transform:uppercase" type="text" required="" placeholder="Nombre" value="@name" name="name" class="txt @stylOnlyForView" @onlyForView>
+                            <input id="rfc" style="text-transform:uppercase" type="text" required="" placeholder="RFC" value="@rfc" name="mob" class="txt @styleReadOnly @stylOnlyForView" @readOnly @onlyForView>
+                            <input id="address" type="text" required="" placeholder="Direccion" value="@address" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
+                            <input id="cp" type="number" required="" placeholder="C.P." value="@CP" name="CP" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
+                            <input id="phone" type="text" required="" placeholder="Telefono" value="@phone" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
+                            <input id="city" style="text-transform:uppercase" type="text" required="" placeholder="Ciudad" value="@city" name="city" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
+                            <input id="state" style="text-transform:uppercase" type="text" required="" placeholder="Estado" value="@state" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
+                            <input id="email" type="text" required="" placeholder="Email" value="@email" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
+                            <input id="invoice" type="checkbox" name="invoice" value="" @invoiceChecked @disableForView> Factura<div class="clearfix"></div><br />
                             Vendedor:
-                            <select id="users">
+                            <select id="users" class="@stylOnlyForView" @onlyForView>
                                 @foreach (var User in Model.Users)
                                 {
                                     <option value="@User.ID" data-id="@User.ID">@User.Name</option>
                                 }
                             </select><div class="clearfix"></div><br />
-                            <input type="submit" value="Guardar" name="submit" class="txt2" id="btnSave">
+                            <input type="submit" value="Guardar" name="submit" class="txt2" id="btnSave" @disableForView>
                         </form>
                     </div>
                 </div>
@@ -144,19 +184,23 @@
             /*
                 Validate all fields are filled
              */
+            var razon = $("#razon").val();
             var name = $("#name").val();
             var rfc = $("#rfc").val();
             var address = $("#address").val();
+            var cp = $("#cp").val();
             var phone = $("#phone").val();
             var city = $("#city").val();
             var state = $("#state").val();
+            var email = $("#email").val();
+            var invoice = $("#invoice").prop('checked') == true ? 1 : 0;
             userID = $('#users').find(":selected").attr("data-id");
 
-            if (name === "" || name === 'undefined') {
-                swal("Ingresa el nombre");
-                $("#name").focus();
+            if (razon === "" || razon === 'undefined') {
+                swal("Ingresa la razon social");
+                $("#razon").focus();
                 return;
-            }
+            }            
             if (rfc === "" || rfc === 'undefined') {
                 swal("Ingresa el RFC");
                 $("#rfc").focus();
@@ -165,6 +209,11 @@
             if (address === "" || address === 'undefined') {
                 swal("Ingresa la direccion");
                 $("#address").focus();
+                return;
+            }
+            if (cp === "" || cp === 'undefined') {
+                swal("Ingresa el C.P.");
+                $("#cp").focus();
                 return;
             }
             if (phone === "" || phone === 'undefined') {
@@ -180,6 +229,11 @@
             if (state === "" || state === 'undefined') {
                 swal("Ingresa el estado");
                 $("#state").focus();
+                return;
+            }
+            if (email === "" || email === 'undefined') {
+                swal("Ingresa el correo");
+                $("#email").focus();
                 return;
             }
 
@@ -205,7 +259,7 @@
                         type: "POST",
                         url: "@url",
                         contentType: "application/json; charset=utf-8",
-                        data: '{"name":"' + name + '","rfc":"' + rfc + '","address":"' + address + '","phone":"' + phone + '","city":"' + city + '","state":"' + state + '","userID":"' + userID + '"}',
+                        data: '{"razon":"' + razon + '","name":"' + name + '","rfc":"' + rfc + '","address":"' + address + '","cp":"' + cp + '","phone":"' + phone + '","city":"' + city + '","state":"' + state + '","email":"' + email + '","invoice":"' + invoice + '","userID":"' + userID + '"}',
                         dataType: "html",
                         success: function (result) {
                             var json = JSON.parse(result);
@@ -238,12 +292,16 @@
          */
     function clearAllFields() {
 
+        $("#razon").val("");
         $("#name").val("");
         $("#rfc").val("");
         $("#address").val("");
+        $("#cp").val("");
         $('#phone').val('');
         $('#city').val('');
         $('#state').val('');
+        $('#email').val('');
+        $('#invoice').prop('checked', true);
         $("#users").val($("#users option:first").val());
     }
 

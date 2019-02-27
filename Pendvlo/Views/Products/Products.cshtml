@@ -1,4 +1,4 @@
-﻿@model Pendvlo.Models.Views.CustomersViewModel
+﻿@model Pendvlo.Models.Views.ProductsViewModel
 
 @{    
     var removeContinueBtn = 0;
@@ -10,18 +10,18 @@
     string type = "";
     if (Model.Type==Pendvlo.Models.Views.TYPE.LIST)
     {
-        title = "CLIENTES";
+        title = "PRODUCTOS";
         removeContinueBtn = 1;
         type = "TYPE.VIEW";
     }
     else if (Model.Type == Pendvlo.Models.Views.TYPE.MODIFY)
     {
-        title = "EDITAR CLIENTE";
+        title = "EDITAR PRODUCTO";
         type = "TYPE.MODIFY";
     }
     else if (Model.Type == Pendvlo.Models.Views.TYPE.DELETE)
     {
-        title = "ELIMINAR CLIENTE";
+        title = "ELIMINAR PRODUCTO";
         type = "TYPE.DELETE";
     }
 
@@ -30,13 +30,13 @@
 
 @section header{
 
-    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Customers.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Products.css")">
 }
 
 @section mainMenu{
 
     @{
-        Html.RenderPartial("MainMenu/_CustomersMenu");
+        Html.RenderPartial("MainMenu/_ProductsMenu");
     }
 }
 
@@ -74,55 +74,39 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="clearfix"></div>
                         <div class="col-md-9">
-                            <table class="table table-list-search" id="tableCustomers">
+                            <table class="table table-list-search" id="tableProductos">
                                 <thead>
                                     <tr>
-                                        <th>Razon Social</th>
-                                        <th>Nombre</th>
-                                        <th>RFC</th>
-                                        <th>Direccion</th>
-                                        <th>CP</th>
-                                        <th>Telefono</th>
-                                        <th>Ciudad</th>
-                                        <th>Estado</th>
-                                        <th>Email</th>
-                                        <th>Factura</th>
-                                        <th>Vendedor</th>
+                                        <th>Codigo</th>
+                                        <th>Descripcion</th>
+                                        <th>Precio</th>
+                                        <th>Impuesto</th>
+                                        <th>Activo</th>
+                                        <th>Venta</th>
                                         <th>Fecha Creacion</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var Customer in Model.Customers)
+                                    @foreach (var Product in Model.Products)
                                     {
-                                        var id = @Customer.ID;
-                                        var razon = @Customer.RazonSocial;
-                                        var name = @Customer.Name;
-                                        var rfc = @Customer.RFC;
-                                        var address = @Customer.Address;
-                                        var CP = @Customer.CP;
-                                        var phone = @Customer.Phone;
-                                        var city = @Customer.City;
-                                        var state = @Customer.State;
-                                        var email = @Customer.email;
-                                        var invoice = @Customer.Invoice ? "Si" : "No";
-                                        var salesMan = @Customer.SalesMan==null?"": @Customer.SalesMan.Name;
-                                        var created = @Customer.Created;
+                                        var id = Product.ID;
+                                        var Code = Product.code;
+                                        var descrip = Product.descrip;
+                                        var price = Product.price;
+                                        var tax = Product.tax;
+                                        var city = Product.avaible;
+                                        var sales = Product.sales;
+                                        var Created = Product.Created;
 
                                     <tr data-id="@id">
-                                        <td>@razon</td>
-                                        <td>@name</td>
-                                        <td>@rfc</td>
-                                        <td>@address</td>
-                                        <td>@CP</td>
-                                        <td>@phone</td>
+                                        <td>@Code</td>
+                                        <td>@descrip</td>
+                                        <td>@price</td>
+                                        <td>@tax</td>
                                         <td>@city</td>
-                                        <td>@state</td>
-                                        <td>@email</td>
-                                        <td>@invoice</td>
-                                        <td>@salesMan</td>
-                                        <td>@created</td>
+                                        <td>@sales</td>
+                                        <td>@Created</td>
                                     </tr>
                                     }
                                     
@@ -133,7 +117,7 @@
                             <div class="col-md-3"></div>
                             <div class="col-md-3"></div>
                             <div class="col-md-3"></div>
-                            <div class="col-md-12">
+                            <div class="col-md-3">
                                 <button type="button" class="btn btn-info" id="btnContinue">Continuar</button>
                             </div>                            
                         </div>
@@ -209,12 +193,12 @@
         /*
             When selecting a row in the table
          */
-        $("#tableCustomers tbody tr").click(function () {
+        $("#tableProductos tbody tr").click(function () {
            
             /*
                 Change the selected color
              */
-            $("#tableCustomers tr").removeClass("highlight");
+            $("#tableProductos tr").removeClass("highlight");
             var selected = $(this).hasClass("highlight");
             $("#data tr").removeClass("highlight");
             if (!selected) {
@@ -257,16 +241,16 @@
 
         });
 
-        //When the user wants to view a customer
+        //When the user wants to view a product
         function viewType() {
 
-            window.location = "/customers/ViewCustomer?ID=" + selectedTableId;
+            window.location = "/products/ViewProduct?ID=" + selectedTableId;
         }
 
         //When the user selected to edit
         function editType() {
 
-            window.location = "/customers/EditCustomerIndex?ID=" + selectedTableId;
+            window.location = "/products/EditProductIndex?ID=" + selectedTableId;
         }
 
         //When the user selected to delete
@@ -286,7 +270,7 @@
                 dangerMode: false,
             }).then(function (isConfirm) {
                 if (isConfirm) {
-                    deleteCustomer();
+                    deleteProduct();
                 } else {
 
                 }
@@ -295,20 +279,20 @@
 
 
         /*
-            Delete a customer from the server
+            Delete a product from the server
          */
-        function deleteCustomer(){
+        function deleteProduct(){
 
             $.ajax({
                 type: "POST",
-                url: "/users/DeleteCustomer",
+                url: "/products/DeleteProduct",
                 contentType: "application/json; charset=utf-8",
                 data: '{"id":"' + selectedTableId + '"}',
                 dataType: "html",
                 success: function (result) {
                     var json = JSON.parse(result);
                     if (json.Result_ == 1) {
-                        swal("Cliente eliminado correctamente");
+                        swal("Producto eliminado correctamente");
                         currentSelectedTD.remove();
                     }
                     else {

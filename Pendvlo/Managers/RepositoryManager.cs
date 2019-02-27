@@ -21,6 +21,7 @@ namespace Pendvlo.Managers
         public UsersRepository UsersRepository { get; set; }
         public ModulesRepository ModulesRepository { get; set; }
         public CustomersRepository CustomersRepository { get; set; }
+        public ProductsRepository ProductsRepository { get; set; }
 
 
 
@@ -31,6 +32,7 @@ namespace Pendvlo.Managers
             UsersRepository = new UsersRepository(dBContext);
             ModulesRepository = new ModulesRepository(dBContext);
             CustomersRepository = new CustomersRepository(dBContext);
+            ProductsRepository = new ProductsRepository(dBContext);
         }
 
         public static RepositoryManager Instance

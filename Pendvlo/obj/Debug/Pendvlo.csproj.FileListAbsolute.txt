@@ -48,6 +48,8 @@ C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\roslyn\VBCSCompiler.exe
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\Antlr3.Runtime.dll
+C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\EntityFramework.dll
+C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\EntityFramework.SqlServer.dll
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\Microsoft.AspNet.TelemetryCorrelation.dll
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\Microsoft.Web.Infrastructure.dll
@@ -61,6 +63,8 @@ C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\System.Web.WebPages.dll
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\System.Web.WebPages.Razor.dll
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\WebGrease.dll
+C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\EntityFramework.xml
+C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\EntityFramework.SqlServer.xml
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\System.Web.Helpers.xml
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\System.Web.Mvc.xml
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\System.Web.Optimization.xml
@@ -77,11 +81,3 @@ C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\obj
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\obj\Debug\Pendvlo.csproj.CopyComplete
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\obj\Debug\Pendvlo.dll
 C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\obj\Debug\Pendvlo.pdb
-C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\EntityFramework.dll
-C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\EntityFramework.SqlServer.dll
-C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\EntityFramework.xml
-C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\bin\EntityFramework.SqlServer.xml
-C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\obj\Debug\Pendvlo.Migrations.initial.resources
-C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\obj\Debug\Pendvlo.csproj.GenerateResource.cache
-C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\obj\Debug\Pendvlo.Migrations.inita.resources
-C:\Users\Exigo_User\Desktop\Carpeta de Trabajo\Proyectos\Chi\Pendvlo\Pendvlo\obj\Debug\Pendvlo.csprojAssemblyReference.cache

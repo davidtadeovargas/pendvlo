@@ -10,7 +10,7 @@ namespace Pendvlo.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Pendvlo.DAL.DBContext context)
