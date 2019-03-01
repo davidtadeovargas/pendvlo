@@ -19,5 +19,12 @@ namespace Pendvlo.DAL
         public DbSet<Module> Modules { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Suaje> Suajes { get; set; }
+        public DbSet<MedidaEtiqueta> MedidasEtiqueta { get; set; }
+        public DbSet<TipoVenta> TipoVentas { get; set; }
+        public DbSet<TiposPagos> TipoPagos { get; set; }
+        public DbSet<Sucursal> Sucursales { get; set; }
+        public DbSet<Banco> Bancos { get; set; }
+        public DbSet<ProcedimientoImpresion> ProcedimientoImpresions { get; set; }
     }
 }

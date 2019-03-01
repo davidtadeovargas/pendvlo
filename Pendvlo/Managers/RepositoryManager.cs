@@ -22,6 +22,13 @@ namespace Pendvlo.Managers
         public ModulesRepository ModulesRepository { get; set; }
         public CustomersRepository CustomersRepository { get; set; }
         public ProductsRepository ProductsRepository { get; set; }
+        public ProcedimientosImpresionRepository ProcedimientosImpresionRepository { get; set; }
+        public SuajeRepository SuajeRepository { get; set; }
+        public MedidaEtiquetaRepository MedidaEtiquetaRepository { get; set; }
+        public TipoVentaRepository TipoVentaRepository { get; set; }
+        public TipoPagosRepository TipoPagosRepository { get; set; }
+        public SucursalesRepository SucursalesRepository { get; set; }
+        public BancoRepository BancoRepository { get; set; }
 
 
 
@@ -33,6 +40,13 @@ namespace Pendvlo.Managers
             ModulesRepository = new ModulesRepository(dBContext);
             CustomersRepository = new CustomersRepository(dBContext);
             ProductsRepository = new ProductsRepository(dBContext);
+            ProcedimientosImpresionRepository = new ProcedimientosImpresionRepository(dBContext);
+            SuajeRepository = new SuajeRepository(dBContext);
+            MedidaEtiquetaRepository = new MedidaEtiquetaRepository(dBContext);
+            TipoVentaRepository = new TipoVentaRepository(dBContext);
+            TipoPagosRepository = new TipoPagosRepository(dBContext);
+            SucursalesRepository = new SucursalesRepository(dBContext);
+            BancoRepository = new BancoRepository(dBContext);
         }
 
         public static RepositoryManager Instance
