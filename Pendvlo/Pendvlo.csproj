@@ -139,6 +139,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductionController.cs" />
     <Compile Include="Controllers\SweetController.cs" />
+    <Compile Include="Controllers\CuentasBancariasController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DAL\DBContext.cs" />
     <Compile Include="DAL\DBInitializer.cs" />
@@ -147,30 +148,55 @@
     <Compile Include="DAL\Repository\ModulesRepository.cs" />
     <Compile Include="DAL\Repository\Repository.cs" />
     <Compile Include="DAL\Repository\CustomersRepository.cs" />
+    <Compile Include="DAL\Repository\EstatusOrdenVentaRepository.cs" />
+    <Compile Include="DAL\Repository\CuentasRepository.cs" />
+    <Compile Include="DAL\Repository\TipoArchivosRepository.cs" />
     <Compile Include="DAL\Repository\UsersRepository.cs" />
+    <Compile Include="DAL\Repository\ProcedimientosImpresionRepository.cs" />
+    <Compile Include="DAL\Repository\SuajeRepository.cs" />
+    <Compile Include="DAL\Repository\MedidaEtiquetaRepository.cs" />
+    <Compile Include="DAL\Repository\TipoVentaRepository.cs" />
+    <Compile Include="DAL\Repository\TipoPagosRepository.cs" />
+    <Compile Include="DAL\Repository\SucursalesRepository.cs" />
+    <Compile Include="DAL\Repository\BancoRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HttpModels\DeleteAccountRequestModel.cs" />
+    <Compile Include="HttpModels\EditAccountRequestModel.cs" />
+    <Compile Include="HttpModels\NewAccountRequestModel.cs" />
     <Compile Include="Managers\JSONManager.cs" />
     <Compile Include="Managers\RepositoryManager.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="HttpModels\DeleteUserRequestModel.cs" />
+    <Compile Include="HttpModels\EditCustomerRequestModel.cs" />
+    <Compile Include="HttpModels\EditUserRequestModel.cs" />
+    <Compile Include="HttpModels\LoginRequestModel.cs" />
+    <Compile Include="HttpModels\NewCustomerRequestModel.cs" />
+    <Compile Include="HttpModels\NewUserRequestModel.cs" />
+    <Compile Include="HttpModels\Result.cs" />
+    <Compile Include="Models\Banco.cs" />
+    <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\Http\DeleteUserRequestModel.cs" />
-    <Compile Include="Models\Http\EditCustomerRequestModel.cs" />
-    <Compile Include="Models\Http\EditUserRequestModel.cs" />
-    <Compile Include="Models\Http\LoginRequestModel.cs" />
-    <Compile Include="Models\Http\NewCustomerRequestModel.cs" />
-    <Compile Include="Models\Http\NewUserRequestModel.cs" />
-    <Compile Include="Models\Http\Result.cs" />
+    <Compile Include="Models\MedidaEtiqueta.cs" />
     <Compile Include="Models\Module.cs" />
+    <Compile Include="Models\ProcedimientoImpresion.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Suaje.cs" />
+    <Compile Include="Models\Sucursal.cs" />
+    <Compile Include="Models\EstatusOrdenVenta.cs" />
+    <Compile Include="Models\TiposArchivo.cs" />
+    <Compile Include="Models\TiposPagos.cs" />
+    <Compile Include="Models\TipoVenta.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\Views\CustomerIndexViewModel.cs" />
-    <Compile Include="Models\Views\ProductsViewModel.cs" />
-    <Compile Include="Models\Views\TYPE.cs" />
-    <Compile Include="Models\Views\UsersIndexViewModel.cs" />
-    <Compile Include="Models\Views\CustomersViewModel.cs" />
-    <Compile Include="Models\Views\UsersViewModel.cs" />
+    <Compile Include="ViewModels\CustomerIndexViewModel.cs" />
+    <Compile Include="ViewModels\CuentasBancariasViewModel.cs" />
+    <Compile Include="ViewModels\ProductsViewModel.cs" />
+    <Compile Include="ViewModels\TYPE.cs" />
+    <Compile Include="ViewModels\UsersIndexViewModel.cs" />
+    <Compile Include="ViewModels\CustomersViewModel.cs" />
+    <Compile Include="ViewModels\AccountsViewModel.cs" />
+    <Compile Include="ViewModels\UsersViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +204,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CuentasIndex.css" />
     <Content Include="Content\Products.css" />
     <Content Include="Content\Customer.css" />
     <Content Include="Content\Home.css" />
@@ -229,12 +256,13 @@
     <Content Include="Content\sweetalert\sweet-alert.css" />
     <Content Include="Content\sweetalert\thumbs-up.jpg" />
     <Content Include="Content\Customers.css" />
-    <Content Include="Content\Users.css" />
+    <Content Include="Content\Cuentas.css" />
     <Content Include="Content\CustomersIndex.css" />
     <Content Include="Content\UsersIndex.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="logo.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\login\vendor\bootstrap\css\bootstrap-grid.css.map" />
@@ -347,6 +375,9 @@
     <Content Include="Views\Users\Users.cshtml" />
     <Content Include="Views\Customers\Customers.cshtml" />
     <Content Include="Views\Products\Products.cshtml" />
+    <Content Include="Views\CuentasBancarias\Cuentas.cshtml" />
+    <Content Include="Views\CuentasBancarias\Index.cshtml" />
+    <Content Include="Views\Shared\MainMenu\_CuentasMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,4 @@
-﻿@model Pendvlo.Models.Views.CustomersViewModel
+﻿@model Pendvlo.ViewModels.CustomersViewModel
 
 @{    
     var removeContinueBtn = 0;
@@ -8,18 +8,18 @@
      */
     string title = "undefined";
     string type = "";
-    if (Model.Type==Pendvlo.Models.Views.TYPE.LIST)
+    if (Model.Type==Pendvlo.ViewModels.TYPE.LIST)
     {
         title = "CLIENTES";
         removeContinueBtn = 1;
         type = "TYPE.VIEW";
     }
-    else if (Model.Type == Pendvlo.Models.Views.TYPE.MODIFY)
+    else if (Model.Type == Pendvlo.ViewModels.TYPE.MODIFY)
     {
         title = "EDITAR CLIENTE";
         type = "TYPE.MODIFY";
     }
-    else if (Model.Type == Pendvlo.Models.Views.TYPE.DELETE)
+    else if (Model.Type == Pendvlo.ViewModels.TYPE.DELETE)
     {
         title = "ELIMINAR CLIENTE";
         type = "TYPE.DELETE";

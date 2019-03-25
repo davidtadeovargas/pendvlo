@@ -8,16 +8,6 @@ namespace Pendvlo.DAL.Repository
 {
     public class BancoRepository : Repository
     {
-        /*
-         Contains the first ids
-             */
-        private int banamexID = 0;
-        private int scotiabankID = 1;
-        private int bancomerID = 2;
-
-
-
-
         public BancoRepository(DBContext dBContext) : base(dBContext)
         {
 
@@ -46,7 +36,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createBanamex()
         {
-            var result = DBContext.Bancos.Add(new Banco { ID = banamexID, Name = "BANAMEX" });
+            var result = DBContext.Bancos.Add(new Banco { Name = "BANAMEX" });
             DBContext.SaveChanges();            
         }
 
@@ -55,7 +45,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createScotiabank()
         {
-            var result = DBContext.Suajes.Add(new Suaje { ID = scotiabankID, Name = "SCOTIABANK" });
+            var result = DBContext.Bancos.Add(new Banco { Name = "SCOTIABANK" });
             DBContext.SaveChanges();
         }
 
@@ -64,7 +54,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createBancomer()
         {
-            var result = DBContext.Suajes.Add(new Suaje { ID = bancomerID, Name = "BANCOMER" });
+            var result = DBContext.Bancos.Add(new Banco { Name = "BANCOMER" });
             DBContext.SaveChanges();
         }
 
@@ -73,7 +63,7 @@ namespace Pendvlo.DAL.Repository
              */
         public Banco getBanamex()
         {
-            Banco Banco = DBContext.Bancos.Where(m => m.ID == banamexID).FirstOrDefault();
+            Banco Banco = DBContext.Bancos.Where(m => m.Name == "BANAMEX").FirstOrDefault();
             return Banco;
         }
 
@@ -82,7 +72,7 @@ namespace Pendvlo.DAL.Repository
              */
         public Banco getScotiabank()
         {
-            Banco Banco = DBContext.Bancos.Where(m => m.ID == scotiabankID).FirstOrDefault();
+            Banco Banco = DBContext.Bancos.Where(m => m.Name == "SCOTIABANK").FirstOrDefault();
             return Banco;
         }
 
@@ -91,7 +81,7 @@ namespace Pendvlo.DAL.Repository
              */
         public Banco getBancomer()
         {
-            Banco Banco = DBContext.Bancos.Where(m => m.ID == bancomerID).FirstOrDefault();
+            Banco Banco = DBContext.Bancos.Where(m => m.Name == "BANCOMER").FirstOrDefault();
             return Banco;
         }
     }

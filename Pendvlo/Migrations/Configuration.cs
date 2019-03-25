@@ -30,22 +30,23 @@ namespace Pendvlo.Migrations
             RepositoryManager.Instance.ModulesRepository.createSalesModule();
             RepositoryManager.Instance.ModulesRepository.createAdministrationModule();
             RepositoryManager.Instance.ModulesRepository.createDesignModule();
-
-            /*
+            RepositoryManager.Instance.ModulesRepository.createAtenServCustomModule();
+            RepositoryManager.Instance.ModulesRepository.createAdminComprasModule();
+/*
                 Users
              */
 
-            Module salesModule = RepositoryManager.Instance.ModulesRepository.getSalesModule();
+            Module salesModule = RepositoryManager.Instance.ModulesRepository.getAtencionServCustomerModule();
             Module administrativeModule = RepositoryManager.Instance.ModulesRepository.getAdministrationModule();
 
             context.Users.AddOrUpdate(x => x.ID,
-                new User() { ID = 1, Name = "admin", User_ = "admin", Password = "123456789", Sales = 1, admin = true }
+                new User() { ID = 1, Name = "admin", User_ = "admin", Password = "123456789", Sales = true, admin = true }
                 );
             context.Users.AddOrUpdate(x => x.ID,
-                new User() { ID = 1, Name = "ALEJANDRO ESPEJO", User_ = "JAER", Password = "123456789", Sales = 1, Module = salesModule }
+                new User() { ID = 1, Name = "ALEJANDRO ESPEJO", User_ = "JAER", Password = "123456789", Sales = true, Module = salesModule }
                 );
             context.Users.AddOrUpdate(x => x.ID,
-                new User() { ID = 1, Name = "ALDO DAGOBERTO", User_ = "ADRL", Password = "123456789", Sales = 1, Module = administrativeModule }
+                new User() { ID = 1, Name = "ALDO DAGOBERTO", User_ = "ADRL", Password = "123456789", Sales = true, Module = administrativeModule }
                 );
 
             /*
@@ -62,6 +63,9 @@ namespace Pendvlo.Migrations
             RepositoryManager.Instance.SuajeRepository.createCorteCompleto();
             RepositoryManager.Instance.SuajeRepository.createSuajeSeguridad();
 
+            RepositoryManager.Instance.SuajeRepository.createSuaje();
+            RepositoryManager.Instance.SuajeRepository.createPleca();
+
             /*
                 Medida etiqueta
              */
@@ -75,6 +79,13 @@ namespace Pendvlo.Migrations
             RepositoryManager.Instance.TipoVentaRepository.createMaquilador();
             RepositoryManager.Instance.TipoVentaRepository.createVolumen();
             RepositoryManager.Instance.TipoVentaRepository.createInternet();
+
+            /*
+                Tipo de archivos
+             */
+            RepositoryManager.Instance.TipoArchivosRepository.createNuevo();
+            RepositoryManager.Instance.TipoArchivosRepository.createReimpresion();
+            RepositoryManager.Instance.TipoArchivosRepository.createModificacion();
 
             /*
                 Tipo de pagos
@@ -96,6 +107,18 @@ namespace Pendvlo.Migrations
             RepositoryManager.Instance.BancoRepository.createBanamex();
             RepositoryManager.Instance.BancoRepository.createBancomer();
             RepositoryManager.Instance.BancoRepository.createScotiabank();
+
+            /*
+                Cuentas
+             */
+            RepositoryManager.Instance.CuentasRepository.createInitialBanamex();
+            RepositoryManager.Instance.CuentasRepository.createInitialScotiabank();
+
+            /*
+                Estatus de ordenes de venta
+             */
+            RepositoryManager.Instance.EstatusOrdenVentaRepository.createPendiente();
+            RepositoryManager.Instance.EstatusOrdenVentaRepository.createCompletada();
         }
     }
 }

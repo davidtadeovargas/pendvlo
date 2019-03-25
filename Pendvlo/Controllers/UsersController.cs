@@ -1,7 +1,7 @@
-﻿using Pendvlo.Managers;
+﻿using Pendvlo.HttpModels;
+using Pendvlo.Managers;
 using Pendvlo.Models;
-using Pendvlo.Models.Http;
-using Pendvlo.Models.Views;
+using Pendvlo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,13 +57,16 @@ namespace Pendvlo.Controllers
                    Persist the new user
                 */
 
-               Module module_ = RepositoryManager.Instance.ModulesRepository.getByID(newUserRequestModel.Module);
+                Module module_ = RepositoryManager.Instance.ModulesRepository.getByID(newUserRequestModel.Module); //Get the module
+                Sucursal sucursal_ = RepositoryManager.Instance.SucursalesRepository.getByID(newUserRequestModel.Sucursal); //Get the sucursal
 
                 User User_ = new User();
                 User_.Name = newUserRequestModel.Name;
                 User_.User_ = newUserRequestModel.User;
                 User_.Password = newUserRequestModel.Password;
                 User_.Sales = newUserRequestModel.Sales;
+                User_.EncargadoSucursal = newUserRequestModel.encargadoSucursal;
+                User_.Sucursal = sucursal_;
                 User_.Module = module_;
 
                 RepositoryManager.Instance.UsersRepository.newUser(User_);
@@ -88,8 +91,8 @@ namespace Pendvlo.Controllers
             try
             {
                 /*
-                Validate all fields are filled
-             */
+                    Validate all fields are filled
+                 */
                 if (editUserRequestModel.Name == null || editUserRequestModel.Name == "")
                 {
                     return Json(JSONManager.JsonFail("Need Name"));
@@ -116,12 +119,15 @@ namespace Pendvlo.Controllers
                     Edit the new user
                  */
 
-                Module module_ = RepositoryManager.Instance.ModulesRepository.getByID(editUserRequestModel.Module);
+                Module module_ = RepositoryManager.Instance.ModulesRepository.getByID(editUserRequestModel.Module); //Get the module
+                Sucursal sucursal_ = RepositoryManager.Instance.SucursalesRepository.getByID(editUserRequestModel.Sucursal); //Get the sucursal
 
                 User_.Name = editUserRequestModel.Name;                
                 User_.Password = editUserRequestModel.Password;
                 User_.Sales = editUserRequestModel.Sales;
+                User_.EncargadoSucursal = editUserRequestModel.encargadoSucursal;
                 User_.Module = module_;
+                User_.Sucursal = sucursal_;
 
                 RepositoryManager.Instance.UsersRepository.editUser(User_);
 
@@ -148,6 +154,9 @@ namespace Pendvlo.Controllers
             return Users(usersViewModel);           
         }
 
+        /*
+            Return the view for new or edit the user
+             */
         private ActionResult UsersIndex(TYPE type, int ID = -1)
         {
             /*
@@ -155,9 +164,15 @@ namespace Pendvlo.Controllers
              */
             var modules = RepositoryManager.Instance.ModulesRepository.getModules();
 
+            /*
+                Get all the sucursales
+             */
+            var sucursales = RepositoryManager.Instance.SucursalesRepository.getAll();
+
             UsersIndexViewModel usersViewModel = new UsersIndexViewModel();
             usersViewModel.Type = type;
             usersViewModel.Modules = modules;
+            usersViewModel.Sucursales = sucursales;
 
             /*
                 Get the complete information from the user 

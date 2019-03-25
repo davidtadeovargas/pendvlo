@@ -1,10 +1,6 @@
-﻿using Pendvlo.Managers;
+﻿using Pendvlo.HttpModels;
+using Pendvlo.Managers;
 using Pendvlo.Models;
-using Pendvlo.Models.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Pendvlo.Controllers

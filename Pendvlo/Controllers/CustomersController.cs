@@ -1,7 +1,7 @@
-﻿using Pendvlo.Managers;
+﻿using Pendvlo.HttpModels;
+using Pendvlo.Managers;
 using Pendvlo.Models;
-using Pendvlo.Models.Http;
-using Pendvlo.Models.Views;
+using Pendvlo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

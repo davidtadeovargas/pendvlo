@@ -8,17 +8,6 @@ namespace Pendvlo.DAL.Repository
 {
     public class ProcedimientosImpresionRepository : Repository
     {
-        /*
-         Contains the first ids
-             */
-        private int seleccionID = 0;
-        private int trocomiaID = 1;
-        private int tintaID = 2;
-        private int directaID = 3;        
-
-
-
-
         public ProcedimientosImpresionRepository(DBContext dBContext) : base(dBContext)
         {
 
@@ -47,7 +36,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createSelection()
         {
-            var result = DBContext.ProcedimientoImpresions.Add(new ProcedimientoImpresion { ID = seleccionID, Name = "SELECCION" });
+            var result = DBContext.ProcedimientoImpresions.Add(new ProcedimientoImpresion { Name = "SELECCION" });
             DBContext.SaveChanges();            
         }
 
@@ -56,7 +45,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createTrocomia()
         {
-            var result = DBContext.ProcedimientoImpresions.Add(new ProcedimientoImpresion { ID = trocomiaID, Name = "TROCOMIA" });
+            var result = DBContext.ProcedimientoImpresions.Add(new ProcedimientoImpresion { Name = "TRICOMIA" });
             DBContext.SaveChanges();
         }
 
@@ -65,7 +54,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createTintaDirecta()
         {
-            var result = DBContext.ProcedimientoImpresions.Add(new ProcedimientoImpresion { ID = tintaID, Name = "TINTA DIRECTA" });
+            var result = DBContext.ProcedimientoImpresions.Add(new ProcedimientoImpresion { Name = "TINTA DIRECTA" });
             DBContext.SaveChanges();
         }
 
@@ -74,7 +63,7 @@ namespace Pendvlo.DAL.Repository
              */
         public ProcedimientoImpresion getSelection()
         {
-            ProcedimientoImpresion Module_ = DBContext.ProcedimientoImpresions.Where(m => m.ID == seleccionID).FirstOrDefault();
+            ProcedimientoImpresion Module_ = DBContext.ProcedimientoImpresions.Where(m => m.Name == "SELECCION").FirstOrDefault();
             return Module_;
         }
 
@@ -83,7 +72,16 @@ namespace Pendvlo.DAL.Repository
              */
         public ProcedimientoImpresion getTracomia()
         {
-            ProcedimientoImpresion Module_ = DBContext.ProcedimientoImpresions.Where(m => m.ID == directaID).FirstOrDefault();
+            ProcedimientoImpresion Module_ = DBContext.ProcedimientoImpresions.Where(m => m.Name == "TRICOMIA").FirstOrDefault();
+            return Module_;
+        }
+
+        /*
+         Get model
+             */
+        public ProcedimientoImpresion getTintaDirecta()
+        {
+            ProcedimientoImpresion Module_ = DBContext.ProcedimientoImpresions.Where(m => m.Name == "TINTA DIRECTA").FirstOrDefault();
             return Module_;
         }
     }

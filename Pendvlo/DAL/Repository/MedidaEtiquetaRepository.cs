@@ -8,15 +8,6 @@ namespace Pendvlo.DAL.Repository
 {
     public class MedidaEtiquetaRepository : Repository
     {
-        /*
-         Contains the first ids
-             */
-        private int ejeID = 0;
-        private int desarrolloID = 1;        
-
-
-
-
         public MedidaEtiquetaRepository(DBContext dBContext) : base(dBContext)
         {
 
@@ -45,7 +36,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createEje()
         {
-            var result = DBContext.MedidasEtiqueta.Add(new MedidaEtiqueta { ID = ejeID, Name = "EJE" });
+            var result = DBContext.MedidasEtiqueta.Add(new MedidaEtiqueta { Name = "EJE" });
             DBContext.SaveChanges();            
         }
 
@@ -54,7 +45,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createDesarrollo()
         {
-            var result = DBContext.MedidasEtiqueta.Add(new MedidaEtiqueta { ID = desarrolloID, Name = "DESARROLLO" });
+            var result = DBContext.MedidasEtiqueta.Add(new MedidaEtiqueta { Name = "DESARROLLO" });
             DBContext.SaveChanges();
         }
 
@@ -63,7 +54,7 @@ namespace Pendvlo.DAL.Repository
              */
         public MedidaEtiqueta getEje()
         {
-            MedidaEtiqueta MedidaEtiqueta = DBContext.MedidasEtiqueta.Where(m => m.ID == ejeID).FirstOrDefault();
+            MedidaEtiqueta MedidaEtiqueta = DBContext.MedidasEtiqueta.Where(m => m.Name == "EJE").FirstOrDefault();
             return MedidaEtiqueta;
         }
 
@@ -72,7 +63,7 @@ namespace Pendvlo.DAL.Repository
              */
         public MedidaEtiqueta getDesarrollo()
         {
-            MedidaEtiqueta MedidaEtiqueta = DBContext.MedidasEtiqueta.Where(m => m.ID == desarrolloID).FirstOrDefault();
+            MedidaEtiqueta MedidaEtiqueta = DBContext.MedidasEtiqueta.Where(m => m.Name == "DESARROLLO").FirstOrDefault();
             return MedidaEtiqueta;
         }        
     }

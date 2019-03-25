@@ -1,12 +1,13 @@
-﻿@model Pendvlo.Models.Views.UsersIndexViewModel
+﻿@model Pendvlo.ViewModels.UsersIndexViewModel
 
 @{
     string tittle = "";
     string url = "";
 
     var module = -1;
-    var moduleName = "";
+    var sucursal = -1;
     var salesChecked = "";
+    var encargadoSucChecked = "";
     var readOnly = "";
     var styleReadOnly = "";
     var successMessage = "";
@@ -18,16 +19,17 @@
 
     var edition = 0;
 
-    if (Model.Type == Pendvlo.Models.Views.TYPE.NEW)
+    if (Model.Type == Pendvlo.ViewModels.TYPE.NEW)
     {
         tittle = "Nuevo";
         url = "/users/NewUser";
         salesChecked = "checked";
+        encargadoSucChecked = ""; //checked
         successMessage = "Usuario creado correctamente";
 
         ViewBag.Title = tittle + " Usuario";
     }
-    else if (Model.Type == Pendvlo.Models.Views.TYPE.MODIFY)
+    else if (Model.Type == Pendvlo.ViewModels.TYPE.MODIFY)
     {
         /*
             Admin user can not be modified
@@ -46,8 +48,9 @@
 
         tittle = "Editar Usuario";
         module = Model.User.Module == null?-1: Model.User.Module.ID;
-        moduleName = Model.User.Module == null?"":Model.User.Module.Name;
-        salesChecked = Model.User.Sales == 1 ? "checked" : "";
+        sucursal = Model.User.Sucursal == null ? -1 : Model.User.Sucursal.ID;
+        salesChecked = Model.User.Sales ? "checked" : "";
+        encargadoSucChecked = Model.User.EncargadoSucursal ? "checked" : "";
         readOnly = "readonly";
         styleReadOnly = "noEditableField";
         url = "/users/EditUser";
@@ -94,13 +97,32 @@
                             <input id="user" type="text" required="" placeholder="Usuario" value="@user" name="mob" class="txt @styleReadOnly" @readOnly>
                             <input id="password" type="password" required="" placeholder="Password" value="@password" name="email" class="txt" @readOnlyAdmin><div class="clearfix"></div><br />
                             <input id="sales" type="checkbox" name="module" value="" @salesChecked @disabledAdmin> Vendedor<div class="clearfix"></div><br />
-                            Departamento:
-                            <select id="module" @disabledAdmin>
-                                @foreach (var Module in Model.Modules)
-                                {
-                                    <option value="@Module.ID" data-id="@Module.ID">@Module.Name</option>
-                                }                                                               
-                            </select><div class="clearfix"></div><br />
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    Departamento:
+                                </div>
+                                <div class="col-xs-9">
+                                    <select id="module" @disabledAdmin>
+                                        @foreach (var Module in Model.Modules)
+                                        {
+                                            <option value="@Module.ID" data-id="@Module.ID">@Module.Name</option>
+                                        }
+                                    </select>
+                                </div><div class="clearfix"></div><br />
+                                <div class="col-xs-3">
+                                    Sucursal:
+                                </div>
+                                <div class="col-xs-9">
+                                    <select id="sucursal" @disabledAdmin>
+                                        @foreach (var Sucursal in Model.Sucursales)
+                                        {
+                                            <option value="@Sucursal.ID" data-id="@Sucursal.ID">@Sucursal.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="clearfix"></div><br />
+                                <input id="encargadoSucursal" type="checkbox" value="" @encargadoSucChecked @disabledAdmin> Encargado de Sucursal<div class="clearfix"></div><br />
+                            </div>                                                       
                             <input type="submit" value="Guardar" name="submit" class="txt2" id="btnSave" @disabledAdmin>
                         </form>
                     </div>
@@ -115,7 +137,7 @@
 <script type="text/JavaScript">
 
     var module = @module;
-    var moduleName = "@moduleName";
+    var sucursal = @sucursal;    
 
     $(document).ready(function () {
 
@@ -124,6 +146,13 @@
             */
         if (module != -1) {
             $("#module").val(module);
+        }
+
+        /*
+            Select the current sucursal
+            */
+        if (sucursal != -1) {
+            $("#sucursal").val(sucursal);
         }
 
         /*
@@ -139,8 +168,10 @@
             var name = $("#name").val();
             var user = $("#user").val();
             var password = $("#password").val();
-            var sales = $("#sales").prop('checked') == true ? 1:0;
+            var sales = $("#sales").prop('checked') == true ? true : false;
+            var encargadoSucursal = $("#encargadoSucursal").prop('checked') == true ? true : false;
             module = $('#module').find(":selected").attr("data-id");
+            sucursal = $('#sucursal').find(":selected").attr("data-id");
 
             if (name === "" || name === 'undefined') {
                 swal("Ingresa el nombre");
@@ -161,6 +192,11 @@
                 swal("Selecciona el departamento");
                 $("#module").focus();
                 return;                
+            }
+            if (sucursal === "" || sucursal === 'undefined') {
+                swal("Selecciona una sucursal");
+                $("#sucursal").focus();
+                return;
             }
 
             /*
@@ -185,7 +221,7 @@
                         type: "POST",
                         url: "@url",
                         contentType: "application/json; charset=utf-8",
-                        data: '{"name":"' + name + '","user":"' + user + '","password":"' + password + '","sales":"' + sales + '","module":"' + module + '"}',
+                        data: '{"name":"' + name + '","user":"' + user + '","password":"' + password + '","sales":"' + sales + '","module":"' + module + '", "sucursal":"' + sucursal + '","encargadoSucursal":"' + encargadoSucursal + '"}',
                         dataType: "html",
                         success: function (result) {
                             var json = JSON.parse(result);
@@ -223,6 +259,7 @@
         $("#password").val("");
         $('#sales').prop('checked', true);
         $("#module").val($("#module option:first").val());
+        $("#sucursal").val($("#module option:first").val());
     }
 
 </script>

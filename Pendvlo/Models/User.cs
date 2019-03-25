@@ -11,7 +11,9 @@ namespace Pendvlo.Models
         public string Name { get; set; }
         public string User_ { get; set; }
         public string Password { get; set; }
-        public int Sales { get; set; }
+        public bool Sales { get; set; }
+        public bool EncargadoSucursal { get; set; }
+        public Sucursal Sucursal { get; set; }
         public Boolean admin { get; set; }
         public Module Module { get; set; }
         public DateTime Created { get; set; }
@@ -20,6 +22,7 @@ namespace Pendvlo.Models
         {
             Created = DateTime.Now;
             admin = false;
+            EncargadoSucursal = false;
         }
     }
 }

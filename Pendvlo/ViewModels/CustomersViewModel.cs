@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Pendvlo.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Pendvlo.Models.Views
+namespace Pendvlo.ViewModels
 {
     public class CustomersViewModel
     {

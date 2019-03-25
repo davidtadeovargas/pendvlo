@@ -1,4 +1,4 @@
-﻿@model Pendvlo.Models.Views.CustomerIndexViewModel
+﻿@model Pendvlo.ViewModels.CustomerIndexViewModel
 
 @{
     string tittle = "";
@@ -34,7 +34,7 @@
 
     var edition = 0;
 
-    if (Model.Type == Pendvlo.Models.Views.TYPE.NEW)
+    if (Model.Type == Pendvlo.ViewModels.TYPE.NEW)
     {
         tittle = "Nuevo Cliente";
         url = "/customers/NewCustomer";
@@ -43,7 +43,7 @@
 
         ViewBag.Title = tittle + " Cliente";
     }
-    else if (Model.Type == Pendvlo.Models.Views.TYPE.MODIFY)
+    else if (Model.Type == Pendvlo.ViewModels.TYPE.MODIFY)
     {
         customer = Model.Customer.ID;
         customerName = Model.Customer.Name;
@@ -62,7 +62,7 @@
 
         edition = 1;
     }
-    else if (Model.Type == Pendvlo.Models.Views.TYPE.VIEW)
+    else if (Model.Type == Pendvlo.ViewModels.TYPE.VIEW)
     {
         customer = Model.Customer.ID;
         customerName = Model.Customer.Name;

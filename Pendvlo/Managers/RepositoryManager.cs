@@ -27,8 +27,11 @@ namespace Pendvlo.Managers
         public MedidaEtiquetaRepository MedidaEtiquetaRepository { get; set; }
         public TipoVentaRepository TipoVentaRepository { get; set; }
         public TipoPagosRepository TipoPagosRepository { get; set; }
+        public TipoArchivosRepository TipoArchivosRepository { get; set; }
         public SucursalesRepository SucursalesRepository { get; set; }
         public BancoRepository BancoRepository { get; set; }
+        public EstatusOrdenVentaRepository EstatusOrdenVentaRepository { get; set; }
+        public CuentasRepository CuentasRepository { get; set; }        
 
 
 
@@ -45,8 +48,11 @@ namespace Pendvlo.Managers
             MedidaEtiquetaRepository = new MedidaEtiquetaRepository(dBContext);
             TipoVentaRepository = new TipoVentaRepository(dBContext);
             TipoPagosRepository = new TipoPagosRepository(dBContext);
+            TipoArchivosRepository = new TipoArchivosRepository(dBContext);            
             SucursalesRepository = new SucursalesRepository(dBContext);
             BancoRepository = new BancoRepository(dBContext);
+            EstatusOrdenVentaRepository = new EstatusOrdenVentaRepository(dBContext);
+            CuentasRepository = new CuentasRepository(dBContext);            
         }
 
         public static RepositoryManager Instance

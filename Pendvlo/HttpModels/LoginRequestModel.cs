@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Pendvlo.Models.Http
+namespace Pendvlo.HttpModels
 {
     public class LoginRequestModel
     {

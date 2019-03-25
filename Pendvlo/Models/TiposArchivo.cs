@@ -6,8 +6,8 @@ using System.Web;
 
 namespace Pendvlo.Models
 {
-    [Table("Bancos")]
-    public class Banco
+    [Table("TiposArchivos")]
+    public class TiposArchivo
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -15,7 +15,7 @@ namespace Pendvlo.Models
 
 
 
-        public Banco()
+        public TiposArchivo()
         {
             Created = DateTime.Now;
         }

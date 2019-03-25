@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Pendvlo.Models.Http;
+using Pendvlo.HttpModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

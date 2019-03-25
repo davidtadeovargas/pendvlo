@@ -8,17 +8,6 @@ namespace Pendvlo.DAL.Repository
 {
     public class TipoVentaRepository : Repository
     {
-        /*
-         Contains the first ids
-             */
-        private int mostradorID = 0;
-        private int maquiladorID = 1;
-        private int volumenID = 2;
-        private int internetID = 3;
-
-
-
-
         public TipoVentaRepository(DBContext dBContext) : base(dBContext)
         {
 
@@ -47,8 +36,17 @@ namespace Pendvlo.DAL.Repository
              */
         public void createMostrador()
         {
-            var result = DBContext.TipoVentas.Add(new TipoVenta { ID = mostradorID, Name = "MOSTRADOR" });
+            var result = DBContext.TipoVentas.Add(new TipoVenta { Name = "MOSTRADOR" });
             DBContext.SaveChanges();            
+        }
+
+        /*
+         Create model
+             */
+        public void createEjecutivoVentas()
+        {
+            var result = DBContext.TipoVentas.Add(new TipoVenta { Name = "EJECUTIVO DE VENTAS" });
+            DBContext.SaveChanges();
         }
 
         /*
@@ -56,7 +54,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createMaquilador()
         {
-            var result = DBContext.TipoVentas.Add(new TipoVenta { ID = maquiladorID, Name = "MAQUILADOR" });
+            var result = DBContext.TipoVentas.Add(new TipoVenta { Name = "MAQUILADOR" });
             DBContext.SaveChanges();
         }
 
@@ -65,7 +63,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createVolumen()
         {
-            var result = DBContext.TipoVentas.Add(new TipoVenta { ID = volumenID, Name = "VOLUMEN" });
+            var result = DBContext.TipoVentas.Add(new TipoVenta { Name = "VOLUMEN" });
             DBContext.SaveChanges();
         }
 
@@ -74,7 +72,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createInternet()
         {
-            var result = DBContext.Suajes.Add(new Suaje { ID = internetID, Name = "INTERNET" });
+            var result = DBContext.Suajes.Add(new Suaje { Name = "INTERNET" });
             DBContext.SaveChanges();
         }
 
@@ -83,7 +81,7 @@ namespace Pendvlo.DAL.Repository
              */
         public TipoVenta getMostrador()
         {
-            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.ID == mostradorID).FirstOrDefault();
+            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.Name == "MOSTRADOR").FirstOrDefault();
             return TipoVenta;
         }
 
@@ -92,7 +90,7 @@ namespace Pendvlo.DAL.Repository
              */
         public TipoVenta getMaquilador()
         {
-            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.ID == maquiladorID).FirstOrDefault();
+            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.Name == "MAQUILADOR").FirstOrDefault();
             return TipoVenta;
         }
 
@@ -101,7 +99,7 @@ namespace Pendvlo.DAL.Repository
              */
         public TipoVenta getVolumen()
         {
-            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.ID == volumenID).FirstOrDefault();
+            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.Name == "VOLUMEN").FirstOrDefault();
             return TipoVenta;
         }
 
@@ -110,7 +108,7 @@ namespace Pendvlo.DAL.Repository
              */
         public TipoVenta getInternet()
         {
-            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.ID == internetID).FirstOrDefault();
+            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.Name == "INTERNET").FirstOrDefault();
             return TipoVenta;
         }
     }

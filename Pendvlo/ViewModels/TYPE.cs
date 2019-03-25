@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Pendvlo.Models.Views
+namespace Pendvlo.ViewModels
 {
     public enum TYPE
     {

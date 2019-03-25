@@ -8,17 +8,6 @@ namespace Pendvlo.DAL.Repository
 {
     public class TipoPagosRepository : Repository
     {
-        /*
-         Contains the first ids
-             */
-        private int efectivoID = 0;
-        private int transferenciaID = 1;
-        private int depositoID = 2;
-        private int terminalID = 3;
-
-
-
-
         public TipoPagosRepository(DBContext dBContext) : base(dBContext)
         {
 
@@ -47,7 +36,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createEfectivo()
         {
-            var result = DBContext.TipoPagos.Add(new TiposPagos { ID = efectivoID, Name = "EFECTIVO" });
+            var result = DBContext.TipoPagos.Add(new TiposPagos { Name = "EFECTIVO" });
             DBContext.SaveChanges();            
         }
 
@@ -56,7 +45,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createTransferencia()
         {
-            var result = DBContext.Suajes.Add(new Suaje { ID = transferenciaID, Name = "TRANSFERENCIA" });
+            var result = DBContext.TipoPagos.Add(new TiposPagos { Name = "TRANSFERENCIA" });
             DBContext.SaveChanges();
         }
 
@@ -65,7 +54,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createDeposito()
         {
-            var result = DBContext.Suajes.Add(new Suaje { ID = depositoID, Name = "DEPOSITO" });
+            var result = DBContext.TipoPagos.Add(new TiposPagos { Name = "DEPOSITO" });
             DBContext.SaveChanges();
         }
 
@@ -74,7 +63,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createTerminal()
         {
-            var result = DBContext.TipoVentas.Add(new TipoVenta { ID = terminalID, Name = "TERMINAL" });
+            var result = DBContext.TipoPagos.Add(new TiposPagos { Name = "TERMINAL" });
             DBContext.SaveChanges();
         }
 
@@ -83,7 +72,7 @@ namespace Pendvlo.DAL.Repository
              */
         public TipoVenta getEfectivo()
         {
-            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.ID == efectivoID).FirstOrDefault();
+            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.Name == "EFECTIVO").FirstOrDefault();
             return TipoVenta;
         }
 
@@ -92,7 +81,7 @@ namespace Pendvlo.DAL.Repository
              */
         public TipoVenta getTransferencia()
         {
-            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.ID == transferenciaID).FirstOrDefault();
+            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.Name == "TRANSFERENCIA").FirstOrDefault();
             return TipoVenta;
         }
 
@@ -101,7 +90,7 @@ namespace Pendvlo.DAL.Repository
              */
         public TipoVenta getDeposito()
         {
-            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.ID == depositoID).FirstOrDefault();
+            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.Name == "DEPOSITO").FirstOrDefault();
             return TipoVenta;
         }
 
@@ -110,7 +99,7 @@ namespace Pendvlo.DAL.Repository
              */
         public TipoVenta getTerminal()
         {
-            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.ID == terminalID).FirstOrDefault();
+            TipoVenta TipoVenta = DBContext.TipoVentas.Where(m => m.Name == "TERMINAL").FirstOrDefault();
             return TipoVenta;
         }
     }

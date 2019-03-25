@@ -1,4 +1,4 @@
-﻿@model Pendvlo.ViewModels.UsersViewModel
+﻿@model Pendvlo.ViewModels.AccountsViewModel
 
 @{    
     var removeContinueBtn = 0;
@@ -10,18 +10,18 @@
     string type = "";
     if (Model.Type==Pendvlo.ViewModels.TYPE.LIST)
     {
-        title = "USUARIOS";
+        title = "CUENTAS";
         removeContinueBtn = 1;
         type = "TYPE.VIEW";
     }
     else if (Model.Type == Pendvlo.ViewModels.TYPE.MODIFY)
     {
-        title = "EDITAR USUARIO";
+        title = "EDITAR CUENTA";
         type = "TYPE.MODIFY";
     }
     else if (Model.Type == Pendvlo.ViewModels.TYPE.DELETE)
     {
-        title = "ELIMINAR USUARIO";
+        title = "ELIMINAR CUENTA";
         type = "TYPE.DELETE";
     }
 
@@ -30,13 +30,13 @@
 
 @section header{
 
-    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Users.css")">
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Cuentas.css")">
 }
 
 @section mainMenu{
 
     @{
-        Html.RenderPartial("MainMenu/_UsersMenu");
+        Html.RenderPartial("MainMenu/_CuentasMenu");
     }
 }
 
@@ -55,13 +55,6 @@
                     <h4 class="heading">
                         <strong>@title</strong><span></span>
                     </h4>
-
-
-
-
-
-
-
                     <div class="row">
                         <div class="col-md-3">
                             <form action="#" method="get">
@@ -75,32 +68,32 @@
                             </form>
                         </div>
                         <div class="col-md-9">
-                            <table class="table table-list-search" id="tableUsers">
+                            <table class="table table-list-search" id="tableRecords">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Usuario</th>
-                                        <th>Password</th>
-                                        <th>Departamento</th>
-                                        <th>Fecha Creacion</th>                                        
+                                        <th>Titular</th>
+                                        <th>Banco</th>
+                                        <th>Cuenta</th>
+                                        <th>Tarjeta</th>
+                                        <th>Clabe</th>                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var User in Model.Users)
+                                    @foreach (var Cuenta_ in Model.Cuentas)
                                     {
-                                        var id = @User.ID;
-                                        var name = @User.Name;
-                                        var user = @User.User_;
-                                        var password = @User.Password;
-                                        var module = @User.Module==null?"No asignado": @User.Module.Name;
-                                        var created = @User.Created;
+                                        var id = Cuenta_.ID;
+                                        var Titular = Cuenta_.titular;
+                                        var Banco = Cuenta_.Banco.Name;
+                                        var Cuenta = Cuenta_.cuenta;
+                                        var Tarjeta = Cuenta_.tarjeta;
+                                        var Clabe = Cuenta_.clabe;
 
                                         <tr data-id="@id">
-                                            <td>@name</td>
-                                            <td>@user</td>
-                                            <td>@password</td>
-                                            <td>@module</td>
-                                            <td>@created</td>
+                                            <td>@Titular</td>
+                                            <td>@Banco</td>
+                                            <td>@Cuenta</td>
+                                            <td>@Tarjeta</td>
+                                            <td>@Clabe</td>
                                         </tr>
                                     }
                                     
@@ -116,11 +109,6 @@
                             </div>                            
                         </div>
                     </div>
-
-
-
-
-
                 </div>
             </div>
         </div>
@@ -147,7 +135,7 @@
         var currentSelectedTD = null;
 
         /*
-            Only when is list users button continue has not to be visible
+            Only when is list button continue has not to be visible
          */
         if (removeContinueBtn) {
             $("#btnContinue").remove();
@@ -194,12 +182,12 @@
         /*
             When selecting a row in the table
          */
-        $("#tableUsers tbody tr").click(function () {
+        $("#tableRecords tbody tr").click(function () {
            
             /*
                 Change the selected color
              */
-            $("#tableUsers tr").removeClass("highlight");
+            $("#tableRecords tr").removeClass("highlight");
             var selected = $(this).hasClass("highlight");
             $("#data tr").removeClass("highlight");
             if (!selected) {
@@ -223,7 +211,7 @@
              * Validate selection in the table
              */
             if (selectedTableId == -1) {
-                swal("Selecciona un usuario");
+                swal("Selecciona una cuenta");
                 return;
             }
 
@@ -235,14 +223,13 @@
             }
             else if (type == TYPE.DELETE) {
                 deleteType();
-            }
-
+            }        
         });
 
-        //When the user selected to edit the user
+        //When the user selected to edit the account
         function editType() {
 
-            window.location = "/users/EditUserIndex?ID=" + selectedTableId;
+            window.location = "/CuentasBancarias/EditAccountIndex?accountId=" + selectedTableId;
         }
 
         //When the user selected to delete the user
@@ -277,14 +264,14 @@
 
             $.ajax({
                 type: "POST",
-                url: "/users/DeleteUser",
+                url: "/CuentasBancarias/DeleteAccount",
                 contentType: "application/json; charset=utf-8",
                 data: '{"id":"' + selectedTableId + '"}',
                 dataType: "html",
                 success: function (result) {
                     var json = JSON.parse(result);
                     if (json.Result_ == 1) {
-                        swal("Usuario eliminado correctamente");
+                        swal("Cuenta eliminada correctamente");
                         currentSelectedTD.remove();
                     }
                     else {
@@ -298,10 +285,5 @@
             });
         }
     });
-
-
-
-
-
-
+    
 </script>

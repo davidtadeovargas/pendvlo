@@ -1,0 +1,223 @@
+﻿@model Pendvlo.ViewModels.AccountsViewModel
+
+@{
+    string tittle = "";
+    string url = "";
+
+    var bancoID = -1;
+    var cuentaID = -1;
+    var readOnly = "";
+    var styleReadOnly = "";
+    var successMessage = "";
+    var readOnlyAdmin = "";
+    var account = "";
+    var titular = "";
+    var tarjeta = "";
+    var clabe = "";
+    var disabled = "";
+
+    var edition = 0;
+
+    if (Model.Type == Pendvlo.ViewModels.TYPE.NEW)
+    {
+        tittle = "Nueva";
+        url = "/CuentasBancarias/NewAccount";
+        successMessage = "Cuenta creada correctamente";
+
+        ViewBag.Title = tittle + " Cuenta";
+    }
+    else if (Model.Type == Pendvlo.ViewModels.TYPE.MODIFY)
+    {
+        edition = 1;
+
+        cuentaID = Model.Cuenta.ID;
+        titular = Model.Cuenta.titular;
+        bancoID = Model.Cuenta.Banco == null ? -1 : Model.Cuenta.Banco.ID;
+        account = Model.Cuenta.cuenta;
+        tarjeta = @Model.Cuenta.tarjeta;
+        clabe = @Model.Cuenta.clabe;
+
+        tittle = "Editar Cuenta";
+
+        disabled = "disabled";
+        readOnly = "readonly";
+        styleReadOnly = "noEditableField";
+        url = "/CuentasBancarias/EditAccount";
+        successMessage = "Cuenta editada correctamente";
+
+        ViewBag.Title = tittle + " Cuenta " + Model.Cuenta.cuenta;
+    }
+    else
+    {
+        tittle = "Undefined";
+    }
+}
+
+@section header{
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/CuentasIndex.css")">
+}
+
+@section mainMenu{
+
+    @{
+        Html.RenderPartial("MainMenu/_CuentasMenu");
+    }
+}
+
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+    <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+        <span class="hamb-top"></span>
+        <span class="hamb-middle"></span>
+        <span class="hamb-bottom"></span>
+    </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form_main">
+                    <h4 class="heading">
+                        <strong>@tittle</strong> @account<span></span>
+                    </h4>
+                    <div class="form">
+                        <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
+                            <input id="titular" type="text" required="" placeholder="Titular" value="@titular" class="txt">
+                            <input id="cuenta" type="text" required="" placeholder="Cuenta" value="@account" class="txt @styleReadOnly" @readOnly>
+                            <input id="tarjeta" type="text" required="" placeholder="Tarjeta" value="@tarjeta" class="txt">
+                            <input id="clabe" type="text" required="" placeholder="Clabe" value="@clabe" class="txt">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    Banco:
+                                </div>
+                                <div class="col-xs-9">
+                                    <select id="banks" @readOnly>
+                                        @foreach (var Banco in Model.Banks)
+                                        {
+                                            <option value="@Banco.ID" data-id="@Banco.ID">@Banco.Name</option>
+                                        }
+                                    </select>
+                                    <div class="clearfix"></div><br />
+                                </div>
+                            </div>
+                            <input type="submit" value="Guardar" name="submit" class="txt2" id="btnSave">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /#page-content-wrapper -->
+
+<script type="text/JavaScript">
+
+    var cuentaID = @cuentaID;
+    var bancoID = @bancoID;    
+    var edition = @edition;
+
+    $(document).ready(function () {
+
+        /*
+            Select the current bank
+            */
+        if (bancoID != -1) {
+            $("#banks").val(bancoID);
+        }
+
+        /*
+            Clic en save button
+         */
+        $("#btnSave").click(function (e) {
+
+            e.preventDefault();
+
+            /*
+                Validate all fields are filled
+             */
+            var titular = $("#titular").val();
+            bancoID = $('#banks').find(":selected").attr("data-id");                        
+            var cuenta = $("#cuenta").val();
+            var tarjeta = $("#tarjeta").val();
+            var clabe = $("#clabe").val();
+            
+            if (titular === "" || titular === 'undefined') {
+                swal("Ingresa el titular");
+                $("#titular").focus();                
+                return;
+            }
+            if (tarjeta === "" || tarjeta === 'undefined') {
+                swal("Ingresa la tarjeta");
+                $("#tarjeta").focus();
+                return;
+            }
+            if (clabe === "" || clabe === 'undefined') {
+                swal("Ingresa la clabe");
+                $("#clabe").focus();
+                return;
+            }
+            
+            /*
+                Validate if continue
+                */
+            swal({
+                title: "¿Seguro que quieres continuar?",
+                text: "",
+                icon: "",
+                buttons: [
+                    'No',
+                    'Si'
+                ],
+                dangerMode: false,
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+
+                    /*
+                    Save the user in the server
+                    */
+                    $.ajax({
+                        type: "POST",
+                        url: "@url",
+                        contentType: "application/json; charset=utf-8",
+                        data: '{"titular":"' + titular + '","Banco":"' + bancoID + '","cuenta":"' + cuenta + '","tarjeta":"' + tarjeta + '","clabe":"' + clabe + '"}',
+                        dataType: "html",
+                        success: function (result) {
+                            var json = JSON.parse(result);
+                            if (json.Result_ == 1) {
+                                swal("@successMessage");
+                                if (edition == 0) { //Only clear fields when it is a new user
+                                    clearAllFields();
+                                }                                
+                            }
+                            else {
+                                swal(json.error);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            alert(error);
+                            console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
+                        }
+                            });
+
+                    } else {
+                        //Nothing to do
+                    }
+                })            
+        });        
+               
+    });
+
+    /*
+            Clear all the fields
+         */
+    function clearAllFields() {
+
+        $("#titular").val("");
+        $("#cuenta").val("");
+        $("#tarjeta").val("");
+        $("#clabe").val("");
+        $("#banks").val($("#module option:first").val());        
+    }
+
+</script>

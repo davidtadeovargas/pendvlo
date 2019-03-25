@@ -8,16 +8,6 @@ namespace Pendvlo.DAL.Repository
 {
     public class SuajeRepository : Repository
     {
-        /*
-         Contains the first ids
-             */
-        private int impresionContinuaID = 0;
-        private int corteCompletoID = 1;
-        private int suajeSeguridadID = 2;
-
-
-
-
         public SuajeRepository(DBContext dBContext) : base(dBContext)
         {
 
@@ -46,7 +36,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createImpresionContinua()
         {
-            var result = DBContext.Suajes.Add(new Suaje { ID = impresionContinuaID, Name = "IMPRESION CONTINUA" });
+            var result = DBContext.Suajes.Add(new Suaje { Name = "IMPRESION CONTINUA" });
             DBContext.SaveChanges();            
         }
 
@@ -55,7 +45,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createCorteCompleto()
         {
-            var result = DBContext.Suajes.Add(new Suaje { ID = corteCompletoID, Name = "CORTE COMPLETO" });
+            var result = DBContext.Suajes.Add(new Suaje { Name = "CORTE COMPLETO" });
             DBContext.SaveChanges();
         }
 
@@ -64,7 +54,25 @@ namespace Pendvlo.DAL.Repository
              */
         public void createSuajeSeguridad()
         {
-            var result = DBContext.Suajes.Add(new Suaje { ID = suajeSeguridadID, Name = "SUAJE DE SEGURIDAD" });
+            var result = DBContext.Suajes.Add(new Suaje { Name = "SUAJE DE SEGURIDAD" });
+            DBContext.SaveChanges();
+        }
+
+        /*
+         Create suaje
+             */
+        public void createSuaje()
+        {
+            var result = DBContext.Suajes.Add(new Suaje { Name = "SUAJE" });
+            DBContext.SaveChanges();
+        }
+
+        /*
+         Create suaje
+             */
+        public void createPleca()
+        {
+            var result = DBContext.Suajes.Add(new Suaje { Name = "PLECA" });
             DBContext.SaveChanges();
         }
 
@@ -73,7 +81,7 @@ namespace Pendvlo.DAL.Repository
              */
         public Suaje getImpresionContinua()
         {
-            Suaje Suaje = DBContext.Suajes.Where(m => m.ID == impresionContinuaID).FirstOrDefault();
+            Suaje Suaje = DBContext.Suajes.Where(m => m.Name == "IMPRESION CONTINUA").FirstOrDefault();
             return Suaje;
         }
 
@@ -82,7 +90,7 @@ namespace Pendvlo.DAL.Repository
              */
         public Suaje getCorteCompleto()
         {
-            Suaje Suaje = DBContext.Suajes.Where(m => m.ID == corteCompletoID).FirstOrDefault();
+            Suaje Suaje = DBContext.Suajes.Where(m => m.Name == "CORTE COMPLETO").FirstOrDefault();
             return Suaje;
         }
 
@@ -91,7 +99,25 @@ namespace Pendvlo.DAL.Repository
              */
         public Suaje getSuajeSeguridad()
         {
-            Suaje Suaje = DBContext.Suajes.Where(m => m.ID == suajeSeguridadID).FirstOrDefault();
+            Suaje Suaje = DBContext.Suajes.Where(m => m.Name == "SUAJE DE SEGURIDAD").FirstOrDefault();
+            return Suaje;
+        }
+
+        /*
+         Get suaje
+             */
+        public Suaje getSuaje()
+        {
+            Suaje Suaje = DBContext.Suajes.Where(m => m.Name == "SUAJE").FirstOrDefault();
+            return Suaje;
+        }
+
+        /*
+         Get suaje
+             */
+        public Suaje getPleca()
+        {
+            Suaje Suaje = DBContext.Suajes.Where(m => m.Name == "PLECA").FirstOrDefault();
             return Suaje;
         }
     }

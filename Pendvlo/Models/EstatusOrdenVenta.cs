@@ -6,8 +6,7 @@ using System.Web;
 
 namespace Pendvlo.Models
 {
-    [Table("Bancos")]
-    public class Banco
+    public class EstatusOrdenVenta
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -15,7 +14,7 @@ namespace Pendvlo.Models
 
 
 
-        public Banco()
+        public EstatusOrdenVenta()
         {
             Created = DateTime.Now;
         }

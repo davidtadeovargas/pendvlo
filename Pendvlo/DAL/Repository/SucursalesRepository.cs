@@ -8,15 +8,6 @@ namespace Pendvlo.DAL.Repository
 {
     public class SucursalesRepository : Repository
     {
-        /*
-         Contains the first ids
-             */
-        private int libertadID = 0;
-        private int miguelBlancoID = 1;        
-
-
-
-
         public SucursalesRepository(DBContext dBContext) : base(dBContext)
         {
 
@@ -45,7 +36,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createLibertadSucursal()
         {
-            var result = DBContext.Sucursales.Add(new Sucursal { ID = libertadID, Name = "LIBERTAD" });
+            var result = DBContext.Sucursales.Add(new Sucursal { Name = "LIBERTAD" });
             DBContext.SaveChanges();            
         }
 
@@ -54,7 +45,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createMiguelBlanco()
         {
-            var result = DBContext.Suajes.Add(new Suaje { ID = miguelBlancoID, Name = "MIGUEL BLANCO" });
+            var result = DBContext.Sucursales.Add(new Sucursal { Name = "MIGUEL BLANCO" });
             DBContext.SaveChanges();
         }
 
@@ -63,7 +54,7 @@ namespace Pendvlo.DAL.Repository
              */
         public Sucursal getLibertadSucursal()
         {
-            Sucursal Sucursal = DBContext.Sucursales.Where(m => m.ID == libertadID).FirstOrDefault();
+            Sucursal Sucursal = DBContext.Sucursales.Where(m => m.Name == "LIBERTAD").FirstOrDefault();
             return Sucursal;
         }
 
@@ -72,7 +63,7 @@ namespace Pendvlo.DAL.Repository
              */
         public Sucursal getMiguelBlancoSucursal()
         {
-            Sucursal Sucursal = DBContext.Sucursales.Where(m => m.ID == miguelBlancoID).FirstOrDefault();
+            Sucursal Sucursal = DBContext.Sucursales.Where(m => m.Name == "MIGUEL BLANCO").FirstOrDefault();
             return Sucursal;
         }        
     }

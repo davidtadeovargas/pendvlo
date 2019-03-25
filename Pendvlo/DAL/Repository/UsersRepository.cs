@@ -18,7 +18,7 @@ namespace Pendvlo.DAL.Repository
              */
         public List<User> getUsers()
         {
-            List<User> Users_ = DBContext.Users.ToList();
+            List<User> Users_ = DBContext.Users.Include("Sucursal").Include("Module").ToList();
             return Users_;
         }
 

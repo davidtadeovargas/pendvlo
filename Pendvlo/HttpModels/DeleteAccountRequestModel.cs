@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Pendvlo.Models.Http
+namespace Pendvlo.HttpModels
 {
-    public class DeleteUserRequestModel
+    public class DeleteAccountRequestModel
     {
         public int ID { get; set; }
     }

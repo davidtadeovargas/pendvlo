@@ -8,18 +8,6 @@ namespace Pendvlo.DAL.Repository
 {
     public class ModulesRepository : Repository
     {
-        /*
-         Contains the first ids
-             */
-        private int productionID = 0;
-        private int warehouseID = 1;
-        private int salesID = 2;
-        private int administrationID = 3;
-        private int designID = 4;
-
-
-
-
         public ModulesRepository(DBContext dBContext) : base(dBContext)
         {
 
@@ -48,7 +36,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createSalesModule()
         {
-            new Module { ID = salesID, Name = "Ventas"};
+            new Module { Name = "Ventas"};
         }
 
         /*
@@ -56,7 +44,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createProductionModule()
         {            
-            var result = DBContext.Modules.Add(new Module { ID = productionID, Name = "Produccion" });
+            var result = DBContext.Modules.Add(new Module { Name = "Produccion" });
             DBContext.SaveChanges();
         }
 
@@ -65,7 +53,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createWareohuseModule()
         {
-            var result = DBContext.Modules.Add(new Module { ID = warehouseID, Name = "Almacen" });
+            var result = DBContext.Modules.Add(new Module { Name = "Almacen" });
             DBContext.SaveChanges();
         }
 
@@ -74,7 +62,7 @@ namespace Pendvlo.DAL.Repository
              */
         public void createAdministrationModule()
         {            
-            var result = DBContext.Modules.Add(new Module { ID = administrationID, Name = "Administracion" });
+            var result = DBContext.Modules.Add(new Module { Name = "Administracion" });
             DBContext.SaveChanges();
         }
 
@@ -83,7 +71,25 @@ namespace Pendvlo.DAL.Repository
              */
         public void createDesignModule()
         {
-            var result = DBContext.Modules.Add(new Module { ID = designID, Name = "Diseño" });
+            var result = DBContext.Modules.Add(new Module { Name = "Diseño" });
+            DBContext.SaveChanges();
+        }
+
+        /*
+         Create the "atencion y servicio al cliente"
+             */
+        public void createAtenServCustomModule()
+        {
+            var result = DBContext.Modules.Add(new Module { Name = "Atencion y servicio al cliente" });
+            DBContext.SaveChanges();
+        }
+
+        /*
+         Create the "administracion y compras"
+             */
+        public void createAdminComprasModule()
+        {
+            var result = DBContext.Modules.Add(new Module { Name = "Administracion y compras" });
             DBContext.SaveChanges();
         }
 
@@ -92,7 +98,7 @@ namespace Pendvlo.DAL.Repository
              */
         public Module getProductionModule()
         {
-            Module Module_ = DBContext.Modules.Where(m => m.ID == productionID).FirstOrDefault();
+            Module Module_ = DBContext.Modules.Where(m => m.Name == "Produccion").FirstOrDefault();
             return Module_;
         }
 
@@ -101,16 +107,16 @@ namespace Pendvlo.DAL.Repository
              */
         public Module getWarehouseModule()
         {
-            Module Module_ = DBContext.Modules.Where(m => m.ID == warehouseID).FirstOrDefault();
+            Module Module_ = DBContext.Modules.Where(m => m.Name == "Almacen").FirstOrDefault();
             return Module_;
         }
 
         /*
          Get the sales module
              */
-        public Module getSalesModule()
+        public Module getAtencionServCustomerModule()
         {
-            Module Module_ = DBContext.Modules.Where(m => m.ID == salesID).FirstOrDefault();
+            Module Module_ = DBContext.Modules.Where(m => m.Name == "Atencion y servicio al cliente").FirstOrDefault();
             return Module_;
         }
 
@@ -119,7 +125,7 @@ namespace Pendvlo.DAL.Repository
              */
         public Module getAdministrationModule()
         {
-            Module Module_ = DBContext.Modules.Where(m => m.ID == administrationID).FirstOrDefault();
+            Module Module_ = DBContext.Modules.Where(m => m.Name == "Administracion y compras").FirstOrDefault();
             return Module_;
         }
 
@@ -128,7 +134,16 @@ namespace Pendvlo.DAL.Repository
              */
         public Module getDesignModule()
         {
-            Module Module_ = DBContext.Modules.Where(m => m.ID == designID).FirstOrDefault();
+            Module Module_ = DBContext.Modules.Where(m => m.Name == "Diseño").FirstOrDefault();
+            return Module_;
+        }
+
+        /*
+         Get module
+             */
+        public Module getAdminComprasModule()
+        {
+            Module Module_ = DBContext.Modules.Where(m => m.Name == "Administracion y compras").FirstOrDefault();
             return Module_;
         }
     }
