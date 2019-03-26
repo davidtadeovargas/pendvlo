@@ -1,10 +1,11 @@
-﻿using Pendvlo.Models;
+﻿using Pendvlo.DAL;
+using Pendvlo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Pendvlo.DAL.Repository
+namespace Pendvlo.Repository
 {
     public class ProductsRepository : Repository
     {
@@ -35,7 +36,7 @@ namespace Pendvlo.DAL.Repository
         /*
          Edit a product
              */
-        public int editCustomer(Product Product_)
+        public int editProduct(Product Product_)
         {
             DBContext.Entry(Product_).State = System.Data.Entity.EntityState.Modified;
             var result = DBContext.SaveChanges();
@@ -63,9 +64,9 @@ namespace Pendvlo.DAL.Repository
         /*
          Delete a product
              */
-        public Product deleteById(string code)
+        public Product deleteById(int id)
         {
-            Product Product_ = getProductByCode(code);
+            Product Product_ = getProductByID(id);
             DBContext.Products.Remove(Product_);
             DBContext.SaveChanges();
             return Product_;

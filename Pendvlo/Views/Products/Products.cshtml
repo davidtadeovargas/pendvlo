@@ -10,18 +10,18 @@
     string type = "";
     if (Model.Type==Pendvlo.ViewModels.TYPE.LIST)
     {
-        title = "PRODUCTOS";
+        title = "Productos Pendvlo!";
         removeContinueBtn = 1;
         type = "TYPE.VIEW";
     }
     else if (Model.Type == Pendvlo.ViewModels.TYPE.MODIFY)
     {
-        title = "EDITAR PRODUCTO";
+        title = "Editar Producto Pendvlo!";
         type = "TYPE.MODIFY";
     }
     else if (Model.Type == Pendvlo.ViewModels.TYPE.DELETE)
     {
-        title = "ELIMINAR PRODUCTO";
+        title = "Eliminar Producto Pendvlo!";
         type = "TYPE.DELETE";
     }
 
@@ -75,39 +75,27 @@
                             </form>
                         </div>
                         <div class="col-md-9">
-                            <table class="table table-list-search" id="tableProductos">
+                            <table class="table table-list-search" id="tableRecords">
                                 <thead>
                                     <tr>
                                         <th>Codigo</th>
-                                        <th>Descripcion</th>
-                                        <th>Precio</th>
-                                        <th>Impuesto</th>
-                                        <th>Activo</th>
-                                        <th>Venta</th>
+                                        <th>Numero</th>
                                         <th>Fecha Creacion</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var Product in Model.Products)
                                     {
-                                        var id = Product.ID;
-                                        var Code = Product.code;
-                                        var descrip = Product.descrip;
-                                        var price = Product.price;
-                                        var tax = Product.tax;
-                                        var city = Product.avaible;
-                                        var sales = Product.sales;
-                                        var Created = Product.Created;
+                                        var id = @Product.ID;
+                                        var codigo = @Product.code;
+                                        var numero = @Product.numero;
+                                        var created = @Product.Created;
 
-                                    <tr data-id="@id">
-                                        <td>@Code</td>
-                                        <td>@descrip</td>
-                                        <td>@price</td>
-                                        <td>@tax</td>
-                                        <td>@city</td>
-                                        <td>@sales</td>
-                                        <td>@Created</td>
-                                    </tr>
+                                        <tr data-id="@id">
+                                            <td>@codigo</td>
+                                            <td>@numero</td>                                            
+                                            <td>@created</td>
+                                        </tr>
                                     }
                                     
                                 </tbody>
@@ -152,6 +140,13 @@
         var selectedTableId = -1;
         var currentSelectedTD = null;
 
+        /*
+            Only when is list products button continue has not to be visible
+         */
+        if (removeContinueBtn) {
+            $("#btnContinue").remove();
+        }
+
         //something is entered in search form
         $('#system-search').keyup(function () {
             var that = this;
@@ -193,12 +188,12 @@
         /*
             When selecting a row in the table
          */
-        $("#tableProductos tbody tr").click(function () {
+        $("#tableRecords tbody tr").click(function () {
            
             /*
                 Change the selected color
              */
-            $("#tableProductos tr").removeClass("highlight");
+            $("#tableRecords tr").removeClass("highlight");
             var selected = $(this).hasClass("highlight");
             $("#data tr").removeClass("highlight");
             if (!selected) {
@@ -222,7 +217,7 @@
              * Validate selection in the table
              */
             if (selectedTableId == -1) {
-                swal("Selecciona un cliente");
+                swal("Selecciona un producto");
                 return;
             }
 
@@ -235,25 +230,16 @@
             else if (type == TYPE.DELETE) {
                 deleteType();
             }
-            else if (type == TYPE.VIEW) {
-                viewType();
-            }
 
         });
 
-        //When the user wants to view a product
-        function viewType() {
-
-            window.location = "/products/ViewProduct?ID=" + selectedTableId;
-        }
-
-        //When the user selected to edit
+        //When the user selected to edit the product
         function editType() {
 
-            window.location = "/products/EditProductIndex?ID=" + selectedTableId;
+            window.location = "/Products/EditProductIndex?ID=" + selectedTableId;
         }
 
-        //When the user selected to delete
+        //When the user selected to delete the product
         function deleteType() {
 
             /*
@@ -285,7 +271,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/products/DeleteProduct",
+                url: "/Products/DeleteProduct",
                 contentType: "application/json; charset=utf-8",
                 data: '{"id":"' + selectedTableId + '"}',
                 dataType: "html",
@@ -306,10 +292,5 @@
             });
         }
     });
-
-
-
-
-
-
+  
 </script>

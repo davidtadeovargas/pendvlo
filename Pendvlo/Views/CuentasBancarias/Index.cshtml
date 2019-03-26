@@ -24,7 +24,7 @@
         url = "/CuentasBancarias/NewAccount";
         successMessage = "Cuenta creada correctamente";
 
-        ViewBag.Title = tittle + " Cuenta";
+        ViewBag.Title = tittle + " Cuenta Pendvlo!";
     }
     else if (Model.Type == Pendvlo.ViewModels.TYPE.MODIFY)
     {
@@ -45,7 +45,7 @@
         url = "/CuentasBancarias/EditAccount";
         successMessage = "Cuenta editada correctamente";
 
-        ViewBag.Title = tittle + " Cuenta " + Model.Cuenta.cuenta;
+        ViewBag.Title = tittle + " Cuenta Pendvlo! " + Model.Cuenta.cuenta;
     }
     else
     {

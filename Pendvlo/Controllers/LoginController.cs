@@ -24,7 +24,7 @@ namespace Pendvlo.Controllers
 
             if (User_ != null)
             {
-                Session["user"] = User_;
+                SessionManager.Instance.setUser(this, User_);
                 response = JSONManager.JsonOk();
             }
             else
@@ -40,7 +40,7 @@ namespace Pendvlo.Controllers
              */
         public ActionResult logout()
         {
-            Session["user"] = null;
+            SessionManager.Instance.logoutUser(this) ;            
             return RedirectToAction("index", "login");
         }
     }

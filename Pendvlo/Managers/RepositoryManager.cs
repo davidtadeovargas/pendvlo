@@ -1,5 +1,5 @@
 ﻿using Pendvlo.DAL;
-using Pendvlo.DAL.Repository;
+using Pendvlo.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

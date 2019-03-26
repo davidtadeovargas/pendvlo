@@ -4,8 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Pendvlo.DAL;
 
-namespace Pendvlo.DAL.Repository
+namespace Pendvlo.Repository
 {
     public class CuentasRepository : Repository
     {

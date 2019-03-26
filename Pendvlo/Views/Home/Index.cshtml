@@ -1,6 +1,9 @@
-﻿
+﻿@model Pendvlo.ViewModels.HomeViewModel
+
 @{
-    ViewBag.Title = "Index";
+    var currentUser = Model.User.User_;
+
+    ViewBag.Title = "Bienvenido a Pendvlo! " + currentUser;
 }
 
 
@@ -27,7 +30,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                <h1>Bienvenido a Pendvlo</h1>
+                <h1>Bienvenido a Pendvlo! @currentUser</h1>
                 <p>Tu sistema confiable</p>
                 <div id="content">
                     <img src="~/logo.jpeg" alt="Logo">

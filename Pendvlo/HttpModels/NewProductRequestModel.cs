@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Pendvlo.Models
+namespace Pendvlo.HttpModels
 {
-    public class Product
+    public class NewProductRequestModel
     {
-        public int ID { get; set; }
         public string code { get; set; }                        //suaje
         public double medidaEje { get; set; }                     //suaje
         public double medidaDesarrollo { get; set; }              //suaje
@@ -27,7 +26,7 @@ namespace Pendvlo.Models
         public double papelCoucheD10AMinimo { get; set; }  //Papel (Couche) - 10% desc aplicado
         public double papelCoucheD15AMillar { get; set; }  //Papel (Couche) - 15% desc aplicado
         public double papelCoucheD15AMinimo { get; set; }  //Papel (Couche) - 15% desc aplicado
-        public double papelCouchePlataMillar { get; set; }  //Papel (Couche) Plata
+        public double papelCouchePlataMillar { get; set; }  //Papel (Couche) Plata     
         public double papelCouchePlataMVMillar { get; set; }  //Papel (Couche) Plata - Minimo venta
         public double papelCouchePlataMVCosto { get; set; }  //Papel (Couche) Plata - Minimo venta
         public double papelCouchePlataLMMillar { get; set; }  //Papel (Couche) Plata - Laminado mate
@@ -45,7 +44,6 @@ namespace Pendvlo.Models
         public double boppPoliesterBlancoTransD10AMinimo { get; set; }  //BOPP (Poliester) Blanco Transparente - 10% desc aplicado
         public double boppPoliesterBlancoTransD15AMillar { get; set; }  //BOPP (Poliester) Blanco Transparente - 15% desc aplicado
         public double boppPoliesterBlancoTransD15AMinimo { get; set; }  //BOPP (Poliester) Blanco Transparente - 15% desc aplicado
-
         public double boppPoliesterPlataMillar { get; set; }  //BOPP (Poliester) Plata
         public double boppPoliesterPlataMVMillar { get; set; }  //BOPP (Poliester) Plata - Minimo venta
         public double boppPoliesterPlataMVCosto { get; set; }  //BOPP (Poliester) Plata - Minimo venta
@@ -55,24 +53,5 @@ namespace Pendvlo.Models
         public double boppPoliesterPlataD10AMinimo { get; set; }  //BOPP (Poliester) Plata - 10% desc aplicado
         public double boppPoliesterPlataD15AMillar { get; set; }  //BOPP (Poliester) Plata - 15% desc aplicado
         public double boppPoliesterPlataD15AMinimo { get; set; }  //BOPP (Poliester) Plata - 15% desc aplicado
-
-        public string descrip { get; set; }
-        public double price { get; set; }
-        public string tax { get; set; }
-        public bool material { get; set; }
-        public double descuento { get; set; }
-        public double precioXImpresion { get; set; }
-        public double precioXGrabado { get; set; }
-        public double precioXDiseno { get; set; }
-        public double precioExpress { get; set; }
-
-        public bool avaible { get; set; }
-        public bool sales  { get; set; }
-        public DateTime Created { get; set; }
-
-        public Product()
-        {
-            Created = DateTime.Now;
-        }
     }
 }

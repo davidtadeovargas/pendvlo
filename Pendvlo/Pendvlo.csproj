@@ -143,22 +143,26 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DAL\DBContext.cs" />
     <Compile Include="DAL\DBInitializer.cs" />
-    <Compile Include="DAL\Repository\ProductsRepository.cs" />
-    <Compile Include="DAL\Repository\LoginReposotiry.cs" />
-    <Compile Include="DAL\Repository\ModulesRepository.cs" />
-    <Compile Include="DAL\Repository\Repository.cs" />
-    <Compile Include="DAL\Repository\CustomersRepository.cs" />
-    <Compile Include="DAL\Repository\EstatusOrdenVentaRepository.cs" />
-    <Compile Include="DAL\Repository\CuentasRepository.cs" />
-    <Compile Include="DAL\Repository\TipoArchivosRepository.cs" />
-    <Compile Include="DAL\Repository\UsersRepository.cs" />
-    <Compile Include="DAL\Repository\ProcedimientosImpresionRepository.cs" />
-    <Compile Include="DAL\Repository\SuajeRepository.cs" />
-    <Compile Include="DAL\Repository\MedidaEtiquetaRepository.cs" />
-    <Compile Include="DAL\Repository\TipoVentaRepository.cs" />
-    <Compile Include="DAL\Repository\TipoPagosRepository.cs" />
-    <Compile Include="DAL\Repository\SucursalesRepository.cs" />
-    <Compile Include="DAL\Repository\BancoRepository.cs" />
+    <Compile Include="HttpModels\DeleteProductRequestModel.cs" />
+    <Compile Include="HttpModels\EditProductRequestModel.cs" />
+    <Compile Include="HttpModels\NewProductRequestModel.cs" />
+    <Compile Include="Managers\SessionManager.cs" />
+    <Compile Include="Repository\ProductsRepository.cs" />
+    <Compile Include="Repository\LoginReposotiry.cs" />
+    <Compile Include="Repository\ModulesRepository.cs" />
+    <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\CustomersRepository.cs" />
+    <Compile Include="Repository\EstatusOrdenVentaRepository.cs" />
+    <Compile Include="Repository\CuentasRepository.cs" />
+    <Compile Include="Repository\TipoArchivosRepository.cs" />
+    <Compile Include="Repository\UsersRepository.cs" />
+    <Compile Include="Repository\ProcedimientosImpresionRepository.cs" />
+    <Compile Include="Repository\SuajeRepository.cs" />
+    <Compile Include="Repository\MedidaEtiquetaRepository.cs" />
+    <Compile Include="Repository\TipoVentaRepository.cs" />
+    <Compile Include="Repository\TipoPagosRepository.cs" />
+    <Compile Include="Repository\SucursalesRepository.cs" />
+    <Compile Include="Repository\BancoRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -191,8 +195,10 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="ViewModels\CustomerIndexViewModel.cs" />
     <Compile Include="ViewModels\CuentasBancariasViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ProductsViewModel.cs" />
     <Compile Include="ViewModels\TYPE.cs" />
+    <Compile Include="ViewModels\ProductsIndexViewModel.cs" />
     <Compile Include="ViewModels\UsersIndexViewModel.cs" />
     <Compile Include="ViewModels\CustomersViewModel.cs" />
     <Compile Include="ViewModels\AccountsViewModel.cs" />
@@ -206,6 +212,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CuentasIndex.css" />
     <Content Include="Content\Products.css" />
+    <Content Include="Content\Users.css" />
     <Content Include="Content\Customer.css" />
     <Content Include="Content\Home.css" />
     <Content Include="Content\images\icons\favicon.ico" />
@@ -258,6 +265,7 @@
     <Content Include="Content\Customers.css" />
     <Content Include="Content\Cuentas.css" />
     <Content Include="Content\CustomersIndex.css" />
+    <Content Include="Content\ProductsIndex.css" />
     <Content Include="Content\UsersIndex.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -368,16 +376,16 @@
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Shared\MainMenu\_MainMenu.cshtml" />
     <Content Include="Views\Shared\MainMenu\_CustomersMenu.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Shared\MainMenu\_ProductsMenu.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Shared\MainMenu\_UsersMenu.cshtml" />
     <Content Include="Views\Users\Users.cshtml" />
     <Content Include="Views\Customers\Customers.cshtml" />
-    <Content Include="Views\Products\Products.cshtml" />
     <Content Include="Views\CuentasBancarias\Cuentas.cshtml" />
     <Content Include="Views\CuentasBancarias\Index.cshtml" />
     <Content Include="Views\Shared\MainMenu\_CuentasMenu.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\Products.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

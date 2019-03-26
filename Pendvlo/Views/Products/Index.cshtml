@@ -1,8 +1,144 @@
-﻿
+﻿@model Pendvlo.ViewModels.ProductsIndexViewModel
+
 @{
-    ViewBag.Title = "Productos";
+    string tittle = "";
+    string url = "";
+
+    var productID = -1;
+    var readOnly = "";
+    var styleReadOnly = "";
+    var successMessage = "";
+    var disabledAdmin = "";
+
+    var productCode = "";
+    double medidaEje = 0;
+    double medidaDesarrollo = 0;
+    double repeticionesEje = 0;
+    double repeticionesDesarrollo = 0;
+    double separacionEje = 0;
+    double separacionDesarrollo = 0;
+    int numero = 0;
+    double existencia = 0;
+    double existenciaRodillos = 0;
+    double papelCoucheMillar = 0;
+    double papelCoucheMVMillar = 0;
+    double papelCoucheMVCosto = 0;
+    double papelCoucheLMMillar = 0;
+    double papelCoucheLMMinimo = 0;
+    double papelCoucheD10AMillar = 0;
+    double papelCoucheD10AMinimo = 0;
+    double papelCoucheD15AMillar = 0;
+    double papelCoucheD15AMinimo = 0;
+    double papelCouchePlataMillar = 0;
+    double papelCouchePlataMVMillar = 0;
+    double papelCouchePlataMVCosto = 0;
+    double papelCouchePlataLMMillar = 0;
+    double papelCouchePlataLMMinimo = 0;
+    double papelCouchePlataD10AMillar = 0;
+    double papelCouchePlataD10AMinimo = 0;
+    double papelCouchePlataD15AMillar = 0;
+    double papelCouchePlataD15AMinimo = 0;
+    double boppPoliesterBlancoTransMillar = 0;
+    double boppPoliesterBlancoTransMVMillar = 0;
+    double boppPoliesterBlancoTransMVCosto = 0;
+    double boppPoliesterBlancoTransLMMillar = 0;
+    double boppPoliesterBlancoTransLMMinimo = 0;
+    double boppPoliesterBlancoTransD10AMillar = 0;
+    double boppPoliesterBlancoTransD10AMinimo = 0;
+    double boppPoliesterBlancoTransD15AMillar = 0;
+    double boppPoliesterBlancoTransD15AMinimo = 0;
+
+    double boppPoliesterPlataMillar = 0;
+    double boppPoliesterPlataMVMillar = 0;
+    double boppPoliesterPlataMVCosto = 0;
+    double boppPoliesterPlataLMMillar = 0;
+    double boppPoliesterPlataLMMinimo = 0;
+    double boppPoliesterPlataD10AMillar = 0;
+    double boppPoliesterPlataD10AMinimo = 0;
+    double boppPoliesterPlataD15AMillar = 0;
+    double boppPoliesterPlataD15AMinimo = 0;
+
+
+    var edition = 0;
+
+    if (Model.Type == Pendvlo.ViewModels.TYPE.NEW)
+    {
+        tittle = "Nuevo";
+        url = "/Products/NewProduct";
+        successMessage = "Producto creado correctamente";
+
+        ViewBag.Title = tittle + " Producto Pendvlo!";
+    }
+    else if (Model.Type == Pendvlo.ViewModels.TYPE.MODIFY)
+    {
+        edition = 1;
+
+        productCode = Model.Product.code;
+        medidaEje = Model.Product.medidaEje;
+        medidaDesarrollo = Model.Product.medidaDesarrollo;
+        repeticionesEje = Model.Product.repeticionesEje;
+        repeticionesDesarrollo = Model.Product.repeticionesDesarrollo;
+        separacionEje = Model.Product.separacionEje;
+        separacionDesarrollo = Model.Product.separacionDesarrollo;
+        numero = Model.Product.numero;
+        existencia = Model.Product.existencia;
+        existenciaRodillos = Model.Product.existenciaRodillos;
+        papelCoucheMillar = Model.Product.papelCoucheMillar;
+        papelCoucheMVMillar = Model.Product.papelCoucheMVMillar;
+        papelCoucheMVCosto = Model.Product.papelCoucheMVCosto;
+        papelCoucheLMMillar = Model.Product.papelCoucheLMMillar;
+        papelCoucheLMMinimo = Model.Product.papelCoucheLMMinimo;
+        papelCoucheD10AMillar = Model.Product.papelCoucheD10AMillar;
+        papelCoucheD10AMinimo = Model.Product.papelCoucheD10AMinimo;
+        papelCoucheD15AMillar = Model.Product.papelCoucheD15AMillar;
+        papelCoucheD15AMinimo = Model.Product.papelCoucheD15AMinimo;
+        papelCouchePlataMillar = Model.Product.papelCouchePlataMillar;
+        papelCouchePlataMVMillar = Model.Product.papelCouchePlataMVMillar;
+        papelCouchePlataMVCosto = Model.Product.papelCouchePlataMVCosto;
+        papelCouchePlataLMMillar = Model.Product.papelCouchePlataLMMillar;
+        papelCouchePlataLMMinimo = Model.Product.papelCouchePlataLMMinimo;
+        papelCouchePlataD10AMillar = Model.Product.papelCouchePlataD10AMillar;
+        papelCouchePlataD10AMinimo = Model.Product.papelCouchePlataD10AMinimo;
+        papelCouchePlataD15AMillar = Model.Product.papelCouchePlataD15AMillar;
+        papelCouchePlataD15AMinimo = Model.Product.papelCouchePlataD15AMinimo;
+        boppPoliesterBlancoTransMillar = Model.Product.boppPoliesterBlancoTransMillar;
+        boppPoliesterBlancoTransMVMillar = Model.Product.boppPoliesterBlancoTransMVMillar;
+        boppPoliesterBlancoTransMVCosto = Model.Product.boppPoliesterBlancoTransMVCosto;
+        boppPoliesterBlancoTransLMMillar = Model.Product.boppPoliesterBlancoTransLMMillar;
+        boppPoliesterBlancoTransLMMinimo = Model.Product.boppPoliesterBlancoTransLMMinimo;
+        boppPoliesterBlancoTransD10AMillar = Model.Product.boppPoliesterBlancoTransD10AMillar;
+        boppPoliesterBlancoTransD10AMinimo = Model.Product.boppPoliesterBlancoTransD10AMinimo;
+        boppPoliesterBlancoTransD15AMillar = Model.Product.boppPoliesterBlancoTransD15AMillar;
+        boppPoliesterBlancoTransD15AMinimo = Model.Product.boppPoliesterBlancoTransD15AMinimo;
+        boppPoliesterPlataMillar = Model.Product.boppPoliesterPlataMillar;
+        boppPoliesterPlataMVMillar = Model.Product.boppPoliesterPlataMVMillar;
+        boppPoliesterPlataMVCosto = Model.Product.boppPoliesterPlataMVCosto;
+        boppPoliesterPlataLMMillar = Model.Product.boppPoliesterPlataLMMillar;
+        boppPoliesterPlataLMMinimo = Model.Product.boppPoliesterPlataLMMinimo;
+        boppPoliesterPlataD10AMillar = Model.Product.boppPoliesterPlataD10AMillar;
+        boppPoliesterPlataD10AMinimo = Model.Product.boppPoliesterPlataD10AMinimo;
+        boppPoliesterPlataD15AMillar = Model.Product.boppPoliesterPlataD15AMillar;
+        boppPoliesterPlataD15AMinimo = Model.Product.boppPoliesterPlataD15AMinimo;
+
+        tittle = "Editar Producto Pendvlo!";
+        productID = Model.Product.ID;
+        readOnly = "readonly";
+        styleReadOnly = "noEditableField";
+        url = "/Products/EditProduct";
+        successMessage = "Producto editado correctamente";
+
+        ViewBag.Title = tittle + " Producto " + Model.Product.code;
+    }
+    else
+    {
+        tittle = "Undefined";
+    }
 }
 
+@section header{
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/ProductsIndex.css")">
+}
 
 @section mainMenu{
 
@@ -21,10 +157,333 @@
     </button>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h1>Productos</h1>
+            <div class="col-md-5">
+                <div class="form_main">
+                    <h4 class="heading">
+                        <strong>@tittle</strong> @productCode<span></span>
+                    </h4>
+                    <div class="form">
+                        <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
+                            <label>Codigo</label><div class="clearfix"></div>
+                            <input id="code" type="text" required="" placeholder="Codigo" value="@productCode" name="name" class="txt" @readOnly><div class="clearfix"></div>
+                            <label>Medida Eje</label><div class="clearfix"></div>
+                            <input id="medidaEje" type="number" required="" placeholder="" value="@medidaEje" class="txt"><div class="clearfix"></div>
+                            <label>Medida Desarrollo</label><div class="clearfix"></div>
+                            <input id="medidaDesarrollo" type="number" required="" placeholder="" value="@medidaDesarrollo" class="txt"><div class="clearfix"></div>
+                            <label>Repeticiones Eje</label><div class="clearfix"></div>
+                            <input id="repeticionesEje" type="number" required="" placeholder="" value="@repeticionesEje" class="txt"><div class="clearfix"></div>
+                            <label>Repeticiones Desarrollo</label><div class="clearfix"></div>
+                            <input id="repeticionesDesarrollo" type="number" required="" placeholder="" value="@repeticionesDesarrollo" class="txt"><div class="clearfix"></div>
+                            <label>Separacion Eje</label><div class="clearfix"></div>
+                            <input id="separacionEje" type="number" required="" placeholder="" value="@separacionEje" class="txt"><div class="clearfix"></div>
+                            <label>Separacion Desarrollo</label><div class="clearfix"></div>
+                            <input id="separacionDesarrollo" type="number" required="" placeholder="" value="@separacionDesarrollo" class="txt"><div class="clearfix"></div>
+                            <label>Numero</label><div class="clearfix"></div>
+                            <input id="numero" type="number" required="" placeholder="" value="@numero" class="txt"><div class="clearfix"></div>
+                            <label>Existencia</label><div class="clearfix"></div>
+                            <input id="existencia" type="number" required="" placeholder="" value="@existencia" class="txt"><div class="clearfix"></div>
+                            <label>Existencia Rodillos</label><div class="clearfix"></div>
+                            <input id="existenciaRodillos" type="number" required="" placeholder="" value="@existenciaRodillos" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) millar</label><div class="clearfix"></div>
+                            <input id="papelCoucheMillar" type="number" required="" placeholder="" value="@papelCoucheMillar" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) - Minimo venta millar</label><div class="clearfix"></div>
+                            <input id="papelCoucheMVMillar" type="number" required="" placeholder="" value="@papelCoucheMVMillar" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) - Minimo venta costo</label><div class="clearfix"></div>
+                            <input id="papelCoucheMVCosto" type="number" required="" placeholder="" value="@papelCoucheMVCosto" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) - Laminado mate millar</label><div class="clearfix"></div>
+                            <input id="papelCoucheLMMillar" type="number" required="" placeholder="" value="@papelCoucheLMMillar" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) - Laminado mate minimo</label><div class="clearfix"></div>
+                            <input id="papelCoucheLMMinimo" type="number" required="" placeholder="" value="@papelCoucheLMMinimo" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) - 10% desc aplicado millar</label><div class="clearfix"></div>
+                            <input id="papelCoucheD10AMillar" type="number" required="" placeholder="" value="@papelCoucheD10AMillar" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) - 10% desc aplicado minimo</label><div class="clearfix"></div>
+                            <input id="papelCoucheD10AMinimo" type="number" required="" placeholder="" value="@papelCoucheD10AMinimo" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) - 15% desc aplicado millar</label><div class="clearfix"></div>
+                            <input id="papelCoucheD15AMillar" type="number" required="" placeholder="" value="@papelCoucheD15AMillar" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) - 15% desc aplicado minimo</label><div class="clearfix"></div>
+                            <input id="papelCoucheD15AMinimo" type="number" required="" placeholder="" value="@papelCoucheD15AMinimo" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) Plata millar</label><div class="clearfix"></div>
+                            <input id="papelCouchePlataMillar" type="number" required="" placeholder="" value="@papelCouchePlataMillar" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) Plata - Minimo venta millar</label><div class="clearfix"></div>
+                            <input id="papelCouchePlataMVMillar" type="number" required="" placeholder="" value="@papelCouchePlataMVMillar" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) Plata - Minimo venta costo</label><div class="clearfix"></div>
+                            <input id="papelCouchePlataMVCosto" type="number" required="" placeholder="" value="@papelCouchePlataMVCosto" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) Plata - Laminado mate millar</label><div class="clearfix"></div>
+                            <input id="papelCouchePlataLMMillar" type="number" required="" placeholder="" value="@papelCouchePlataLMMillar" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) Plata - Laminado mate minimo</label><div class="clearfix"></div>
+                            <input id="papelCouchePlataLMMinimo" type="number" required="" placeholder="" value="@papelCouchePlataLMMinimo" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) Plata - 10% desc aplicado millar</label><div class="clearfix"></div>
+                            <input id="papelCouchePlataD10AMillar" type="number" required="" placeholder="" value="@papelCouchePlataD10AMillar" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) Plata - 10% desc aplicado minimo</label><div class="clearfix"></div>
+                            <input id="papelCouchePlataD10AMinimo" type="number" required="" placeholder="" value="@papelCouchePlataD10AMinimo" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) Plata - 15% desc aplicado millar</label><div class="clearfix"></div>
+                            <input id="papelCouchePlataD15AMillar" type="number" required="" placeholder="" value="@papelCouchePlataD15AMillar" class="txt"><div class="clearfix"></div>
+                            <label>Papel (Couche) Plata- 15% desc aplicado minimo</label><div class="clearfix"></div>
+                            <input id="papelCouchePlataD15AMinimo" type="number" required="" placeholder="" value="@papelCouchePlataD15AMinimo" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Blanco Transparente millar</label><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransMillar" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Blanco Transparente - Minimo venta millar</label><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransMVMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransMVMillar" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Blanco Transparente - Minimo venta costo</label><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransMVCosto" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransMVCosto" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Blanco Transparente - Laminado mate millar</label><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransLMMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransLMMillar" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Blanco Transparente - Laminado mate minimo</label><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransLMMinimo" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransLMMinimo" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Blanco Transparente - 10% desc aplicado millar</label><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransD10AMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD10AMillar" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Blanco Transparente - 10% desc aplicado minimo</label><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransD10AMinimo" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD10AMinimo" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Blanco Transparente - 15% desc aplicado millar</label><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransD15AMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD15AMillar" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Blanco Transparente - 15% desc aplicado minimo</label><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransD15AMinimo" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD15AMinimo" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Plata millar</label><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataMillar" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Plata - Minimo venta millar</label><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataMVMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataMVMillar" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Plata - Minimo venta costo</label><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataMVCosto" type="number" required="" placeholder="" value="@boppPoliesterPlataMVCosto" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Plata - Laminado mate millar</label><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataLMMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataLMMillar" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Plata - Laminado mate minimo</label><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataLMMinimo" type="number" required="" placeholder="" value="@boppPoliesterPlataLMMinimo" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Plata - 10% desc aplicado millar</label><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataD10AMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataD10AMillar" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Plata - 10% desc aplicado minimo</label><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataD10AMinimo" type="number" required="" placeholder="" value="@boppPoliesterPlataD10AMinimo" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Plata - 15% desc aplicado millar</label><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataD15AMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataD15AMillar" class="txt"><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Plata - 15% desc aplicado minimo</label><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataD15AMinimo" type="number" required="" placeholder="" value="@boppPoliesterPlataD15AMinimo" class="txt"><div class="clearfix"></div>
+                            <input type="submit" value="Guardar" name="submit" class="txt2" id="btnSave" @disabledAdmin>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- /#page-content-wrapper -->
+
+<script type="text/JavaScript">
+
+    var productID = @productID;    
+
+    $(document).ready(function () {
+
+        /*
+            Clic on save button
+         */
+        $("#btnSave").click(function (e) {
+
+            e.preventDefault();
+
+            /*
+                Validate all fields are filled
+             */
+            var code = $("#code").val();
+            var medidaEje = $("#medidaEje").val();
+            var medidaDesarrollo = $("#medidaDesarrollo").val();
+            var repeticionesEje = $("#repeticionesEje").val();
+            var repeticionesDesarrollo = $("#repeticionesDesarrollo").val();
+            var separacionEje = $("#separacionEje").val();
+            var separacionDesarrollo = $("#separacionDesarrollo").val();
+            var numero = $("#numero").val();
+            var existencia = $("#existencia").val();
+            var existenciaRodillos = $("#existenciaRodillos").val();
+            var papelCoucheMillar = $("#papelCoucheMillar").val();
+            var papelCoucheMVMillar = $("#papelCoucheMVMillar").val();
+            var papelCoucheMVCosto = $("#papelCoucheMVCosto").val();
+            var papelCoucheLMMillar = $("#papelCoucheLMMillar").val();
+            var papelCoucheLMMinimo = $("#papelCoucheLMMinimo").val();
+            var papelCoucheD10AMillar = $("#papelCoucheD10AMillar").val();
+            var papelCoucheD10AMinimo = $("#papelCoucheD10AMinimo").val();
+            var papelCoucheD15AMillar = $("#papelCoucheD15AMillar").val();
+            var papelCoucheD15AMinimo = $("#papelCoucheD15AMinimo").val();
+            var papelCouchePlataMillar = $("#papelCouchePlataMillar").val();
+            var papelCouchePlataMVMillar = $("#papelCouchePlataMVMillar").val();
+            var papelCouchePlataMVCosto = $("#papelCouchePlataMVCosto").val();
+            var papelCouchePlataLMMillar = $("#papelCouchePlataLMMillar").val();
+            var papelCouchePlataLMMinimo = $("#papelCouchePlataLMMinimo").val();
+            var papelCouchePlataD10AMillar = $("#papelCouchePlataD10AMillar").val();
+            var papelCouchePlataD10AMinimo = $("#papelCouchePlataD10AMinimo").val();
+            var papelCouchePlataD15AMillar = $("#papelCouchePlataD15AMillar").val();
+            var papelCouchePlataD15AMinimo = $("#papelCouchePlataD15AMinimo").val();
+            var boppPoliesterBlancoTransMillar = $("#boppPoliesterBlancoTransMillar").val();
+            var boppPoliesterBlancoTransMVMillar = $("#boppPoliesterBlancoTransMVMillar").val();
+            var boppPoliesterBlancoTransMVCosto = $("#boppPoliesterBlancoTransMVCosto").val();
+            var boppPoliesterBlancoTransLMMillar = $("#boppPoliesterBlancoTransLMMillar").val();
+            var boppPoliesterBlancoTransLMMinimo = $("#boppPoliesterBlancoTransLMMinimo").val();
+            var boppPoliesterBlancoTransD10AMillar = $("#boppPoliesterBlancoTransD10AMillar").val();
+            var boppPoliesterBlancoTransD10AMinimo = $("#boppPoliesterBlancoTransD10AMinimo").val();
+            var boppPoliesterBlancoTransD15AMillar = $("#boppPoliesterBlancoTransD15AMillar").val();
+            var boppPoliesterBlancoTransD15AMinimo = $("#boppPoliesterBlancoTransD15AMinimo").val();
+            var boppPoliesterPlataMillar = $("#boppPoliesterPlataMillar").val();
+            var boppPoliesterPlataMVMillar = $("#boppPoliesterPlataMVMillar").val();
+            var boppPoliesterPlataMVCosto = $("#boppPoliesterPlataMVCosto").val();
+            var boppPoliesterPlataLMMillar = $("#boppPoliesterPlataLMMillar").val();
+            var boppPoliesterPlataLMMinimo = $("#boppPoliesterPlataLMMinimo").val();
+            var boppPoliesterPlataD10AMillar = $("#boppPoliesterPlataD10AMillar").val();
+            var boppPoliesterPlataD10AMinimo = $("#boppPoliesterPlataD10AMinimo").val();
+            var boppPoliesterPlataD15AMillar = $("#boppPoliesterPlataD15AMillar").val();
+            var boppPoliesterPlataD15AMinimo = $("#boppPoliesterPlataD15AMinimo").val();
+
+            if (code === "" || code === 'undefined') {
+                swal("Ingresa el codigo");
+                $("#code").focus();                
+                return;
+            }
+
+            /*
+                Validate if continue
+                */
+            swal({
+                title: "¿Seguro que quieres continuar?",
+                text: "",
+                icon: "",
+                buttons: [
+                    'No',
+                    'Si'
+                ],
+                dangerMode: false,
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+
+                    /*
+                    Save the user in the server
+                    */
+                    $.ajax({
+                        type: "POST",
+                        url: "@url",
+                        contentType: "application/json; charset=utf-8",
+                        data: '{"code":"' + code + '",' +
+                            '"ID":"' + productID + '",' + 
+                            '"medidaEje":"' + medidaEje + '",' + 
+                            '"medidaDesarrollo":"' + medidaDesarrollo + '",' + 
+                            '"repeticionesEje":"' + repeticionesEje + '",' + 
+                            '"repeticionesDesarrollo":"' + repeticionesDesarrollo + '",' + 
+                            '"separacionEje":"' + separacionEje + '",' + 
+                            '"separacionDesarrollo":"' + separacionDesarrollo + '",' + 
+                            '"numero":"' + numero + '",' + 
+                            '"existencia":"' + existencia + '",' + 
+                            '"existenciaRodillos":"' + existenciaRodillos + '",' + 
+                            '"papelCoucheMillar":"' + papelCoucheMillar + '",' + 
+                            '"papelCoucheMVMillar":"' + papelCoucheMVMillar + '",' + 
+                            '"papelCoucheMVCosto":"' + papelCoucheMVCosto + '",' + 
+                            '"papelCoucheLMMillar":"' + papelCoucheLMMillar + '",' + 
+                            '"papelCoucheLMMinimo":"' + papelCoucheLMMinimo + '",' + 
+                            '"papelCoucheD10AMillar":"' + papelCoucheD10AMillar + '",' + 
+                            '"papelCoucheD10AMinimo":"' + papelCoucheD10AMinimo + '",' + 
+                            '"papelCoucheD15AMillar":"' + papelCoucheD15AMillar + '",' + 
+                            '"papelCoucheD15AMinimo":"' + papelCoucheD15AMinimo + '",' + 
+                            '"papelCouchePlataMillar":"' + papelCouchePlataMillar + '",' + 
+                            '"papelCouchePlataMVMillar":"' + papelCouchePlataMVMillar + '",' + 
+                            '"papelCouchePlataMVCosto":"' + papelCouchePlataMVCosto + '",' + 
+                            '"papelCouchePlataLMMillar":"' + papelCouchePlataLMMillar + '",' + 
+                            '"papelCouchePlataLMMinimo":"' + papelCouchePlataLMMinimo + '",' + 
+                            '"papelCouchePlataD10AMillar":"' + papelCouchePlataD10AMillar + '",' + 
+                            '"papelCouchePlataD10AMinimo":"' + papelCouchePlataD10AMinimo + '",' + 
+                            '"papelCouchePlataD15AMillar":"' + papelCouchePlataD15AMillar + '",' + 
+                            '"papelCouchePlataD15AMinimo":"' + papelCouchePlataD15AMinimo + '",' + 
+                            '"boppPoliesterBlancoTransMillar":"' + boppPoliesterBlancoTransMillar + '",' + 
+                            '"boppPoliesterBlancoTransMVMillar":"' + boppPoliesterBlancoTransMVMillar + '",' + 
+                            '"boppPoliesterBlancoTransMVCosto":"' + boppPoliesterBlancoTransMVCosto + '",' + 
+                            '"boppPoliesterBlancoTransLMMillar":"' + boppPoliesterBlancoTransLMMillar + '",' + 
+                            '"boppPoliesterBlancoTransLMMinimo":"' + boppPoliesterBlancoTransLMMinimo + '",' + 
+                            '"boppPoliesterBlancoTransD10AMillar":"' + boppPoliesterBlancoTransD10AMillar + '",' + 
+                            '"boppPoliesterBlancoTransD10AMinimo":"' + boppPoliesterBlancoTransD10AMinimo + '",' + 
+                            '"boppPoliesterBlancoTransD10AMinimo":"' + boppPoliesterBlancoTransD10AMinimo + '",' + 
+                            '"boppPoliesterBlancoTransD15AMinimo":"' + boppPoliesterBlancoTransD15AMinimo + '",' +
+                            '"boppPoliesterBlancoTransD15AMillar":"' + boppPoliesterBlancoTransD15AMillar + '",' +                               
+                            '"boppPoliesterPlataMillar":"' + boppPoliesterPlataMillar + '",' +
+                            '"boppPoliesterPlataMVMillar":"' + boppPoliesterPlataMVMillar + '",' +
+                            '"boppPoliesterPlataMVCosto":"' + boppPoliesterPlataMVCosto + '",' +
+                            '"boppPoliesterPlataLMMillar":"' + boppPoliesterPlataLMMillar + '",' +
+                            '"boppPoliesterPlataLMMinimo":"' + boppPoliesterPlataLMMinimo + '",' +
+                            '"boppPoliesterPlataD10AMillar":"' + boppPoliesterPlataD10AMillar + '",' +
+                            '"boppPoliesterPlataD10AMinimo":"' + boppPoliesterPlataD10AMinimo + '",' +
+                            '"boppPoliesterPlataD15AMillar":"' + boppPoliesterPlataD15AMillar + '",' +
+                            '"boppPoliesterPlataD15AMinimo":"' + boppPoliesterPlataD15AMinimo + '"}',
+                        dataType: "html",
+                        success: function (result) {
+                            var json = JSON.parse(result);
+                            if (json.Result_ == 1) {
+                                swal("@successMessage");
+                                if (edition == 0) { //Only clear fields when it is a new user
+                                    clearAllFields();
+                                }                                
+                            }
+                            else {
+                                swal(json.error);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            alert(error);
+                            console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
+                        }
+                            });
+
+                    } else {
+                        //Nothing to do
+                    }
+                })            
+        });        
+               
+    });
+
+    /*
+            Clear all the fields
+         */
+    function clearAllFields() {
+
+        $("#code").val("");
+        $("#medidaEje").val("0");
+        $("#medidaDesarrollo").val("0");
+        $("#repeticionesEje").val("0");
+        $("#repeticionesDesarrollo").val("0");
+        $("#separacionEje").val("0");
+        $("#separacionDesarrollo").val("0");
+        $("#numero").val("0");
+        $("#existencia").val("0");
+        $("#existenciaRodillos").val("0");
+        $("#papelCoucheMillar").val("0");
+        $("#papelCoucheMVMillar").val("0");
+        $("#papelCoucheMVCosto").val("0");
+        $("#papelCoucheLMMillar").val("0");
+        $("#papelCoucheLMMinimo").val("0");
+        $("#papelCoucheD10AMillar").val("0");
+        $("#papelCoucheD10AMinimo").val("0");
+        $("#papelCoucheD15AMillar").val("0");
+        $("#papelCoucheD15AMinimo").val("0");
+        $("#papelCouchePlataMillar").val("0");
+        $("#papelCouchePlataMVMillar").val("0");
+        $("#papelCouchePlataMVCosto").val("0");
+        $("#papelCouchePlataLMMillar").val("0");
+        $("#papelCouchePlataLMMinimo").val("0");
+        $("#papelCouchePlataD10AMillar").val("0");
+        $("#papelCouchePlataD10AMinimo").val("0");
+        $("#papelCouchePlataD15AMillar").val("0");
+        $("#papelCouchePlataD15AMinimo").val("0");
+        $("#boppPoliesterBlancoTransMillar").val("0");
+        $("#boppPoliesterBlancoTransMVMillar").val("0");
+        $("#boppPoliesterBlancoTransMVCosto").val("0");
+        $("#boppPoliesterBlancoTransLMMillar").val("0");
+        $("#boppPoliesterBlancoTransLMMinimo").val("0");
+        $("#boppPoliesterBlancoTransD10AMillar").val("0");
+        $("#boppPoliesterBlancoTransD10AMinimo").val("0");
+        $("#boppPoliesterBlancoTransD15AMillar").val("0");
+        $("#boppPoliesterBlancoTransD15AMinimo").val("0");
+        $("#boppPoliesterPlataMillar").val("0");
+        $("#boppPoliesterPlataMVMillar").val("0");
+        $("#boppPoliesterPlataMVCosto").val("0");
+        $("#boppPoliesterPlataLMMillar").val("0");
+        $("#boppPoliesterPlataLMMinimo").val("0");
+        $("#boppPoliesterPlataD10AMillar").val("0");
+        $("#boppPoliesterPlataD10AMinimo").val("0");
+        $("#boppPoliesterPlataD15AMillar").val("0");
+        $("#boppPoliesterPlataD15AMinimo").val("0");
+    }
+
+</script>

@@ -4,7 +4,7 @@ namespace Pendvlo.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using Pendvlo.DAL.Repository;
+    using Pendvlo.Repository;
     using Pendvlo.Managers;
     using Pendvlo.Models;
 

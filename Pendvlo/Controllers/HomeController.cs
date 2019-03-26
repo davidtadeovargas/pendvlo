@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Pendvlo.Managers;
+using Pendvlo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,12 @@ namespace Pendvlo.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var currentUser = SessionManager.Instance.getUser();
+
+            var homeViewModel = new HomeViewModel();
+            homeViewModel.User = currentUser;
+
+            return View(homeViewModel);
         }
 
         public ActionResult About()

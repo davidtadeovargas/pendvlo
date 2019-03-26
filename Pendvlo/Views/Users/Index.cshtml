@@ -27,7 +27,7 @@
         encargadoSucChecked = ""; //checked
         successMessage = "Usuario creado correctamente";
 
-        ViewBag.Title = tittle + " Usuario";
+        ViewBag.Title = tittle + " Usuario Pendvlo!";
     }
     else if (Model.Type == Pendvlo.ViewModels.TYPE.MODIFY)
     {
@@ -46,7 +46,7 @@
         userName = Model.User.Name;
         password = @Model.User.Password;
 
-        tittle = "Editar Usuario";
+        tittle = "Editar Usuario Pendvlo!";
         module = Model.User.Module == null?-1: Model.User.Module.ID;
         sucursal = Model.User.Sucursal == null ? -1 : Model.User.Sucursal.ID;
         salesChecked = Model.User.Sales ? "checked" : "";

@@ -36,7 +36,7 @@
 
     if (Model.Type == Pendvlo.ViewModels.TYPE.NEW)
     {
-        tittle = "Nuevo Cliente";
+        tittle = "Nuevo Cliente Pendvlo!";
         url = "/customers/NewCustomer";
         successMessage = "Cliente creado correctamente";
         invoiceChecked = "checked";
@@ -48,7 +48,7 @@
         customer = Model.Customer.ID;
         customerName = Model.Customer.Name;
 
-        tittle = "Editar Cliente ";
+        tittle = "Editar Cliente Pendvlo! ";
         userID = Model.Customer.SalesMan == null ? -1 : Model.Customer.SalesMan.ID;
         readOnly = "readonly";
         url = "/customers/EditCustomer";
@@ -67,7 +67,7 @@
         customer = Model.Customer.ID;
         customerName = Model.Customer.Name;
 
-        tittle = "Ver Cliente";
+        tittle = "Ver Cliente Pendvlo! ";
         userID = Model.Customer.SalesMan == null ? -1 : Model.Customer.SalesMan.ID;
 
         ViewBag.Title = tittle + " Cliente " + Model.Customer.Name;
