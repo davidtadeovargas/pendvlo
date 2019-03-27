@@ -81,6 +81,13 @@ namespace Pendvlo.Migrations
             RepositoryManager.Instance.TipoVentaRepository.createInternet();
 
             /*
+                Tipo de laminados
+             */
+            RepositoryManager.Instance.TipoLaminadosRepository.createBrillante();
+            RepositoryManager.Instance.TipoLaminadosRepository.createMate();
+            RepositoryManager.Instance.TipoLaminadosRepository.createSin();
+
+            /*
                 Tipo de archivos
              */
             RepositoryManager.Instance.TipoArchivosRepository.createNuevo();

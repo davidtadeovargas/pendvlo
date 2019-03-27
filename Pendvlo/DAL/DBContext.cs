@@ -22,12 +22,14 @@ namespace Pendvlo.DAL
         public DbSet<Suaje> Suajes { get; set; }
         public DbSet<MedidaEtiqueta> MedidasEtiqueta { get; set; }
         public DbSet<TipoVenta> TipoVentas { get; set; }
-        public DbSet<TiposPagos> TipoPagos { get; set; }
+        public DbSet<TiposPagos> TipoPagos { get; set; }        
         public DbSet<TiposArchivo> TipoArchivos { get; set; }
+        public DbSet<TiposLaminados> TipoLaminados { get; set; }
         public DbSet<Cuenta> Cuentas { get; set; }
         public DbSet<Sucursal> Sucursales { get; set; }
         public DbSet<Banco> Bancos { get; set; }
         public DbSet<ProcedimientoImpresion> ProcedimientoImpresions { get; set; }
         public DbSet<EstatusOrdenVenta> EstatusOrdenVenta { get; set; }
+        public DbSet<NotaVenta> NotasVenta { get; set; }
     }
 }

@@ -11,7 +11,6 @@
     if (Model.Type==Pendvlo.ViewModels.TYPE.LIST)
     {
         title = "Productos Pendvlo!";
-        removeContinueBtn = 1;
         type = "TYPE.VIEW";
     }
     else if (Model.Type == Pendvlo.ViewModels.TYPE.MODIFY)
@@ -230,8 +229,17 @@
             else if (type == TYPE.DELETE) {
                 deleteType();
             }
+            else if (type == TYPE.VIEW) {
+                viewType();
+            }
 
         });
+
+        //When the user wants to view a product
+        function viewType() {
+
+            window.location = "/Products/ViewProduct?ID=" + selectedTableId;
+        }
 
         //When the user selected to edit the product
         function editType() {

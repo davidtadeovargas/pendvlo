@@ -147,6 +147,8 @@
     <Compile Include="HttpModels\EditProductRequestModel.cs" />
     <Compile Include="HttpModels\NewProductRequestModel.cs" />
     <Compile Include="Managers\SessionManager.cs" />
+    <Compile Include="Models\NotaVenta.cs" />
+    <Compile Include="Models\TiposLaminados.cs" />
     <Compile Include="Repository\ProductsRepository.cs" />
     <Compile Include="Repository\LoginReposotiry.cs" />
     <Compile Include="Repository\ModulesRepository.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="Repository\CustomersRepository.cs" />
     <Compile Include="Repository\EstatusOrdenVentaRepository.cs" />
     <Compile Include="Repository\CuentasRepository.cs" />
+    <Compile Include="Repository\TipoLaminadosRepository.cs" />
     <Compile Include="Repository\TipoArchivosRepository.cs" />
     <Compile Include="Repository\UsersRepository.cs" />
     <Compile Include="Repository\ProcedimientosImpresionRepository.cs" />

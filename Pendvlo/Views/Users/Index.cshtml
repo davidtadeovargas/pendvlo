@@ -226,10 +226,15 @@
                         success: function (result) {
                             var json = JSON.parse(result);
                             if (json.Result_ == 1) {
-                                swal("@successMessage");
-                                if (edition == 0) { //Only clear fields when it is a new user
-                                    clearAllFields();
-                                }                                
+                                swal({
+                                    title: "@successMessage",
+                                    text: "",
+                                    icon: "",
+                                    button: 'Si',
+                                    dangerMode: false,
+                                }).then(function (isConfirm) {
+                                        window.location.href = '/Users';
+                                    })
                             }
                             else {
                                 swal(json.error);

@@ -7,6 +7,8 @@
     var productID = -1;
     var readOnly = "";
     var styleReadOnly = "";
+    var viewOnly = "";
+    var styleViewOnly="";
     var successMessage = "";
     var disabledAdmin = "";
 
@@ -61,7 +63,15 @@
 
     var edition = 0;
 
-    if (Model.Type == Pendvlo.ViewModels.TYPE.NEW)
+    if (Model.Type == Pendvlo.ViewModels.TYPE.VIEW)
+    {
+        tittle = "Ver Producto Pendvlo!";
+
+        viewOnly = "readonly";
+        styleViewOnly = "noEditableField";
+        disabledAdmin = "disabled";
+    }
+    else if (Model.Type == Pendvlo.ViewModels.TYPE.NEW)
     {
         tittle = "Nuevo";
         url = "/Products/NewProduct";
@@ -165,97 +175,97 @@
                     <div class="form">
                         <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
                             <label>Codigo</label><div class="clearfix"></div>
-                            <input id="code" type="text" required="" placeholder="Codigo" value="@productCode" name="name" class="txt" @readOnly><div class="clearfix"></div>
+                            <input id="code" type="text" required="" placeholder="Codigo" value="@productCode" name="name" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
                             <label>Medida Eje</label><div class="clearfix"></div>
-                            <input id="medidaEje" type="number" required="" placeholder="" value="@medidaEje" class="txt"><div class="clearfix"></div>
+                            <input id="medidaEje" type="number" required="" placeholder="" value="@medidaEje" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Medida Desarrollo</label><div class="clearfix"></div>
-                            <input id="medidaDesarrollo" type="number" required="" placeholder="" value="@medidaDesarrollo" class="txt"><div class="clearfix"></div>
+                            <input id="medidaDesarrollo" type="number" required="" placeholder="" value="@medidaDesarrollo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Repeticiones Eje</label><div class="clearfix"></div>
-                            <input id="repeticionesEje" type="number" required="" placeholder="" value="@repeticionesEje" class="txt"><div class="clearfix"></div>
+                            <input id="repeticionesEje" type="number" required="" placeholder="" value="@repeticionesEje" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Repeticiones Desarrollo</label><div class="clearfix"></div>
-                            <input id="repeticionesDesarrollo" type="number" required="" placeholder="" value="@repeticionesDesarrollo" class="txt"><div class="clearfix"></div>
+                            <input id="repeticionesDesarrollo" type="number" required="" placeholder="" value="@repeticionesDesarrollo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Separacion Eje</label><div class="clearfix"></div>
-                            <input id="separacionEje" type="number" required="" placeholder="" value="@separacionEje" class="txt"><div class="clearfix"></div>
+                            <input id="separacionEje" type="number" required="" placeholder="" value="@separacionEje" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Separacion Desarrollo</label><div class="clearfix"></div>
-                            <input id="separacionDesarrollo" type="number" required="" placeholder="" value="@separacionDesarrollo" class="txt"><div class="clearfix"></div>
+                            <input id="separacionDesarrollo" type="number" required="" placeholder="" value="@separacionDesarrollo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Numero</label><div class="clearfix"></div>
-                            <input id="numero" type="number" required="" placeholder="" value="@numero" class="txt"><div class="clearfix"></div>
+                            <input id="numero" type="number" required="" placeholder="" value="@numero" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Existencia</label><div class="clearfix"></div>
-                            <input id="existencia" type="number" required="" placeholder="" value="@existencia" class="txt"><div class="clearfix"></div>
+                            <input id="existencia" type="number" required="" placeholder="" value="@existencia" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Existencia Rodillos</label><div class="clearfix"></div>
-                            <input id="existenciaRodillos" type="number" required="" placeholder="" value="@existenciaRodillos" class="txt"><div class="clearfix"></div>
+                            <input id="existenciaRodillos" type="number" required="" placeholder="" value="@existenciaRodillos" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) millar</label><div class="clearfix"></div>
-                            <input id="papelCoucheMillar" type="number" required="" placeholder="" value="@papelCoucheMillar" class="txt"><div class="clearfix"></div>
+                            <input id="papelCoucheMillar" type="number" required="" placeholder="" value="@papelCoucheMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) - Minimo venta millar</label><div class="clearfix"></div>
-                            <input id="papelCoucheMVMillar" type="number" required="" placeholder="" value="@papelCoucheMVMillar" class="txt"><div class="clearfix"></div>
+                            <input id="papelCoucheMVMillar" type="number" required="" placeholder="" value="@papelCoucheMVMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) - Minimo venta costo</label><div class="clearfix"></div>
-                            <input id="papelCoucheMVCosto" type="number" required="" placeholder="" value="@papelCoucheMVCosto" class="txt"><div class="clearfix"></div>
+                            <input id="papelCoucheMVCosto" type="number" required="" placeholder="" value="@papelCoucheMVCosto" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) - Laminado mate millar</label><div class="clearfix"></div>
-                            <input id="papelCoucheLMMillar" type="number" required="" placeholder="" value="@papelCoucheLMMillar" class="txt"><div class="clearfix"></div>
+                            <input id="papelCoucheLMMillar" type="number" required="" placeholder="" value="@papelCoucheLMMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) - Laminado mate minimo</label><div class="clearfix"></div>
-                            <input id="papelCoucheLMMinimo" type="number" required="" placeholder="" value="@papelCoucheLMMinimo" class="txt"><div class="clearfix"></div>
+                            <input id="papelCoucheLMMinimo" type="number" required="" placeholder="" value="@papelCoucheLMMinimo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) - 10% desc aplicado millar</label><div class="clearfix"></div>
-                            <input id="papelCoucheD10AMillar" type="number" required="" placeholder="" value="@papelCoucheD10AMillar" class="txt"><div class="clearfix"></div>
+                            <input id="papelCoucheD10AMillar" type="number" required="" placeholder="" value="@papelCoucheD10AMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) - 10% desc aplicado minimo</label><div class="clearfix"></div>
-                            <input id="papelCoucheD10AMinimo" type="number" required="" placeholder="" value="@papelCoucheD10AMinimo" class="txt"><div class="clearfix"></div>
+                            <input id="papelCoucheD10AMinimo" type="number" required="" placeholder="" value="@papelCoucheD10AMinimo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) - 15% desc aplicado millar</label><div class="clearfix"></div>
-                            <input id="papelCoucheD15AMillar" type="number" required="" placeholder="" value="@papelCoucheD15AMillar" class="txt"><div class="clearfix"></div>
+                            <input id="papelCoucheD15AMillar" type="number" required="" placeholder="" value="@papelCoucheD15AMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) - 15% desc aplicado minimo</label><div class="clearfix"></div>
-                            <input id="papelCoucheD15AMinimo" type="number" required="" placeholder="" value="@papelCoucheD15AMinimo" class="txt"><div class="clearfix"></div>
+                            <input id="papelCoucheD15AMinimo" type="number" required="" placeholder="" value="@papelCoucheD15AMinimo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) Plata millar</label><div class="clearfix"></div>
-                            <input id="papelCouchePlataMillar" type="number" required="" placeholder="" value="@papelCouchePlataMillar" class="txt"><div class="clearfix"></div>
+                            <input id="papelCouchePlataMillar" type="number" required="" placeholder="" value="@papelCouchePlataMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) Plata - Minimo venta millar</label><div class="clearfix"></div>
-                            <input id="papelCouchePlataMVMillar" type="number" required="" placeholder="" value="@papelCouchePlataMVMillar" class="txt"><div class="clearfix"></div>
+                            <input id="papelCouchePlataMVMillar" type="number" required="" placeholder="" value="@papelCouchePlataMVMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) Plata - Minimo venta costo</label><div class="clearfix"></div>
-                            <input id="papelCouchePlataMVCosto" type="number" required="" placeholder="" value="@papelCouchePlataMVCosto" class="txt"><div class="clearfix"></div>
+                            <input id="papelCouchePlataMVCosto" type="number" required="" placeholder="" value="@papelCouchePlataMVCosto" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) Plata - Laminado mate millar</label><div class="clearfix"></div>
-                            <input id="papelCouchePlataLMMillar" type="number" required="" placeholder="" value="@papelCouchePlataLMMillar" class="txt"><div class="clearfix"></div>
+                            <input id="papelCouchePlataLMMillar" type="number" required="" placeholder="" value="@papelCouchePlataLMMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) Plata - Laminado mate minimo</label><div class="clearfix"></div>
-                            <input id="papelCouchePlataLMMinimo" type="number" required="" placeholder="" value="@papelCouchePlataLMMinimo" class="txt"><div class="clearfix"></div>
+                            <input id="papelCouchePlataLMMinimo" type="number" required="" placeholder="" value="@papelCouchePlataLMMinimo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) Plata - 10% desc aplicado millar</label><div class="clearfix"></div>
-                            <input id="papelCouchePlataD10AMillar" type="number" required="" placeholder="" value="@papelCouchePlataD10AMillar" class="txt"><div class="clearfix"></div>
+                            <input id="papelCouchePlataD10AMillar" type="number" required="" placeholder="" value="@papelCouchePlataD10AMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) Plata - 10% desc aplicado minimo</label><div class="clearfix"></div>
-                            <input id="papelCouchePlataD10AMinimo" type="number" required="" placeholder="" value="@papelCouchePlataD10AMinimo" class="txt"><div class="clearfix"></div>
+                            <input id="papelCouchePlataD10AMinimo" type="number" required="" placeholder="" value="@papelCouchePlataD10AMinimo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) Plata - 15% desc aplicado millar</label><div class="clearfix"></div>
-                            <input id="papelCouchePlataD15AMillar" type="number" required="" placeholder="" value="@papelCouchePlataD15AMillar" class="txt"><div class="clearfix"></div>
+                            <input id="papelCouchePlataD15AMillar" type="number" required="" placeholder="" value="@papelCouchePlataD15AMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>Papel (Couche) Plata- 15% desc aplicado minimo</label><div class="clearfix"></div>
-                            <input id="papelCouchePlataD15AMinimo" type="number" required="" placeholder="" value="@papelCouchePlataD15AMinimo" class="txt"><div class="clearfix"></div>
+                            <input id="papelCouchePlataD15AMinimo" type="number" required="" placeholder="" value="@papelCouchePlataD15AMinimo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>BOPP (Poliester) Blanco Transparente millar</label><div class="clearfix"></div>
-                            <input id="boppPoliesterBlancoTransMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransMillar" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>BOPP (Poliester) Blanco Transparente - Minimo venta millar</label><div class="clearfix"></div>
-                            <input id="boppPoliesterBlancoTransMVMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransMVMillar" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransMVMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransMVMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>BOPP (Poliester) Blanco Transparente - Minimo venta costo</label><div class="clearfix"></div>
-                            <input id="boppPoliesterBlancoTransMVCosto" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransMVCosto" class="txt"><div class="clearfix"></div>
-                            <label>BOPP (Poliester) Blanco Transparente - Laminado mate millar</label><div class="clearfix"></div>
-                            <input id="boppPoliesterBlancoTransLMMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransLMMillar" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransMVCosto" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransMVCosto" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Blanco Transparente - Laminado mate millar</label><div class="clearfix"></div> 
+                            <input id="boppPoliesterBlancoTransLMMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransLMMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>BOPP (Poliester) Blanco Transparente - Laminado mate minimo</label><div class="clearfix"></div>
-                            <input id="boppPoliesterBlancoTransLMMinimo" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransLMMinimo" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransLMMinimo" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransLMMinimo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>BOPP (Poliester) Blanco Transparente - 10% desc aplicado millar</label><div class="clearfix"></div>
-                            <input id="boppPoliesterBlancoTransD10AMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD10AMillar" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransD10AMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD10AMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>BOPP (Poliester) Blanco Transparente - 10% desc aplicado minimo</label><div class="clearfix"></div>
-                            <input id="boppPoliesterBlancoTransD10AMinimo" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD10AMinimo" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransD10AMinimo" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD10AMinimo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>BOPP (Poliester) Blanco Transparente - 15% desc aplicado millar</label><div class="clearfix"></div>
-                            <input id="boppPoliesterBlancoTransD15AMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD15AMillar" class="txt"><div class="clearfix"></div>
-                            <label>BOPP (Poliester) Blanco Transparente - 15% desc aplicado minimo</label><div class="clearfix"></div>
-                            <input id="boppPoliesterBlancoTransD15AMinimo" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD15AMinimo" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterBlancoTransD15AMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD15AMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
+                            <label>BOPP (Poliester) Blanco Transparente - 15% desc aplicado minimo</label><div class="clearfix"></div> 
+                            <input id="boppPoliesterBlancoTransD15AMinimo" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD15AMinimo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>BOPP (Poliester) Plata millar</label><div class="clearfix"></div>
-                            <input id="boppPoliesterPlataMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataMillar" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataMillar" class="txt @styleViewOnly"><div class="clearfix" @viewOnly></div>
                             <label>BOPP (Poliester) Plata - Minimo venta millar</label><div class="clearfix"></div>
-                            <input id="boppPoliesterPlataMVMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataMVMillar" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataMVMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataMVMillar" class="txt @styleViewOnly"><div class="clearfix" @viewOnly></div>
                             <label>BOPP (Poliester) Plata - Minimo venta costo</label><div class="clearfix"></div>
-                            <input id="boppPoliesterPlataMVCosto" type="number" required="" placeholder="" value="@boppPoliesterPlataMVCosto" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataMVCosto" type="number" required="" placeholder="" value="@boppPoliesterPlataMVCosto" class="txt @styleViewOnly"><div class="clearfix" @viewOnly></div>
                             <label>BOPP (Poliester) Plata - Laminado mate millar</label><div class="clearfix"></div>
-                            <input id="boppPoliesterPlataLMMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataLMMillar" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataLMMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataLMMillar" class="txt @styleViewOnly"><div class="clearfix" @viewOnly></div>
                             <label>BOPP (Poliester) Plata - Laminado mate minimo</label><div class="clearfix"></div>
-                            <input id="boppPoliesterPlataLMMinimo" type="number" required="" placeholder="" value="@boppPoliesterPlataLMMinimo" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataLMMinimo" type="number" required="" placeholder="" value="@boppPoliesterPlataLMMinimo" class="txt @styleViewOnly"><div class="clearfix" @viewOnly></div>
                             <label>BOPP (Poliester) Plata - 10% desc aplicado millar</label><div class="clearfix"></div>
-                            <input id="boppPoliesterPlataD10AMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataD10AMillar" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataD10AMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataD10AMillar" class="txt @styleViewOnly"><div class="clearfix" @viewOnly></div>
                             <label>BOPP (Poliester) Plata - 10% desc aplicado minimo</label><div class="clearfix"></div>
-                            <input id="boppPoliesterPlataD10AMinimo" type="number" required="" placeholder="" value="@boppPoliesterPlataD10AMinimo" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataD10AMinimo" type="number" required="" placeholder="" value="@boppPoliesterPlataD10AMinimo" class="txt @styleViewOnly"><div class="clearfix" @viewOnly></div>
                             <label>BOPP (Poliester) Plata - 15% desc aplicado millar</label><div class="clearfix"></div>
-                            <input id="boppPoliesterPlataD15AMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataD15AMillar" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataD15AMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataD15AMillar" class="txt @styleViewOnly"><div class="clearfix" @viewOnly></div>
                             <label>BOPP (Poliester) Plata - 15% desc aplicado minimo</label><div class="clearfix"></div>
-                            <input id="boppPoliesterPlataD15AMinimo" type="number" required="" placeholder="" value="@boppPoliesterPlataD15AMinimo" class="txt"><div class="clearfix"></div>
+                            <input id="boppPoliesterPlataD15AMinimo" type="number" required="" placeholder="" value="@boppPoliesterPlataD15AMinimo" class="txt @styleViewOnly"><div class="clearfix" @viewOnly></div>
                             <input type="submit" value="Guardar" name="submit" class="txt2" id="btnSave" @disabledAdmin>
                         </form>
                     </div>
@@ -410,10 +420,15 @@
                         success: function (result) {
                             var json = JSON.parse(result);
                             if (json.Result_ == 1) {
-                                swal("@successMessage");
-                                if (edition == 0) { //Only clear fields when it is a new user
-                                    clearAllFields();
-                                }                                
+                                swal({
+                                    title: "@successMessage",
+                                    text: "",
+                                    icon: "",
+                                    button: 'Si',
+                                    dangerMode: false,
+                                }).then(function (isConfirm) {
+                                        window.location.href = '/Products';
+                                    })                                
                             }
                             else {
                                 swal(json.error);

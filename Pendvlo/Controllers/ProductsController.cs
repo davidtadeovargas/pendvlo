@@ -241,6 +241,14 @@ namespace Pendvlo.Controllers
         }
 
         /*
+            View a product in read only view
+             */
+        public ActionResult ViewProduct(int ID)
+        {
+            return ProductsIndex(TYPE.VIEW, ID);
+        }
+
+        /*
             Edit an account in Index
              */
         public ActionResult EditProductIndex(int ID)
