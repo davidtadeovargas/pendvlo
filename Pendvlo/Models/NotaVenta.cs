@@ -10,7 +10,7 @@ namespace Pendvlo.Models
         public int ID { get; set; }
         public int numeroNota { get; set; }
         public DateTime fecha { get; set; }
-        public long hora { get; set; }
+        public string hora { get; set; }
         public DateTime fechaEntrega { get; set; }
         public bool requiereFactura { get; set; }
         public TiposArchivo TiposArchivo { get; set; }
@@ -34,6 +34,7 @@ namespace Pendvlo.Models
         public double total { get; set; }
         public double anticipo { get; set; }
         public double saldo { get; set; }
+        public double abono { get; set; }
         public DateTime Created { get; set; }
 
         public NotaVenta()

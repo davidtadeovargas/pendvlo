@@ -32,7 +32,8 @@ namespace Pendvlo.Managers
         public BancoRepository BancoRepository { get; set; }
         public EstatusOrdenVentaRepository EstatusOrdenVentaRepository { get; set; }
         public CuentasRepository CuentasRepository { get; set; }
-        public TipoLaminadosRepository TipoLaminadosRepository { get; set; }        
+        public TipoLaminadosRepository TipoLaminadosRepository { get; set; }
+        public NotasVentaRepository NotasVentaRepository { get; set; }        
 
 
 
@@ -54,7 +55,8 @@ namespace Pendvlo.Managers
             BancoRepository = new BancoRepository(dBContext);
             EstatusOrdenVentaRepository = new EstatusOrdenVentaRepository(dBContext);
             CuentasRepository = new CuentasRepository(dBContext);
-            TipoLaminadosRepository = new TipoLaminadosRepository(dBContext);            
+            TipoLaminadosRepository = new TipoLaminadosRepository(dBContext);
+            NotasVentaRepository = new NotasVentaRepository(dBContext);            
         }
 
         public static RepositoryManager Instance
