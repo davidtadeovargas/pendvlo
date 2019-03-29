@@ -1,0 +1,437 @@
+﻿@model Pendvlo.ViewModels.NotaVentaIndexViewModel
+
+@{
+    string tittle = "";
+    string url = "";
+
+    var notaVentaID = -1;
+    var numeroNotaVenta = "";
+    var readOnly = "";
+    var styleReadOnly = "";
+    var viewOnly = "";
+    var styleViewOnly="";
+    var successMessage = "";
+    var disabledAdmin = "";
+
+    var fecha = Model.fecha;
+    var hora = Model.hora;
+    var fechaEntrega = Model.fechaEntrega;
+    var requiereFactura = 0;
+    var tipoArchivoId = -1;
+    var customerId = -1;
+    var customer = "";
+    var tipoLaminadoId = -1;
+    var productoId = -1;
+    var productoCode = "";
+    var tipoPagoId = -1;
+    var vendedorId = -1;
+    var vendedor = "";
+    var bancoId = -1;
+    var observaciones = "";
+    var sucursalId = -1;
+    var sucursal = Model.sucursal;
+    double millar = 0;
+    double impresion = 0;
+    double otro = 0;
+    double descuento = 0;
+    double grabados = 0;
+    double diseno = 0;
+    double express = 0;
+    double subtotal = 0;
+    double impuesto = 0;
+    double total = 0;
+    double anticipo = 0;
+    double saldo = 0;
+    double abono = 0;
+
+    var edition = 0;
+
+    if (Model.Type == Pendvlo.ViewModels.TYPE.VIEW)
+    {
+        tittle = "Ver Nota de Venta Pendvlo!";
+
+        viewOnly = "readonly";
+        styleViewOnly = "noEditableField";
+        disabledAdmin = "disabled";
+    }
+    else if (Model.Type == Pendvlo.ViewModels.TYPE.NEW)
+    {
+        tittle = "Nueva";
+        url = "/NotasVenta/NewNotaVenta";
+        successMessage = "Nota de Venta creada correctamente";
+
+        ViewBag.Title = tittle + " Nota de Venta Pendvlo!";        
+    }
+    else if (Model.Type == Pendvlo.ViewModels.TYPE.MODIFY)
+    {
+        edition = 1;
+
+        fecha = Model.NotaVenta.fecha.ToString("yyyy-MM-dd hh:mm:ss");
+        hora = Model.NotaVenta.hora;
+        customer = Model.NotaVenta.Customer.Name;
+        customerId = Model.NotaVenta.Customer.ID;
+        fechaEntrega = Model.NotaVenta.fechaEntrega.ToString("yyyy-MM-dd hh:mm:ss");
+        requiereFactura = Model.NotaVenta.requiereFactura ? 1 : 0;
+        tipoArchivoId = Model.NotaVenta.TiposArchivo.ID;
+        tipoLaminadoId = Model.NotaVenta.TipoLaminado.ID;
+        productoId = Model.NotaVenta.Product.ID;
+        productoCode = Model.NotaVenta.Product.code;
+        tipoPagoId = Model.NotaVenta.TipoPago.ID;
+        vendedorId = Model.NotaVenta.Vendedor.ID;
+        vendedor = Model.NotaVenta.Vendedor.Name;
+        bancoId = Model.NotaVenta.Banco.ID;
+        observaciones = Model.NotaVenta.observaciones;
+        sucursalId = Model.NotaVenta.Sucursal.ID;
+        millar = Model.NotaVenta.millar;
+        impresion = Model.NotaVenta.impresion;
+        otro = Model.NotaVenta.otro;
+        descuento = Model.NotaVenta.descuento;
+        grabados = Model.NotaVenta.grabados;
+        diseno = Model.NotaVenta.diseno;
+        express = Model.NotaVenta.express;
+        subtotal = Model.NotaVenta.subtotal;
+        impuesto = Model.NotaVenta.impuesto;
+        total = Model.NotaVenta.total;
+        anticipo = Model.NotaVenta.anticipo;
+        saldo = Model.NotaVenta.saldo;
+        abono = Model.NotaVenta.abono;
+
+        tittle = "Editar Nota de Venta Pendvlo!";
+
+        readOnly = "readonly";
+        styleReadOnly = "noEditableField";
+        url = "/NotasVenta/EditNotaVenta";
+        successMessage = "Nota de Venta editada correctamente";
+
+        ViewBag.Title = tittle + " Nota de Venta " + Model.NotaVenta.ID;
+    }
+    else
+    {
+        tittle = "Undefined";
+    }
+}
+
+@section header{
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/NotasVentaIndex.css")">
+}
+
+@section mainMenu{
+
+    @{
+        Html.RenderPartial("MainMenu/_NotasVentaMenu");
+    }
+}
+
+
+<!-- Page Content -->
+<div id="page-content-wrapper">
+    <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+        <span class="hamb-top"></span>
+        <span class="hamb-middle"></span>
+        <span class="hamb-bottom"></span>
+    </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form_main">
+                    <h4 class="heading">
+                        <strong>@tittle</strong> @numeroNotaVenta<span></span>
+                    </h4>
+                    <div class="form">
+                        <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
+
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <div class="col-xs-12">
+                                        <label>Nota de Venta:</label><div class="clearfix"></div>
+                                        <input id="notaVenta" type="number" required="" placeholder="Nota de Venta" value="@numeroNotaVenta" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label>Sucursal:</label><div class="clearfix"></div>
+                                        <input id="sucursal" placeholder="Sucursal" type="text" value="@sucursal" class="txt noEditableField" readonly><div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="col-xs-10">
+                                        <label>Cliente:</label><div class="clearfix"></div>
+                                        <input id="customer" type="text" value="@productoCode" placeholder="Nombre del Cliente" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <label>Factura:</label><div class="clearfix"></div>
+                                        <input id="requiereFactura" type="checkbox" class="txt @styleViewOnly" @requiereFactura @readOnly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <label>Tipo de Archivo:</label><div class="clearfix"></div>
+                                        <select id="tipoArchivo" @disabledAdmin>
+                                            @foreach (var TipoArchivo in Model.TiposArchivos)
+                                            {
+                                                <option value="@TipoArchivo.ID" data-id="@TipoArchivo.ID">@TipoArchivo.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <label>Tipo de Laminado:</label><div class="clearfix"></div>
+                                        <select id="tipoArchivo" @disabledAdmin>
+                                            @foreach (var TipoLaminado in Model.TiposLaminados)
+                                            {
+                                                <option value="@TipoLaminado.ID" data-id="@TipoLaminado.ID">@TipoLaminado.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-3">
+                                    </div>
+                                    <div class="col-xs-3">
+                                    </div>
+
+
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="col-xs-12">
+                                        <label>Fecha:</label><div class="clearfix"></div>
+                                        <input id="fecha" type="text" required="" placeholder="Fecha" value="@fecha" class="txt noEditableField" readonly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label>Hora:</label><div class="clearfix"></div>
+                                        <input id="hora" type="text" required="" placeholder="Hora" value="@hora" class="txt noEditableField" readonly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label>Fecha Entrega:</label><div class="clearfix"></div>
+                                        <input id="fechaEntrega" type="date" value="@fechaEntrega" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12" style="padding:0">
+                                    <div class="col-xs-3">
+                                        <label>Producto:</label><div class="clearfix"></div>
+                                        <input id="producto" type="text" placeholder="Codigo Producto" value="@productoCode" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div><br /><br />
+                            <div class="row">
+                                <div class="col-xs-2" style="padding:0">
+                                    <div class="col-xs-12">
+                                        <label>Millar:</label><div class="clearfix"></div>
+                                        <input id="millar" type="text" value="@millar" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label>Impresion:</label><div class="clearfix"></div>
+                                        <input id="impresion" type="text" value="@impresion" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label>Otro:</label><div class="clearfix"></div>
+                                        <input id="otro" type="text" value="@otro" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="col-xs-12">
+                                        <label>Descuento:</label><div class="clearfix"></div>
+                                        <input id="descuento" type="text" value="@descuento" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label>Grabados:</label><div class="clearfix"></div>
+                                        <input id="grabados" type="text" value="@grabados" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label>Diseño:</label><div class="clearfix"></div>
+                                        <input id="diseno" type="text" value="@diseno" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="col-xs-12">
+                                        <label>Express:</label><div class="clearfix"></div>
+                                        <input id="express" type="text" value="@express" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label>Anticipo:</label><div class="clearfix"></div>
+                                        <input id="anticipo" type="text" value="@anticipo" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label>Saldo:</label><div class="clearfix"></div>
+                                        <input id="saldo" type="text" value="@saldo" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <div class="col-xs-12">
+                                        <label>Subtotal:</label><div class="clearfix"></div>
+                                        <input id="subtotal" type="text" value="@subtotal" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label>Impuesto:</label><div class="clearfix"></div>
+                                        <input id="impuesto" type="text" value="@impuesto" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label>Total:</label><div class="clearfix"></div>
+                                        <input id="total" type="text" value="@total" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label>Abono:</label><div class="clearfix"></div>
+                                        <input id="abono" type="text" value="@abono" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Observaciones:</label><div class="clearfix"></div>
+                                    <input id="observaciones" type="text" placeholder="Observaciones de Nota de Venta" value="@vendedor" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Vendedor:</label><div class="clearfix"></div>
+                                    <input id="vendedor" type="text" value="@vendedor" placeholder="Usuario Vendedor" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label>Bancos:</label><div class="clearfix"></div>
+                                    <select id="banco" @disabledAdmin>
+                                        @foreach (var Banco in Model.Bancos)
+                                        {
+                                            <option value="@Banco.ID" data-id="@Banco.ID">@Banco.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div><br />
+
+                            <input type="submit" value="Guardar" name="submit" class="txt2" id="btnSave" @disabledAdmin>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /#page-content-wrapper -->
+
+<script type="text/JavaScript">
+
+    var notaVentaID = @notaVentaID;    
+
+    $(document).ready(function () {
+
+        /*
+            Clic on save button
+         */
+        $("#btnSave").click(function (e) {
+
+            e.preventDefault();
+
+            /*
+                Validate all fields are filled
+             */
+            //var code = $("#code").val();
+            
+
+            /*if (code === "" || code === 'undefined') {
+                swal("Ingresa el codigo");
+                $("#code").focus();                
+                return;
+            }*/
+
+            /*
+                Validate if continue
+                */
+            swal({
+                title: "¿Seguro que quieres continuar?",
+                text: "",
+                icon: "",
+                buttons: [
+                    'No',
+                    'Si'
+                ],
+                dangerMode: false,
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+
+                    /*
+                    Save the nota de venta in the server
+                    */
+                    $.ajax({
+                        type: "POST",
+                        url: "@url",
+                        contentType: "application/json; charset=utf-8",
+                        data: '{"code":"' + code + '",' +
+                            '"ID":"' + productID + '",' + 
+                            '"medidaEje":"' + medidaEje + '",' + 
+                            '"medidaDesarrollo":"' + medidaDesarrollo + '",' + 
+                            '"repeticionesEje":"' + repeticionesEje + '",' + 
+                            '"repeticionesDesarrollo":"' + repeticionesDesarrollo + '",' + 
+                            '"separacionEje":"' + separacionEje + '",' + 
+                            '"separacionDesarrollo":"' + separacionDesarrollo + '",' + 
+                            '"numero":"' + numero + '",' + 
+                            '"existencia":"' + existencia + '",' + 
+                            '"existenciaRodillos":"' + existenciaRodillos + '",' + 
+                            '"papelCoucheMillar":"' + papelCoucheMillar + '",' + 
+                            '"papelCoucheMVMillar":"' + papelCoucheMVMillar + '",' + 
+                            '"papelCoucheMVCosto":"' + papelCoucheMVCosto + '",' + 
+                            '"papelCoucheLMMillar":"' + papelCoucheLMMillar + '",' + 
+                            '"papelCoucheLMMinimo":"' + papelCoucheLMMinimo + '",' + 
+                            '"papelCoucheD10AMillar":"' + papelCoucheD10AMillar + '",' + 
+                            '"papelCoucheD10AMinimo":"' + papelCoucheD10AMinimo + '",' + 
+                            '"papelCoucheD15AMillar":"' + papelCoucheD15AMillar + '",' + 
+                            '"papelCoucheD15AMinimo":"' + papelCoucheD15AMinimo + '",' + 
+                            '"papelCouchePlataMillar":"' + papelCouchePlataMillar + '",' + 
+                            '"papelCouchePlataMVMillar":"' + papelCouchePlataMVMillar + '",' + 
+                            '"papelCouchePlataMVCosto":"' + papelCouchePlataMVCosto + '",' + 
+                            '"papelCouchePlataLMMillar":"' + papelCouchePlataLMMillar + '",' + 
+                            '"papelCouchePlataLMMinimo":"' + papelCouchePlataLMMinimo + '",' + 
+                            '"papelCouchePlataD10AMillar":"' + papelCouchePlataD10AMillar + '",' + 
+                            '"papelCouchePlataD10AMinimo":"' + papelCouchePlataD10AMinimo + '",' + 
+                            '"papelCouchePlataD15AMillar":"' + papelCouchePlataD15AMillar + '",' + 
+                            '"papelCouchePlataD15AMinimo":"' + papelCouchePlataD15AMinimo + '",' + 
+                            '"boppPoliesterBlancoTransMillar":"' + boppPoliesterBlancoTransMillar + '",' + 
+                            '"boppPoliesterBlancoTransMVMillar":"' + boppPoliesterBlancoTransMVMillar + '",' + 
+                            '"boppPoliesterBlancoTransMVCosto":"' + boppPoliesterBlancoTransMVCosto + '",' + 
+                            '"boppPoliesterBlancoTransLMMillar":"' + boppPoliesterBlancoTransLMMillar + '",' + 
+                            '"boppPoliesterBlancoTransLMMinimo":"' + boppPoliesterBlancoTransLMMinimo + '",' + 
+                            '"boppPoliesterBlancoTransD10AMillar":"' + boppPoliesterBlancoTransD10AMillar + '",' + 
+                            '"boppPoliesterBlancoTransD10AMinimo":"' + boppPoliesterBlancoTransD10AMinimo + '",' + 
+                            '"boppPoliesterBlancoTransD10AMinimo":"' + boppPoliesterBlancoTransD10AMinimo + '",' + 
+                            '"boppPoliesterBlancoTransD15AMinimo":"' + boppPoliesterBlancoTransD15AMinimo + '",' +
+                            '"boppPoliesterBlancoTransD15AMillar":"' + boppPoliesterBlancoTransD15AMillar + '",' +                               
+                            '"boppPoliesterPlataMillar":"' + boppPoliesterPlataMillar + '",' +
+                            '"boppPoliesterPlataMVMillar":"' + boppPoliesterPlataMVMillar + '",' +
+                            '"boppPoliesterPlataMVCosto":"' + boppPoliesterPlataMVCosto + '",' +
+                            '"boppPoliesterPlataLMMillar":"' + boppPoliesterPlataLMMillar + '",' +
+                            '"boppPoliesterPlataLMMinimo":"' + boppPoliesterPlataLMMinimo + '",' +
+                            '"boppPoliesterPlataD10AMillar":"' + boppPoliesterPlataD10AMillar + '",' +
+                            '"boppPoliesterPlataD10AMinimo":"' + boppPoliesterPlataD10AMinimo + '",' +
+                            '"boppPoliesterPlataD15AMillar":"' + boppPoliesterPlataD15AMillar + '",' +
+                            '"boppPoliesterPlataD15AMinimo":"' + boppPoliesterPlataD15AMinimo + '"}',
+                        dataType: "html",
+                        success: function (result) {
+                            var json = JSON.parse(result);
+                            if (json.Result_ == 1) {
+                                swal({
+                                    title: "@successMessage",
+                                    text: "",
+                                    icon: "",
+                                    button: 'Si',
+                                    dangerMode: false,
+                                }).then(function (isConfirm) {
+                                        window.location.href = '/NotasVenta';
+                                    })                                
+                            }
+                            else {
+                                swal(json.error);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            alert(error);
+                            console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
+                        }
+                            });
+
+                    } else {
+                        //Nothing to do
+                    }
+                })            
+        });        
+               
+    });
+    
+</script>

@@ -16,7 +16,7 @@ namespace Pendvlo.Repository
 
         public User validateLogin(string user, string password)
         {
-            User User_ = DBContext.Users.Where(Users => Users.User_ == user).Where(Users => Users.Password == password).FirstOrDefault();
+            User User_ = DBContext.Users.Include("Sucursal").Include("Module").Where(Users => Users.User_ == user).Where(Users => Users.Password == password).FirstOrDefault();
             return User_;
         }
     }

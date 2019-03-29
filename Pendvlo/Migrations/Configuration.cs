@@ -32,21 +32,30 @@ namespace Pendvlo.Migrations
             RepositoryManager.Instance.ModulesRepository.createDesignModule();
             RepositoryManager.Instance.ModulesRepository.createAtenServCustomModule();
             RepositoryManager.Instance.ModulesRepository.createAdminComprasModule();
-/*
+
+            /*
+                Sucursales
+             */
+            RepositoryManager.Instance.SucursalesRepository.createLibertadSucursal();
+            RepositoryManager.Instance.SucursalesRepository.createMiguelBlanco();
+
+            /*
                 Users
              */
 
             Module salesModule = RepositoryManager.Instance.ModulesRepository.getAtencionServCustomerModule();
             Module administrativeModule = RepositoryManager.Instance.ModulesRepository.getAdministrationModule();
 
+            Sucursal sucursal = RepositoryManager.Instance.SucursalesRepository.getLibertadSucursal();
+
             context.Users.AddOrUpdate(x => x.ID,
-                new User() { ID = 1, Name = "admin", User_ = "admin", Password = "123456789", Sales = true, admin = true }
+                new User() { ID = 1, Name = "admin", User_ = "admin", Password = "123456789", Sales = true, admin = true, Sucursal = sucursal }
                 );
             context.Users.AddOrUpdate(x => x.ID,
-                new User() { ID = 1, Name = "ALEJANDRO ESPEJO", User_ = "JAER", Password = "123456789", Sales = true, Module = salesModule }
+                new User() { ID = 1, Name = "ALEJANDRO ESPEJO", User_ = "JAER", Password = "123456789", Sales = true, Module = salesModule, Sucursal = sucursal }
                 );
             context.Users.AddOrUpdate(x => x.ID,
-                new User() { ID = 1, Name = "ALDO DAGOBERTO", User_ = "ADRL", Password = "123456789", Sales = true, Module = administrativeModule }
+                new User() { ID = 1, Name = "ALDO DAGOBERTO", User_ = "ADRL", Password = "123456789", Sales = true, Module = administrativeModule, Sucursal = sucursal }
                 );
 
             /*
@@ -100,13 +109,7 @@ namespace Pendvlo.Migrations
             RepositoryManager.Instance.TipoPagosRepository.createEfectivo();
             RepositoryManager.Instance.TipoPagosRepository.createTransferencia();
             RepositoryManager.Instance.TipoPagosRepository.createDeposito();
-            RepositoryManager.Instance.TipoPagosRepository.createTerminal();
-
-            /*
-                Sucursales
-             */
-            RepositoryManager.Instance.SucursalesRepository.createLibertadSucursal();
-            RepositoryManager.Instance.SucursalesRepository.createMiguelBlanco();
+            RepositoryManager.Instance.TipoPagosRepository.createTerminal();            
 
             /*
                 Bancos

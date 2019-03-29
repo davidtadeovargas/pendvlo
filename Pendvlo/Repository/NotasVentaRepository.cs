@@ -21,11 +21,11 @@ namespace Pendvlo.Repository
         {
             List<NotaVenta> NotaVenta = DBContext.NotasVenta
                 .Include("TiposArchivo")
-                .Include("TiposLaminados")
+                .Include("TipoLaminado")
                 .Include("Product")
                 .Include("Customer")
-                .Include("TiposPagos")
-                .Include("User")
+                .Include("TipoPago")
+                .Include("Vendedor")
                 .Include("Banco")
                 .Include("Sucursal")
                 .ToList();

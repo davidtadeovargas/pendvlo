@@ -4,7 +4,9 @@ using Pendvlo.Models;
 using Pendvlo.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -229,7 +231,19 @@ namespace Pendvlo.Controllers
         private ActionResult NotaVentaIndex(TYPE type, int ID = -1)
         {
             NotaVentaIndexViewModel NotaVentaIndexViewModel = new NotaVentaIndexViewModel();
-            NotaVentaIndexViewModel.Type = type;            
+            NotaVentaIndexViewModel.Type = type;
+
+            /*
+                Get the lists needed
+             */
+            List<TiposArchivo> TiposArchivos = RepositoryManager.Instance.TipoArchivosRepository.getAll();
+            NotaVentaIndexViewModel.TiposArchivos = TiposArchivos;
+            List<TiposLaminados> TiposLaminados = RepositoryManager.Instance.TipoLaminadosRepository.getAll();
+            NotaVentaIndexViewModel.TiposLaminados = TiposLaminados;
+            List<TiposPagos> TiposPagos = RepositoryManager.Instance.TipoPagosRepository.getAll();
+            NotaVentaIndexViewModel.TiposPagos = TiposPagos;
+            List<Banco> Bancos = RepositoryManager.Instance.BancoRepository.getAll();
+            NotaVentaIndexViewModel.Bancos = Bancos;            
 
             /*
                 Get the complete information from the nota de venta
@@ -238,6 +252,23 @@ namespace Pendvlo.Controllers
             {
                 NotaVenta NotaVenta = RepositoryManager.Instance.NotasVentaRepository.getById(ID);
                 NotaVentaIndexViewModel.NotaVenta = NotaVenta;
+            }
+            else
+            {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("es-ES");
+                DateTime today = DateTime.Today;
+                var fecha = today.ToString("dddd, dd MMMM yyyy");
+                NotaVentaIndexViewModel.fecha = fecha;
+
+                var hora = DateTime.UtcNow.ToString("HH:mm:ss");
+                NotaVentaIndexViewModel.hora = hora;
+
+                var fechaEntrega = today.ToString("yyyy-MM-dd");
+                NotaVentaIndexViewModel.fechaEntrega = fechaEntrega;
+
+                User user = SessionManager.Instance.getUser();
+                var sucursal = user.Sucursal.Name;
+                NotaVentaIndexViewModel.sucursal = sucursal;
             }
 
             return View("~/Views/NotasVenta/Index.cshtml", NotaVentaIndexViewModel);

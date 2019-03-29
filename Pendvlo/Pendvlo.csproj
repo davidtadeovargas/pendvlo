@@ -221,7 +221,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CuentasIndex.css" />
+    <Content Include="Content\NotasVenta.css" />
     <Content Include="Content\Products.css" />
+    <Content Include="Content\NotasVentaIndex.css" />
     <Content Include="Content\Users.css" />
     <Content Include="Content\Customer.css" />
     <Content Include="Content\Home.css" />
@@ -396,6 +398,9 @@
     <Content Include="Views\Shared\MainMenu\_CuentasMenu.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\Products.cshtml" />
+    <Content Include="Views\NotasVenta\Index.cshtml" />
+    <Content Include="Views\NotasVenta\NotasVenta.cshtml" />
+    <Content Include="Views\Shared\MainMenu\_NotasVentaMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
