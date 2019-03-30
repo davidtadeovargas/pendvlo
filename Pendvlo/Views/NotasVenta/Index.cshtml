@@ -143,7 +143,7 @@
                 <div class="col-xs-12" style="padding:0">
                     <div class="col-xs-4" style="padding:0">
                         <div class="col-xs-12" style="padding:0">
-                            <input id="codigoBuscar" type="text" placeholder="Ingresa el codigo a buscar" value="" class="txt">
+                            <input id="codigoBuscar" style="text-transform:uppercase" type="text" placeholder="Ingresa el codigo a buscar" value="" class="txt">
                         </div>
                         <div class="col-xs-2" style="padding:0">
                             <input type="button" value="Buscar" class="txt" id="btnCodigoBuscar">
@@ -152,36 +152,34 @@
                         
                     </div>
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Codigo</th>
-                            <th scope="col">Numero</th>
-                            <th scope="col">Fecha Creacion</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>twitter</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-wrapper-scroll-y ">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Codigo</th>
+                                <th scope="col">Numero</th>
+                                <th scope="col">Fecha Creacion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modalTbody">
+                            @{
+                                var row = 1;
+                            }
+                            @foreach (var Product in Model.Products)
+                            {
+                                <tr>
+                                    <th scope="row" data-productid="@Product.ID">@row</th>
+                                    <td>@Product.code</td>
+                                    <td>@Product.numero</td>
+                                    <td>@Product.Created.ToString("dd-MM-yyyy")</td>
+                                </tr>
+
+                                row = row + 1;
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
@@ -398,6 +396,50 @@
 
         //END MODAL
 
+        $("#btnCodigoBuscar").click(function (e) {
+
+            //If no code product show error
+            var productCode = $("#codigoBuscar").val();
+            if (productCode === "") {
+                swal("Ingresa un codigo para buscar");
+                return;
+            }
+
+            //Make the ajax request
+            $.ajax({
+                type: "POST",
+                url: "@Model.urlGetFilteredProducts",
+                contentType: "application/json; charset=utf-8",
+                data: '{"code":"' + productCode + '"}',
+                dataType: "html",
+                success: function (result) {
+                    var json = JSON.parse(result);
+                    if (json.Result_ == 1) {
+
+                        $("#modalTbody").empty();
+
+                        var row = 1;
+
+                        var Products = json.Products;
+                        console.log(Products[0]);
+                        for (x = 0; x < Products.length; x++) {
+                            var Product = Products[x];
+                            addRowModal(Product, row);
+                            row += 1;
+                        }
+                    }
+                    else {
+                        swal(json.error);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                    console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
+                }
+                    });
+
+        });
+
         /*
             Clic on save button
          */
@@ -517,6 +559,17 @@
                 })
         });
 
+        function addRowModal(Product, fileNumber) {
+
+            var created = new Date(Product.Created);
+            $("#modalTbody").append("<tr>" +
+                                        "<th scope='row' data-productid=" + Product.ID + ">" + fileNumber + "</th>" +
+                                        "<td>" + Product.code + "</td>" +
+                                        "<td>" + Product.numero + "</td>" +
+                                        "<td>" + created + "</td>" +
+                                    "</tr>");
+
+        }
     });
 
 </script>

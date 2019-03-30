@@ -13,8 +13,6 @@
 
     <link rel="SHORTCUT ICON" href="~/logo.jpeg" />
 
-    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Customer.css")">
-
     @if (IsSectionDefined("header"))
     {
         @RenderSection("header", required: false)
@@ -105,7 +103,7 @@
             /*
                Clic on menu
             */
-            $("#notasVentaMenu").click(function () {
+            $("#viewNotasVentaMenu").click(function () {
                 window.location = "/notasVenta";
             });
             $("#newNotaVentaMenu").click(function () {

@@ -144,10 +144,12 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DAL\DBContext.cs" />
     <Compile Include="DAL\DBInitializer.cs" />
+    <Compile Include="HttpModels\GetFilteredProductsRequestModel.cs" />
     <Compile Include="HttpModels\DeleteNotaVentaRequestModel.cs" />
     <Compile Include="HttpModels\DeleteProductRequestModel.cs" />
     <Compile Include="HttpModels\EditProductRequestModel.cs" />
     <Compile Include="HttpModels\EditNotaVentaRequestModel.cs" />
+    <Compile Include="HttpModels\GetFilteredProductsResponseModel.cs" />
     <Compile Include="HttpModels\NewNotaVentaRequestModel.cs" />
     <Compile Include="HttpModels\NewProductRequestModel.cs" />
     <Compile Include="Managers\SessionManager.cs" />

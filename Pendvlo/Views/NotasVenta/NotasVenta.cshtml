@@ -75,42 +75,44 @@
                             </form>
                         </div>
                         <div class="col-md-9">
-                            <table class="table table-list-search" id="tableRecords">
-                                <thead>
-                                    <tr>
-                                        <th>Nota</th>
-                                        <th>Cliente</th>
-                                        <th>Vendedor</th>
-                                        <th>Fecha</th>
-                                        <th>Subtotal</th>
-                                        <th>Impuesto</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var NotaVenta in Model.NotasVenta)
-                                    {
-                                        var id = NotaVenta.ID;
-                                        var Cliente = NotaVenta.Customer.Name;
-                                        var Vendedor = NotaVenta.Vendedor.Name;
-                                        var Fecha = NotaVenta.fecha;
-                                        var Subtotal = NotaVenta.subtotal;
-                                        var Impuesto = NotaVenta.impuesto;
-                                        var Total = NotaVenta.total;
-
-                                        <tr data-id="@id">
-                                            <td>@id</td>
-                                            <td>@Cliente</td>
-                                            <td>@Vendedor</td>
-                                            <td>@Fecha</td>
-                                            <td>@Subtotal</td>
-                                            <td>@Impuesto</td>
-                                            <td>@Total</td>
+                            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                                <table class="table table-list-search" id="tableRecords">
+                                    <thead>
+                                        <tr>
+                                            <th>Nota</th>
+                                            <th>Cliente</th>
+                                            <th>Vendedor</th>
+                                            <th>Fecha</th>
+                                            <th>Subtotal</th>
+                                            <th>Impuesto</th>
+                                            <th>Total</th>
                                         </tr>
-                                    }
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var NotaVenta in Model.NotasVenta)
+                                        {
+                                            var id = NotaVenta.ID;
+                                            var Cliente = NotaVenta.Customer.Name;
+                                            var Vendedor = NotaVenta.Vendedor.Name;
+                                            var Fecha = NotaVenta.fecha;
+                                            var Subtotal = NotaVenta.subtotal;
+                                            var Impuesto = NotaVenta.impuesto;
+                                            var Total = NotaVenta.total;
 
-                                </tbody>
-                            </table>
+                                            <tr data-id="@id">
+                                                <td>@id</td>
+                                                <td>@Cliente</td>
+                                                <td>@Vendedor</td>
+                                                <td>@Fecha</td>
+                                                <td>@Subtotal</td>
+                                                <td>@Impuesto</td>
+                                                <td>@Total</td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3"></div>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Pendvlo.DAL;
+using Pendvlo.Managers;
 
 namespace Pendvlo.Repository
 {
@@ -34,6 +35,29 @@ namespace Pendvlo.Repository
         }
 
         /*
+         Create super admin user
+             */
+        public int createSuperAdmin()
+        {
+            Sucursal Sucursal = RepositoryManager.Instance.SucursalesRepository.getLibertadSucursal();
+            Module Module = RepositoryManager.Instance.ModulesRepository.getAdministrationModule();
+
+            User User_ = new User();
+            User_.Name = "SUPER ADMIN";
+            User_.User_ = "sadmin";
+            User_.Password = "123456";
+            User_.Sales = true;
+            User_.EncargadoSucursal = true;
+            User_.Sucursal = Sucursal;
+            User_.superAdmin = true;
+            User_.Module = Module;
+
+            var result = DBContext.Users.Add(User_);
+            DBContext.SaveChanges();
+            return result.ID;
+        }
+
+        /*
          Edit a new user
              */
         public int editUser(User User_)
@@ -52,6 +76,15 @@ namespace Pendvlo.Repository
             return User_;
         }
 
+
+        /*
+         Get super admin user
+             */
+        public User getSuperAdmin()
+        {
+            var User_ = DBContext.Users.Where(a => a.User_ == "sadmin").FirstOrDefault();
+            return User_;
+        }
 
         /*
          Get user by name

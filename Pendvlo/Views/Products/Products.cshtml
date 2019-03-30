@@ -75,31 +75,33 @@
                             </form>
                         </div>
                         <div class="col-md-9">
-                            <table class="table table-list-search" id="tableRecords">
-                                <thead>
-                                    <tr>
-                                        <th>Codigo</th>
-                                        <th>Numero</th>
-                                        <th>Fecha Creacion</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var Product in Model.Products)
-                                    {
-                                        var id = @Product.ID;
-                                        var codigo = @Product.code;
-                                        var numero = @Product.numero;
-                                        var created = @Product.Created;
-
-                                        <tr data-id="@id">
-                                            <td>@codigo</td>
-                                            <td>@numero</td>
-                                            <td>@created</td>
+                            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                                <table class="table table-list-search" id="tableRecords">
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Numero</th>
+                                            <th>Fecha Creacion</th>
                                         </tr>
-                                    }
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var Product in Model.Products)
+                                        {
+                                            var id = @Product.ID;
+                                            var codigo = @Product.code;
+                                            var numero = @Product.numero;
+                                            var created = @Product.Created;
 
-                                </tbody>
-                            </table>
+                                            <tr data-id="@id">
+                                                <td>@codigo</td>
+                                                <td>@numero</td>
+                                                <td>@created</td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3"></div>

@@ -77,58 +77,60 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="col-md-9">
-                            <table class="table table-list-search" id="tableCustomers">
-                                <thead>
-                                    <tr>
-                                        <th>Razon Social</th>
-                                        <th>Nombre</th>
-                                        <th>RFC</th>
-                                        <th>Direccion</th>
-                                        <th>CP</th>
-                                        <th>Telefono</th>
-                                        <th>Ciudad</th>
-                                        <th>Estado</th>
-                                        <th>Email</th>
-                                        <th>Factura</th>
-                                        <th>Vendedor</th>
-                                        <th>Fecha Creacion</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var Customer in Model.Customers)
-                                    {
-                                        var id = @Customer.ID;
-                                        var razon = @Customer.RazonSocial;
-                                        var name = @Customer.Name;
-                                        var rfc = @Customer.RFC;
-                                        var address = @Customer.Address;
-                                        var CP = @Customer.CP;
-                                        var phone = @Customer.Phone;
-                                        var city = @Customer.City;
-                                        var state = @Customer.State;
-                                        var email = @Customer.email;
-                                        var invoice = @Customer.Invoice ? "Si" : "No";
-                                        var salesMan = @Customer.SalesMan == null ? "" : @Customer.SalesMan.Name;
-                                        var created = @Customer.Created;
-
-                                        <tr data-id="@id">
-                                            <td>@razon</td>
-                                            <td>@name</td>
-                                            <td>@rfc</td>
-                                            <td>@address</td>
-                                            <td>@CP</td>
-                                            <td>@phone</td>
-                                            <td>@city</td>
-                                            <td>@state</td>
-                                            <td>@email</td>
-                                            <td>@invoice</td>
-                                            <td>@salesMan</td>
-                                            <td>@created</td>
+                            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                                <table class="table table-list-search" id="tableCustomers">
+                                    <thead>
+                                        <tr>
+                                            <th>Razon Social</th>
+                                            <th>Nombre</th>
+                                            <th>RFC</th>
+                                            <th>Direccion</th>
+                                            <th>CP</th>
+                                            <th>Telefono</th>
+                                            <th>Ciudad</th>
+                                            <th>Estado</th>
+                                            <th>Email</th>
+                                            <th>Factura</th>
+                                            <th>Vendedor</th>
+                                            <th>Fecha Creacion</th>
                                         </tr>
-                                    }
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var Customer in Model.Customers)
+                                        {
+                                            var id = @Customer.ID;
+                                            var razon = @Customer.RazonSocial;
+                                            var name = @Customer.Name;
+                                            var rfc = @Customer.RFC;
+                                            var address = @Customer.Address;
+                                            var CP = @Customer.CP;
+                                            var phone = @Customer.Phone;
+                                            var city = @Customer.City;
+                                            var state = @Customer.State;
+                                            var email = @Customer.email;
+                                            var invoice = @Customer.Invoice ? "Si" : "No";
+                                            var salesMan = @Customer.SalesMan == null ? "" : @Customer.SalesMan.Name;
+                                            var created = @Customer.Created;
 
-                                </tbody>
-                            </table>
+                                            <tr data-id="@id">
+                                                <td>@razon</td>
+                                                <td>@name</td>
+                                                <td>@rfc</td>
+                                                <td>@address</td>
+                                                <td>@CP</td>
+                                                <td>@phone</td>
+                                                <td>@city</td>
+                                                <td>@state</td>
+                                                <td>@email</td>
+                                                <td>@invoice</td>
+                                                <td>@salesMan</td>
+                                                <td>@created</td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3"></div>

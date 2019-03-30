@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Pendvlo.DAL;
+using Pendvlo.Managers;
 
 namespace Pendvlo.Repository
 {
@@ -21,6 +22,211 @@ namespace Pendvlo.Repository
         {
             List<Customer> Customers_ = DBContext.Customers.ToList();
             return Customers_;
+        }
+
+        /*
+         Create test customers
+             */
+        public int createTestsCustomers()
+        {
+            var salesMan = RepositoryManager.Instance.UsersRepository.getSuperAdmin();
+
+            Customer customer = new Customer();
+            customer.RazonSocial = "Mi razon social";
+            customer.Name = "Mi nombre";
+            customer.RFC = "VAVY910708LNA";
+            customer.Address = "Rio tinto colonia centro";
+            customer.CP = 44150;
+            customer.Phone = "3310644917";
+            customer.City = "Guadalajara";
+            customer.State = "Jalisco";
+            customer.email = "email@hotmail.com";
+            customer.Invoice = true;
+            customer.SalesMan = salesMan;
+            var result = DBContext.Customers.Add(customer);
+            DBContext.SaveChanges();
+
+            customer = new Customer();
+            customer.RazonSocial = "Mi razon social";
+            customer.Name = "Mi nombre";
+            customer.RFC = "VAVY910708LNA";
+            customer.Address = "Rio tinto colonia centro";
+            customer.CP = 44150;
+            customer.Phone = "3310644917";
+            customer.City = "Guadalajara";
+            customer.State = "Jalisco";
+            customer.email = "email@hotmail.com";
+            customer.Invoice = true;
+            customer.SalesMan = salesMan;
+            result = DBContext.Customers.Add(customer);
+            DBContext.SaveChanges();
+
+            customer = new Customer();
+            customer.RazonSocial = "Mi razon social";
+            customer.Name = "Mi nombre";
+            customer.RFC = "VAVY910708LNA";
+            customer.Address = "Rio tinto colonia centro";
+            customer.CP = 44150;
+            customer.Phone = "3310644917";
+            customer.City = "Guadalajara";
+            customer.State = "Jalisco";
+            customer.email = "email@hotmail.com";
+            customer.Invoice = true;
+            customer.SalesMan = salesMan;
+            result = DBContext.Customers.Add(customer);
+            DBContext.SaveChanges();
+
+            customer = new Customer();
+            customer.RazonSocial = "Mi razon social";
+            customer.Name = "Mi nombre";
+            customer.RFC = "VAVY910708LNA";
+            customer.Address = "Rio tinto colonia centro";
+            customer.CP = 44150;
+            customer.Phone = "3310644917";
+            customer.City = "Guadalajara";
+            customer.State = "Jalisco";
+            customer.email = "email@hotmail.com";
+            customer.Invoice = true;
+            customer.SalesMan = salesMan;
+            result = DBContext.Customers.Add(customer);
+            DBContext.SaveChanges();
+
+            customer = new Customer();
+            customer.RazonSocial = "Mi razon social";
+            customer.Name = "Mi nombre";
+            customer.RFC = "VAVY910708LNA";
+            customer.Address = "Rio tinto colonia centro";
+            customer.CP = 44150;
+            customer.Phone = "3310644917";
+            customer.City = "Guadalajara";
+            customer.State = "Jalisco";
+            customer.email = "email@hotmail.com";
+            customer.Invoice = true;
+            customer.SalesMan = salesMan;
+            result = DBContext.Customers.Add(customer);
+            DBContext.SaveChanges();
+
+            customer = new Customer();
+            customer.RazonSocial = "Mi razon social";
+            customer.Name = "Mi nombre";
+            customer.RFC = "VAVY910708LNA";
+            customer.Address = "Rio tinto colonia centro";
+            customer.CP = 44150;
+            customer.Phone = "3310644917";
+            customer.City = "Guadalajara";
+            customer.State = "Jalisco";
+            customer.email = "email@hotmail.com";
+            customer.Invoice = true;
+            customer.SalesMan = salesMan;
+            result = DBContext.Customers.Add(customer);
+            DBContext.SaveChanges();
+
+            customer = new Customer();
+            customer.RazonSocial = "Mi razon social";
+            customer.Name = "Mi nombre";
+            customer.RFC = "VAVY910708LNA";
+            customer.Address = "Rio tinto colonia centro";
+            customer.CP = 44150;
+            customer.Phone = "3310644917";
+            customer.City = "Guadalajara";
+            customer.State = "Jalisco";
+            customer.email = "email@hotmail.com";
+            customer.Invoice = true;
+            customer.SalesMan = salesMan;
+            result = DBContext.Customers.Add(customer);
+            DBContext.SaveChanges();
+
+            customer = new Customer();
+            customer.RazonSocial = "Mi razon social";
+            customer.Name = "Mi nombre";
+            customer.RFC = "VAVY910708LNA";
+            customer.Address = "Rio tinto colonia centro";
+            customer.CP = 44150;
+            customer.Phone = "3310644917";
+            customer.City = "Guadalajara";
+            customer.State = "Jalisco";
+            customer.email = "email@hotmail.com";
+            customer.Invoice = true;
+            customer.SalesMan = salesMan;
+            result = DBContext.Customers.Add(customer);
+            DBContext.SaveChanges();
+
+            customer = new Customer();
+            customer.RazonSocial = "Mi razon social";
+            customer.Name = "Mi nombre";
+            customer.RFC = "VAVY910708LNA";
+            customer.Address = "Rio tinto colonia centro";
+            customer.CP = 44150;
+            customer.Phone = "3310644917";
+            customer.City = "Guadalajara";
+            customer.State = "Jalisco";
+            customer.email = "email@hotmail.com";
+            customer.Invoice = true;
+            customer.SalesMan = salesMan;
+            result = DBContext.Customers.Add(customer);
+            DBContext.SaveChanges();
+
+            customer = new Customer();
+            customer.RazonSocial = "Mi razon social";
+            customer.Name = "Mi nombre";
+            customer.RFC = "VAVY910708LNA";
+            customer.Address = "Rio tinto colonia centro";
+            customer.CP = 44150;
+            customer.Phone = "3310644917";
+            customer.City = "Guadalajara";
+            customer.State = "Jalisco";
+            customer.email = "email@hotmail.com";
+            customer.Invoice = true;
+            customer.SalesMan = salesMan;
+            result = DBContext.Customers.Add(customer);
+            DBContext.SaveChanges();
+
+            customer = new Customer();
+            customer.RazonSocial = "Mi razon social";
+            customer.Name = "Mi nombre";
+            customer.RFC = "VAVY910708LNA";
+            customer.Address = "Rio tinto colonia centro";
+            customer.CP = 44150;
+            customer.Phone = "3310644917";
+            customer.City = "Guadalajara";
+            customer.State = "Jalisco";
+            customer.email = "email@hotmail.com";
+            customer.Invoice = true;
+            customer.SalesMan = salesMan;
+            result = DBContext.Customers.Add(customer);
+            DBContext.SaveChanges();
+
+            customer = new Customer();
+            customer.RazonSocial = "Mi razon social";
+            customer.Name = "Mi nombre";
+            customer.RFC = "VAVY910708LNA";
+            customer.Address = "Rio tinto colonia centro";
+            customer.CP = 44150;
+            customer.Phone = "3310644917";
+            customer.City = "Guadalajara";
+            customer.State = "Jalisco";
+            customer.email = "email@hotmail.com";
+            customer.Invoice = true;
+            customer.SalesMan = salesMan;
+            result = DBContext.Customers.Add(customer);
+            DBContext.SaveChanges();
+
+            customer = new Customer();
+            customer.RazonSocial = "Mi razon social";
+            customer.Name = "Mi nombre";
+            customer.RFC = "VAVY910708LNA";
+            customer.Address = "Rio tinto colonia centro";
+            customer.CP = 44150;
+            customer.Phone = "3310644917";
+            customer.City = "Guadalajara";
+            customer.State = "Jalisco";
+            customer.email = "email@hotmail.com";
+            customer.Invoice = true;
+            customer.SalesMan = salesMan;
+            result = DBContext.Customers.Add(customer);
+            DBContext.SaveChanges();
+
+            return result.ID;
         }
 
         /*

@@ -243,7 +243,13 @@ namespace Pendvlo.Controllers
             List<TiposPagos> TiposPagos = RepositoryManager.Instance.TipoPagosRepository.getAll();
             NotaVentaIndexViewModel.TiposPagos = TiposPagos;
             List<Banco> Bancos = RepositoryManager.Instance.BancoRepository.getAll();
-            NotaVentaIndexViewModel.Bancos = Bancos;            
+            NotaVentaIndexViewModel.Bancos = Bancos;
+            List<Product> Products = RepositoryManager.Instance.ProductsRepository.getLimitedProducts(10,true);
+            NotaVentaIndexViewModel.Products = Products;
+
+            var baseUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+            baseUrl += "Products/GetFilteredProducts";
+            NotaVentaIndexViewModel.urlGetFilteredProducts = baseUrl;
 
             /*
                 Get the complete information from the nota de venta

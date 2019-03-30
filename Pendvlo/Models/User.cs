@@ -15,6 +15,7 @@ namespace Pendvlo.Models
         public bool EncargadoSucursal { get; set; }
         public Sucursal Sucursal { get; set; }
         public Boolean admin { get; set; }
+        public Boolean superAdmin { get; set; }
         public Module Module { get; set; }
         public DateTime Created { get; set; }
 
@@ -22,6 +23,7 @@ namespace Pendvlo.Models
         {
             Created = DateTime.Now;
             admin = false;
+            superAdmin = false;
             EncargadoSucursal = false;
         }
     }

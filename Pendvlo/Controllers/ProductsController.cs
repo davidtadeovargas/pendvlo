@@ -115,6 +115,37 @@ namespace Pendvlo.Controllers
         /*
             Edit a new user
              */
+        public ActionResult GetFilteredProducts(GetFilteredProductsRequestModel GetFilteredProductsRequestModel)
+        {
+            try
+            {
+                /*
+                    Validate all fields are filled
+                 */
+                if (GetFilteredProductsRequestModel.code == null || GetFilteredProductsRequestModel.code == "")
+                {
+                    return Json(JSONManager.JsonFail("Need code"));
+                }
+
+                /*
+                    Get all the products from db
+                 */
+                var Products = RepositoryManager.Instance.ProductsRepository.getFilteredProducts(GetFilteredProductsRequestModel.code);
+
+                /*
+                    Return result
+                 */
+                return Json(JSONManager.JsonFilteredProducts(Products));
+            }
+            catch (Exception e)
+            {
+                return Json(JSONManager.JsonFail(e.Message));
+            }
+        }
+
+        /*
+            Edit a new user
+             */
         public ActionResult EditProduct(EditProductRequestModel EditProductRequestModel)
         {
             try
@@ -198,7 +229,6 @@ namespace Pendvlo.Controllers
             {
                 return Json(JSONManager.JsonFail(e.Message));
             }
-
         }
 
         /*

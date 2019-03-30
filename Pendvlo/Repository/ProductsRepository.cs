@@ -24,12 +24,118 @@ namespace Pendvlo.Repository
         }
 
         /*
+         Get limited products
+             */
+        public List<Product> getLimitedProducts(int limited, bool descending)
+        {
+            List<Product> Products_ = new List<Product>();
+            if (descending)
+            {
+                Products_ = DBContext.Products.OrderByDescending(u => u.ID).Take(limited).ToList();
+            }
+            else
+            {
+                Products_ = DBContext.Products.OrderBy(u => u.ID).Take(limited).ToList();
+            }
+            
+            return Products_;
+        }
+
+        /*
+         Get limited products
+             */
+        public List<Product> getFilteredProducts(string code)
+        {
+            List<Product> Products_ = Products_ = (from m in DBContext.Products where m.code.Contains(code) select m).ToList();
+
+            return Products_;
+        }
+
+        /*
          Create a new product
              */
         public int newProduct(Product Product_)
         {
             var result = DBContext.Products.Add(Product_);
             DBContext.SaveChanges();
+            return result.ID;
+        }
+
+        /*
+         Create tests products
+             */
+        public int createTestsProducts()
+        {
+            Product Product = new Product();
+            Product.code = "PROD1";
+            var result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
+            Product = new Product();
+            Product.code = "PROD2";
+            result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
+            Product = new Product();
+            Product.code = "PROD3";
+            result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
+            Product = new Product();
+            Product.code = "PROD4";
+            result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
+            Product = new Product();
+            Product.code = "PROD5";
+            result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
+            Product = new Product();
+            Product.code = "PROD6";
+            result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
+            Product = new Product();
+            Product.code = "PROD7";
+            result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
+            Product = new Product();
+            Product.code = "PROD8";
+            result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
+            Product = new Product();
+            Product.code = "PROD9";
+            result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
+            Product = new Product();
+            Product.code = "PROD10";
+            result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
+            Product = new Product();
+            Product.code = "PROD11";
+            result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
+            Product = new Product();
+            Product.code = "PROD12";
+            result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
+            Product = new Product();
+            Product.code = "PROD13";
+            result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
+            Product = new Product();
+            Product.code = "PROD14";
+            result = DBContext.Products.Add(Product);
+            DBContext.SaveChanges();
+
             return result.ID;
         }
 

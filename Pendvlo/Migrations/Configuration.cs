@@ -40,25 +40,6 @@ namespace Pendvlo.Migrations
             RepositoryManager.Instance.SucursalesRepository.createMiguelBlanco();
 
             /*
-                Users
-             */
-
-            Module salesModule = RepositoryManager.Instance.ModulesRepository.getAtencionServCustomerModule();
-            Module administrativeModule = RepositoryManager.Instance.ModulesRepository.getAdministrationModule();
-
-            Sucursal sucursal = RepositoryManager.Instance.SucursalesRepository.getLibertadSucursal();
-
-            context.Users.AddOrUpdate(x => x.ID,
-                new User() { ID = 1, Name = "admin", User_ = "admin", Password = "123456789", Sales = true, admin = true, Sucursal = sucursal }
-                );
-            context.Users.AddOrUpdate(x => x.ID,
-                new User() { ID = 1, Name = "ALEJANDRO ESPEJO", User_ = "JAER", Password = "123456789", Sales = true, Module = salesModule, Sucursal = sucursal }
-                );
-            context.Users.AddOrUpdate(x => x.ID,
-                new User() { ID = 1, Name = "ALDO DAGOBERTO", User_ = "ADRL", Password = "123456789", Sales = true, Module = administrativeModule, Sucursal = sucursal }
-                );
-
-            /*
                 Procedimientos de impresion
              */
             RepositoryManager.Instance.ProcedimientosImpresionRepository.createSelection();
@@ -129,6 +110,39 @@ namespace Pendvlo.Migrations
              */
             RepositoryManager.Instance.EstatusOrdenVentaRepository.createPendiente();
             RepositoryManager.Instance.EstatusOrdenVentaRepository.createCompletada();
+
+            /*
+                Users
+             */
+
+            Module salesModule = RepositoryManager.Instance.ModulesRepository.getAtencionServCustomerModule();
+            Module administrativeModule = RepositoryManager.Instance.ModulesRepository.getAdministrationModule();
+
+            Sucursal sucursal = RepositoryManager.Instance.SucursalesRepository.getLibertadSucursal();
+
+            RepositoryManager.Instance.UsersRepository.createSuperAdmin();
+
+            context.Users.AddOrUpdate(x => x.ID,
+                new User() { Name = "admin", User_ = "admin", Password = "123456789", Sales = true, admin = true, Sucursal = sucursal }
+                );
+            context.Users.AddOrUpdate(x => x.ID,
+                new User() { Name = "ALEJANDRO ESPEJO", User_ = "JAER", Password = "123456789", Sales = true, Module = salesModule, Sucursal = sucursal }
+                );
+            context.Users.AddOrUpdate(x => x.ID,
+                new User() { Name = "ALDO DAGOBERTO", User_ = "ADRL", Password = "123456789", Sales = true, Module = administrativeModule, Sucursal = sucursal }
+                );
+
+            /*
+                Customers
+             */
+            #if DEBUG
+
+            RepositoryManager.Instance.CustomersRepository.createTestsCustomers();
+            RepositoryManager.Instance.ProductsRepository.createTestsProducts();
+
+            #else
+                
+#endif
         }
     }
 }
