@@ -1,6 +1,6 @@
 ﻿@model Pendvlo.ViewModels.UsersViewModel
 
-@{    
+@{
     var removeContinueBtn = 0;
 
     /*
@@ -8,7 +8,7 @@
      */
     string title = "undefined";
     string type = "";
-    if (Model.Type==Pendvlo.ViewModels.TYPE.LIST)
+    if (Model.Type == Pendvlo.ViewModels.TYPE.LIST)
     {
         title = "Usuarios Pendvlo!";
         removeContinueBtn = 1;
@@ -30,6 +30,7 @@
 
 @section header{
 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Main.css")">
     <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Users.css")">
 }
 
@@ -82,7 +83,7 @@
                                         <th>Usuario</th>
                                         <th>Password</th>
                                         <th>Departamento</th>
-                                        <th>Fecha Creacion</th>                                        
+                                        <th>Fecha Creacion</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,7 +93,7 @@
                                         var name = @User.Name;
                                         var user = @User.User_;
                                         var password = @User.Password;
-                                        var module = @User.Module==null?"No asignado": @User.Module.Name;
+                                        var module = @User.Module == null ? "No asignado" : @User.Module.Name;
                                         var created = @User.Created;
 
                                         <tr data-id="@id">
@@ -103,7 +104,7 @@
                                             <td>@created</td>
                                         </tr>
                                     }
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -113,7 +114,7 @@
                             <div class="col-md-3"></div>
                             <div class="col-md-3">
                                 <button type="button" class="btn btn-info" id="btnContinue">Continuar</button>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
 
@@ -195,7 +196,7 @@
             When selecting a row in the table
          */
         $("#tableUsers tbody tr").click(function () {
-           
+
             /*
                 Change the selected color
              */

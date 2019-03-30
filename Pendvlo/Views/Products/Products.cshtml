@@ -1,6 +1,6 @@
 ﻿@model Pendvlo.ViewModels.ProductsViewModel
 
-@{    
+@{
     var removeContinueBtn = 0;
 
     /*
@@ -8,7 +8,7 @@
      */
     string title = "undefined";
     string type = "";
-    if (Model.Type==Pendvlo.ViewModels.TYPE.LIST)
+    if (Model.Type == Pendvlo.ViewModels.TYPE.LIST)
     {
         title = "Productos Pendvlo!";
         type = "TYPE.VIEW";
@@ -29,6 +29,7 @@
 
 @section header{
 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Main.css")">
     <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Products.css")">
 }
 
@@ -92,11 +93,11 @@
 
                                         <tr data-id="@id">
                                             <td>@codigo</td>
-                                            <td>@numero</td>                                            
+                                            <td>@numero</td>
                                             <td>@created</td>
                                         </tr>
                                     }
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -106,7 +107,7 @@
                             <div class="col-md-3"></div>
                             <div class="col-md-3">
                                 <button type="button" class="btn btn-info" id="btnContinue">Continuar</button>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
 
@@ -188,7 +189,7 @@
             When selecting a row in the table
          */
         $("#tableRecords tbody tr").click(function () {
-           
+
             /*
                 Change the selected color
              */
@@ -300,5 +301,5 @@
             });
         }
     });
-  
+
 </script>

@@ -55,6 +55,7 @@
 
 @section header{
 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Main.css")">
     <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/CuentasIndex.css")">
 }
 
@@ -114,7 +115,7 @@
 <script type="text/JavaScript">
 
     var cuentaID = @cuentaID;
-    var bancoID = @bancoID;    
+    var bancoID = @bancoID;
     var edition = @edition;
 
     $(document).ready(function () {
@@ -137,14 +138,14 @@
                 Validate all fields are filled
              */
             var titular = $("#titular").val();
-            bancoID = $('#banks').find(":selected").attr("data-id");                        
+            bancoID = $('#banks').find(":selected").attr("data-id");
             var cuenta = $("#cuenta").val();
             var tarjeta = $("#tarjeta").val();
             var clabe = $("#clabe").val();
-            
+
             if (titular === "" || titular === 'undefined') {
                 swal("Ingresa el titular");
-                $("#titular").focus();                
+                $("#titular").focus();
                 return;
             }
             if (tarjeta === "" || tarjeta === 'undefined') {
@@ -157,7 +158,7 @@
                 $("#clabe").focus();
                 return;
             }
-            
+
             /*
                 Validate if continue
                 */
@@ -188,7 +189,7 @@
                                 swal("@successMessage");
                                 if (edition == 0) { //Only clear fields when it is a new user
                                     clearAllFields();
-                                }                                
+                                }
                             }
                             else {
                                 swal(json.error);
@@ -203,9 +204,9 @@
                     } else {
                         //Nothing to do
                     }
-                })            
-        });        
-               
+                })
+        });
+
     });
 
     /*
@@ -217,7 +218,7 @@
         $("#cuenta").val("");
         $("#tarjeta").val("");
         $("#clabe").val("");
-        $("#banks").val($("#module option:first").val());        
+        $("#banks").val($("#module option:first").val());
     }
 
 </script>

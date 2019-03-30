@@ -1,6 +1,6 @@
 ﻿@model Pendvlo.ViewModels.CustomersViewModel
 
-@{    
+@{
     var removeContinueBtn = 0;
 
     /*
@@ -8,7 +8,7 @@
      */
     string title = "undefined";
     string type = "";
-    if (Model.Type==Pendvlo.ViewModels.TYPE.LIST)
+    if (Model.Type == Pendvlo.ViewModels.TYPE.LIST)
     {
         title = "Clientes Pendvlo!";
         removeContinueBtn = 1;
@@ -30,6 +30,7 @@
 
 @section header{
 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Main.css")">
     <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Customers.css")">
 }
 
@@ -107,25 +108,25 @@
                                         var state = @Customer.State;
                                         var email = @Customer.email;
                                         var invoice = @Customer.Invoice ? "Si" : "No";
-                                        var salesMan = @Customer.SalesMan==null?"": @Customer.SalesMan.Name;
+                                        var salesMan = @Customer.SalesMan == null ? "" : @Customer.SalesMan.Name;
                                         var created = @Customer.Created;
 
-                                    <tr data-id="@id">
-                                        <td>@razon</td>
-                                        <td>@name</td>
-                                        <td>@rfc</td>
-                                        <td>@address</td>
-                                        <td>@CP</td>
-                                        <td>@phone</td>
-                                        <td>@city</td>
-                                        <td>@state</td>
-                                        <td>@email</td>
-                                        <td>@invoice</td>
-                                        <td>@salesMan</td>
-                                        <td>@created</td>
-                                    </tr>
+                                        <tr data-id="@id">
+                                            <td>@razon</td>
+                                            <td>@name</td>
+                                            <td>@rfc</td>
+                                            <td>@address</td>
+                                            <td>@CP</td>
+                                            <td>@phone</td>
+                                            <td>@city</td>
+                                            <td>@state</td>
+                                            <td>@email</td>
+                                            <td>@invoice</td>
+                                            <td>@salesMan</td>
+                                            <td>@created</td>
+                                        </tr>
                                     }
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -135,7 +136,7 @@
                             <div class="col-md-3"></div>
                             <div class="col-md-12">
                                 <button type="button" class="btn btn-info" id="btnContinue">Continuar</button>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
 
@@ -210,7 +211,7 @@
             When selecting a row in the table
          */
         $("#tableCustomers tbody tr").click(function () {
-           
+
             /*
                 Change the selected color
              */

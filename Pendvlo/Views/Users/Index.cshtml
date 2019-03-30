@@ -47,7 +47,7 @@
         password = @Model.User.Password;
 
         tittle = "Editar Usuario Pendvlo!";
-        module = Model.User.Module == null?-1: Model.User.Module.ID;
+        module = Model.User.Module == null ? -1 : Model.User.Module.ID;
         sucursal = Model.User.Sucursal == null ? -1 : Model.User.Sucursal.ID;
         salesChecked = Model.User.Sales ? "checked" : "";
         encargadoSucChecked = Model.User.EncargadoSucursal ? "checked" : "";
@@ -66,6 +66,7 @@
 
 @section header{
 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Main.css")">
     <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/UsersIndex.css")">
 }
 
@@ -122,7 +123,7 @@
                                 </div>
                                 <div class="clearfix"></div><br />
                                 <input id="encargadoSucursal" type="checkbox" value="" @encargadoSucChecked @disabledAdmin> Encargado de Sucursal<div class="clearfix"></div><br />
-                            </div>                                                       
+                            </div>
                             <input type="submit" value="Guardar" name="submit" class="txt2" id="btnSave" @disabledAdmin>
                         </form>
                     </div>
@@ -137,7 +138,7 @@
 <script type="text/JavaScript">
 
     var module = @module;
-    var sucursal = @sucursal;    
+    var sucursal = @sucursal;
 
     $(document).ready(function () {
 
@@ -175,7 +176,7 @@
 
             if (name === "" || name === 'undefined') {
                 swal("Ingresa el nombre");
-                $("#name").focus();                
+                $("#name").focus();
                 return;
             }
             if (user === "" || user === 'undefined') {
@@ -191,7 +192,7 @@
             if (module === "" || module === 'undefined') {
                 swal("Selecciona el departamento");
                 $("#module").focus();
-                return;                
+                return;
             }
             if (sucursal === "" || sucursal === 'undefined') {
                 swal("Selecciona una sucursal");
@@ -249,9 +250,9 @@
                     } else {
                         //Nothing to do
                     }
-                })            
-        });        
-               
+                })
+        });
+
     });
 
     /*

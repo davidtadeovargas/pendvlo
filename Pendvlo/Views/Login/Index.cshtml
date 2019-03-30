@@ -100,6 +100,10 @@
                 return;
             }
 
+            //Disable the button and prevent double or more clicking
+            $('#btnLogin').attr("disabled", true);
+            $('#btnLogin').addClass("noEditableField");
+
             /*
                 Make ajax call to controller to request
                 */
@@ -120,6 +124,8 @@
                 },
                 error: function (xhr, status, error) {
                     alert(error);
+                    $('#btnLogin').attr("disabled", false);
+                    $('#btnLogin').removeClass("noEditableField");
                     console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
                 }
             });

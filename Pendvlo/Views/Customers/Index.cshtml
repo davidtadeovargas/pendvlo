@@ -101,6 +101,7 @@
 
 @section header{
 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Main.css")">
     <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/CustomersIndex.css")">
 }
 
@@ -125,9 +126,10 @@
                 <div class="form_main">
                     <h4 class="heading">
                         <strong>@tittle</strong> <div class="clearfix"></div>
-                        @if (customer != -1) {
+                        @if (customer != -1)
+                        {
                             <div></div>
-                           }
+                        }
                         <span></span>
                     </h4>
                     <div class="form">
@@ -166,7 +168,7 @@
     var edition = @edition;
 
 
-    $(document).ready(function () {        
+    $(document).ready(function () {
 
         /*
             Select the current user module
@@ -180,7 +182,7 @@
          */
         $("#btnSave").click(function (e) {
 
-            e.preventDefault();            
+            e.preventDefault();
 
             /*
                 Validate all fields are filled
@@ -201,7 +203,7 @@
                 swal("Ingresa la razon social");
                 $("#razon").focus();
                 return;
-            }            
+            }
             if (rfc === "" || rfc === 'undefined') {
                 swal("Ingresa el RFC");
                 $("#rfc").focus();

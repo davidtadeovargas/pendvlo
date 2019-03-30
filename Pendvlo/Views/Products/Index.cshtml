@@ -8,7 +8,7 @@
     var readOnly = "";
     var styleReadOnly = "";
     var viewOnly = "";
-    var styleViewOnly="";
+    var styleViewOnly = "";
     var successMessage = "";
     var disabledAdmin = "";
 
@@ -147,6 +147,7 @@
 
 @section header{
 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Main.css")">
     <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/ProductsIndex.css")">
 }
 
@@ -236,7 +237,7 @@
                             <input id="boppPoliesterBlancoTransMVMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransMVMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>BOPP (Poliester) Blanco Transparente - Minimo venta costo</label><div class="clearfix"></div>
                             <input id="boppPoliesterBlancoTransMVCosto" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransMVCosto" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
-                            <label>BOPP (Poliester) Blanco Transparente - Laminado mate millar</label><div class="clearfix"></div> 
+                            <label>BOPP (Poliester) Blanco Transparente - Laminado mate millar</label><div class="clearfix"></div>
                             <input id="boppPoliesterBlancoTransLMMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransLMMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>BOPP (Poliester) Blanco Transparente - Laminado mate minimo</label><div class="clearfix"></div>
                             <input id="boppPoliesterBlancoTransLMMinimo" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransLMMinimo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
@@ -246,7 +247,7 @@
                             <input id="boppPoliesterBlancoTransD10AMinimo" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD10AMinimo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>BOPP (Poliester) Blanco Transparente - 15% desc aplicado millar</label><div class="clearfix"></div>
                             <input id="boppPoliesterBlancoTransD15AMillar" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD15AMillar" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
-                            <label>BOPP (Poliester) Blanco Transparente - 15% desc aplicado minimo</label><div class="clearfix"></div> 
+                            <label>BOPP (Poliester) Blanco Transparente - 15% desc aplicado minimo</label><div class="clearfix"></div>
                             <input id="boppPoliesterBlancoTransD15AMinimo" type="number" required="" placeholder="" value="@boppPoliesterBlancoTransD15AMinimo" class="txt @styleViewOnly" @viewOnly><div class="clearfix"></div>
                             <label>BOPP (Poliester) Plata millar</label><div class="clearfix"></div>
                             <input id="boppPoliesterPlataMillar" type="number" required="" placeholder="" value="@boppPoliesterPlataMillar" class="txt @styleViewOnly"><div class="clearfix" @viewOnly></div>
@@ -279,7 +280,7 @@
 
 <script type="text/JavaScript">
 
-    var productID = @productID;    
+    var productID = @productID;
 
     $(document).ready(function () {
 
@@ -342,7 +343,7 @@
 
             if (code === "" || code === 'undefined') {
                 swal("Ingresa el codigo");
-                $("#code").focus();                
+                $("#code").focus();
                 return;
             }
 
@@ -369,44 +370,44 @@
                         url: "@url",
                         contentType: "application/json; charset=utf-8",
                         data: '{"code":"' + code + '",' +
-                            '"ID":"' + productID + '",' + 
-                            '"medidaEje":"' + medidaEje + '",' + 
-                            '"medidaDesarrollo":"' + medidaDesarrollo + '",' + 
-                            '"repeticionesEje":"' + repeticionesEje + '",' + 
-                            '"repeticionesDesarrollo":"' + repeticionesDesarrollo + '",' + 
-                            '"separacionEje":"' + separacionEje + '",' + 
-                            '"separacionDesarrollo":"' + separacionDesarrollo + '",' + 
-                            '"numero":"' + numero + '",' + 
-                            '"existencia":"' + existencia + '",' + 
-                            '"existenciaRodillos":"' + existenciaRodillos + '",' + 
-                            '"papelCoucheMillar":"' + papelCoucheMillar + '",' + 
-                            '"papelCoucheMVMillar":"' + papelCoucheMVMillar + '",' + 
-                            '"papelCoucheMVCosto":"' + papelCoucheMVCosto + '",' + 
-                            '"papelCoucheLMMillar":"' + papelCoucheLMMillar + '",' + 
-                            '"papelCoucheLMMinimo":"' + papelCoucheLMMinimo + '",' + 
-                            '"papelCoucheD10AMillar":"' + papelCoucheD10AMillar + '",' + 
-                            '"papelCoucheD10AMinimo":"' + papelCoucheD10AMinimo + '",' + 
-                            '"papelCoucheD15AMillar":"' + papelCoucheD15AMillar + '",' + 
-                            '"papelCoucheD15AMinimo":"' + papelCoucheD15AMinimo + '",' + 
-                            '"papelCouchePlataMillar":"' + papelCouchePlataMillar + '",' + 
-                            '"papelCouchePlataMVMillar":"' + papelCouchePlataMVMillar + '",' + 
-                            '"papelCouchePlataMVCosto":"' + papelCouchePlataMVCosto + '",' + 
-                            '"papelCouchePlataLMMillar":"' + papelCouchePlataLMMillar + '",' + 
-                            '"papelCouchePlataLMMinimo":"' + papelCouchePlataLMMinimo + '",' + 
-                            '"papelCouchePlataD10AMillar":"' + papelCouchePlataD10AMillar + '",' + 
-                            '"papelCouchePlataD10AMinimo":"' + papelCouchePlataD10AMinimo + '",' + 
-                            '"papelCouchePlataD15AMillar":"' + papelCouchePlataD15AMillar + '",' + 
-                            '"papelCouchePlataD15AMinimo":"' + papelCouchePlataD15AMinimo + '",' + 
-                            '"boppPoliesterBlancoTransMillar":"' + boppPoliesterBlancoTransMillar + '",' + 
-                            '"boppPoliesterBlancoTransMVMillar":"' + boppPoliesterBlancoTransMVMillar + '",' + 
-                            '"boppPoliesterBlancoTransMVCosto":"' + boppPoliesterBlancoTransMVCosto + '",' + 
-                            '"boppPoliesterBlancoTransLMMillar":"' + boppPoliesterBlancoTransLMMillar + '",' + 
-                            '"boppPoliesterBlancoTransLMMinimo":"' + boppPoliesterBlancoTransLMMinimo + '",' + 
-                            '"boppPoliesterBlancoTransD10AMillar":"' + boppPoliesterBlancoTransD10AMillar + '",' + 
-                            '"boppPoliesterBlancoTransD10AMinimo":"' + boppPoliesterBlancoTransD10AMinimo + '",' + 
-                            '"boppPoliesterBlancoTransD10AMinimo":"' + boppPoliesterBlancoTransD10AMinimo + '",' + 
+                            '"ID":"' + productID + '",' +
+                            '"medidaEje":"' + medidaEje + '",' +
+                            '"medidaDesarrollo":"' + medidaDesarrollo + '",' +
+                            '"repeticionesEje":"' + repeticionesEje + '",' +
+                            '"repeticionesDesarrollo":"' + repeticionesDesarrollo + '",' +
+                            '"separacionEje":"' + separacionEje + '",' +
+                            '"separacionDesarrollo":"' + separacionDesarrollo + '",' +
+                            '"numero":"' + numero + '",' +
+                            '"existencia":"' + existencia + '",' +
+                            '"existenciaRodillos":"' + existenciaRodillos + '",' +
+                            '"papelCoucheMillar":"' + papelCoucheMillar + '",' +
+                            '"papelCoucheMVMillar":"' + papelCoucheMVMillar + '",' +
+                            '"papelCoucheMVCosto":"' + papelCoucheMVCosto + '",' +
+                            '"papelCoucheLMMillar":"' + papelCoucheLMMillar + '",' +
+                            '"papelCoucheLMMinimo":"' + papelCoucheLMMinimo + '",' +
+                            '"papelCoucheD10AMillar":"' + papelCoucheD10AMillar + '",' +
+                            '"papelCoucheD10AMinimo":"' + papelCoucheD10AMinimo + '",' +
+                            '"papelCoucheD15AMillar":"' + papelCoucheD15AMillar + '",' +
+                            '"papelCoucheD15AMinimo":"' + papelCoucheD15AMinimo + '",' +
+                            '"papelCouchePlataMillar":"' + papelCouchePlataMillar + '",' +
+                            '"papelCouchePlataMVMillar":"' + papelCouchePlataMVMillar + '",' +
+                            '"papelCouchePlataMVCosto":"' + papelCouchePlataMVCosto + '",' +
+                            '"papelCouchePlataLMMillar":"' + papelCouchePlataLMMillar + '",' +
+                            '"papelCouchePlataLMMinimo":"' + papelCouchePlataLMMinimo + '",' +
+                            '"papelCouchePlataD10AMillar":"' + papelCouchePlataD10AMillar + '",' +
+                            '"papelCouchePlataD10AMinimo":"' + papelCouchePlataD10AMinimo + '",' +
+                            '"papelCouchePlataD15AMillar":"' + papelCouchePlataD15AMillar + '",' +
+                            '"papelCouchePlataD15AMinimo":"' + papelCouchePlataD15AMinimo + '",' +
+                            '"boppPoliesterBlancoTransMillar":"' + boppPoliesterBlancoTransMillar + '",' +
+                            '"boppPoliesterBlancoTransMVMillar":"' + boppPoliesterBlancoTransMVMillar + '",' +
+                            '"boppPoliesterBlancoTransMVCosto":"' + boppPoliesterBlancoTransMVCosto + '",' +
+                            '"boppPoliesterBlancoTransLMMillar":"' + boppPoliesterBlancoTransLMMillar + '",' +
+                            '"boppPoliesterBlancoTransLMMinimo":"' + boppPoliesterBlancoTransLMMinimo + '",' +
+                            '"boppPoliesterBlancoTransD10AMillar":"' + boppPoliesterBlancoTransD10AMillar + '",' +
+                            '"boppPoliesterBlancoTransD10AMinimo":"' + boppPoliesterBlancoTransD10AMinimo + '",' +
+                            '"boppPoliesterBlancoTransD10AMinimo":"' + boppPoliesterBlancoTransD10AMinimo + '",' +
                             '"boppPoliesterBlancoTransD15AMinimo":"' + boppPoliesterBlancoTransD15AMinimo + '",' +
-                            '"boppPoliesterBlancoTransD15AMillar":"' + boppPoliesterBlancoTransD15AMillar + '",' +                               
+                            '"boppPoliesterBlancoTransD15AMillar":"' + boppPoliesterBlancoTransD15AMillar + '",' +
                             '"boppPoliesterPlataMillar":"' + boppPoliesterPlataMillar + '",' +
                             '"boppPoliesterPlataMVMillar":"' + boppPoliesterPlataMVMillar + '",' +
                             '"boppPoliesterPlataMVCosto":"' + boppPoliesterPlataMVCosto + '",' +
@@ -428,7 +429,7 @@
                                     dangerMode: false,
                                 }).then(function (isConfirm) {
                                         window.location.href = '/Products';
-                                    })                                
+                                    })
                             }
                             else {
                                 swal(json.error);
@@ -443,9 +444,9 @@
                     } else {
                         //Nothing to do
                     }
-                })            
-        });        
-               
+                })
+        });
+
     });
 
     /*

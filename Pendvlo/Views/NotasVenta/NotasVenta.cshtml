@@ -1,6 +1,6 @@
 ﻿@model Pendvlo.ViewModels.NotasVentaViewModel
 
-@{    
+@{
     var removeContinueBtn = 0;
 
     /*
@@ -8,7 +8,7 @@
      */
     string title = "undefined";
     string type = "";
-    if (Model.Type==Pendvlo.ViewModels.TYPE.LIST)
+    if (Model.Type == Pendvlo.ViewModels.TYPE.LIST)
     {
         title = "Notas Venta Pendvlo!";
         type = "TYPE.VIEW";
@@ -29,6 +29,7 @@
 
 @section header{
 
+    <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/Main.css")">
     <link rel="stylesheet" type="text/css" href="@Url.Content("/Content/NotasVenta.css")">
 }
 
@@ -99,7 +100,7 @@
 
                                         <tr data-id="@id">
                                             <td>@id</td>
-                                            <td>@Cliente</td>                                            
+                                            <td>@Cliente</td>
                                             <td>@Vendedor</td>
                                             <td>@Fecha</td>
                                             <td>@Subtotal</td>
@@ -107,7 +108,7 @@
                                             <td>@Total</td>
                                         </tr>
                                     }
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -117,7 +118,7 @@
                             <div class="col-md-3"></div>
                             <div class="col-md-3">
                                 <button type="button" class="btn btn-info" id="btnContinue">Continuar</button>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
 
@@ -199,7 +200,7 @@
             When selecting a row in the table
          */
         $("#tableRecords tbody tr").click(function () {
-           
+
             /*
                 Change the selected color
              */
@@ -311,5 +312,5 @@
             });
         }
     });
-  
+
 </script>
