@@ -19,6 +19,7 @@
     var requiereFactura = 0;
     var tipoArchivoId = -1;
     var customerId = -1;
+    var cuenta = "";
     var customer = "";
     var tipoLaminadoId = -1;
     var productoId = -1;
@@ -61,6 +62,9 @@
         successMessage = "Nota de Venta creada correctamente";
 
         ViewBag.Title = tittle + " Nota de Venta Pendvlo!";
+
+        vendedor = Model.vendedor;
+        vendedorId = Model.vendedorID;
     }
     else if (Model.Type == Pendvlo.ViewModels.TYPE.MODIFY)
     {
@@ -78,11 +82,12 @@
         productoCode = Model.NotaVenta.Product.code;
         tipoPagoId = Model.NotaVenta.TipoPago.ID;
         vendedorId = Model.NotaVenta.Vendedor.ID;
-        vendedor = Model.NotaVenta.Vendedor.Name;
         bancoId = Model.NotaVenta.Banco.ID;
+        cuenta = Model.NotaVenta.cuenta;
         observaciones = Model.NotaVenta.observaciones;
         sucursalId = Model.NotaVenta.Sucursal.ID;
         millar = Model.NotaVenta.millar;
+        vendedor = Model.NotaVenta.Vendedor.User_;
         impresion = Model.NotaVenta.impresion;
         otro = Model.NotaVenta.otro;
         descuento = Model.NotaVenta.descuento;
@@ -134,8 +139,8 @@
     </button>
     <div class="container">
 
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
+        <!-- The Modal Produts -->
+        <div id="modalProducts" class="modal">
 
             <!-- Modal content -->
             <div class="modal-content">
@@ -145,15 +150,17 @@
                         <div class="col-xs-12" style="padding:0">
                             <input id="codigoBuscar" style="text-transform:uppercase" type="text" placeholder="Ingresa el codigo a buscar" value="" class="txt">
                         </div>
-                        <div class="col-xs-2" style="padding:0">
+                        <div class="col-xs-3">
                             <input type="button" value="Buscar" class="txt" id="btnCodigoBuscar">
                         </div>
-                        
-                        
+                        <div class="col-xs-4">
+                            <input type="button" value="Seleccionar" class="txt" id="btnAddProduct">
+                        </div>
+
                     </div>
                 </div>
                 <div class="table-wrapper-scroll-y ">
-                    <table class="table">
+                    <table class="table" id="tableModal">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -168,8 +175,8 @@
                             }
                             @foreach (var Product in Model.Products)
                             {
-                                <tr>
-                                    <th scope="row" data-productid="@Product.ID">@row</th>
+                                <tr data-id="@Product.ID" data-code="@Product.code">
+                                    <th scope="row">@row</th>
                                     <td>@Product.code</td>
                                     <td>@Product.numero</td>
                                     <td>@Product.Created.ToString("dd-MM-yyyy")</td>
@@ -177,6 +184,45 @@
 
                                 row = row + 1;
                             }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- The Modal Customers -->
+        <div id="modalCustomers" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="col-xs-12" style="padding:0">
+                    <div class="col-xs-4" style="padding:0">
+                        <div class="col-xs-12" style="padding:0">
+                            <input id="codigoSearchCustomer" style="text-transform:uppercase" type="text" placeholder="Ingresa el nombre a buscar" value="" class="txt">
+                        </div>
+                        <div class="col-xs-3">
+                            <input type="button" value="Buscar" class="txt" id="btnCodeSearchCustomer">
+                        </div>
+                        <div class="col-xs-4">
+                            <input type="button" value="Seleccionar" class="txt" id="btnAddCustomer">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="table-wrapper-scroll-y ">
+                    <table class="table" id="tableModalCustomers">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Razon Social</th>
+                                <th scope="col">Otro Nombre</th>
+                                <th scope="col">RFC</th>
+                                <th scope="col">Fecha Creacion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modalCustomersTbody">                            
                         </tbody>
                     </table>
                 </div>
@@ -195,26 +241,33 @@
                         <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
 
                             <div class="col-xs-8">
-                                <div class="col-xs-3">
+                                <div class="col-xs-4">
                                     <div class="col-xs-12">
                                         <label>Nota de Venta:</label><div class="clearfix"></div>
-                                        <input id="notaVenta" type="number" required="" placeholder="Nota de Venta" value="@numeroNotaVenta" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                        <input id="notaVenta" type="number" required="" placeholder="Nota de Venta" value="@numeroNotaVenta" class="txt @styleViewOnly" @readOnly>
                                     </div>
                                     <div class="col-xs-12">
-                                        <label>Sucursal:</label><div class="clearfix"></div>
-                                        <input id="sucursal" placeholder="Sucursal" type="text" value="@sucursal" class="txt noEditableField" readonly><div class="clearfix"></div>
+                                        <label>Sucursal:</label>
+                                        <input id="sucursal" placeholder="Sucursal" type="text" value="@sucursal" class="txt noEditableField" readonly>
                                     </div>
                                 </div>
-                                <div class="col-xs-9">
-                                    <div class="col-xs-10">
-                                        <label>Cliente:</label><div class="clearfix"></div>
-                                        <input id="customer" type="text" value="@customer" placeholder="Nombre del Cliente" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                <div class="col-xs-8" style="padding:0">
+                                    <div class="col-xs-10" style="padding:0">
+                                        <div class="col-xs-10" style="padding:0">
+                                            <label>Cliente:</label><div class="clearfix"></div>
+                                            <div class="col-xs-11" style="padding:0">
+                                                <input id="customer" type="text" style="min-width:100%" value="@customer" placeholder="Nombre del Cliente" class="txt noEditableField" @readOnly>
+                                            </div>
+                                            <div class="col-xs-1" style="padding:0">
+                                                <input type="button" value="..." class="txt" id="btnCliente" @disabledAdmin>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-xs-2">
                                         <label>Factura:</label><div class="clearfix"></div>
                                         <input id="requiereFactura" type="checkbox" class="txt @styleViewOnly" @requiereFactura @readOnly><div class="clearfix"></div>
                                     </div>
-                                    <div class="col-xs-4">
+                                    <div class="col-xs-4" style="padding:0">
                                         <label>Tipo de Archivo:</label><div class="clearfix"></div>
                                         <select id="tipoArchivo" @disabledAdmin>
                                             @foreach (var TipoArchivo in Model.TiposArchivos)
@@ -225,7 +278,7 @@
                                     </div>
                                     <div class="col-xs-4">
                                         <label>Tipo de Laminado:</label><div class="clearfix"></div>
-                                        <select id="tipoArchivo" @disabledAdmin>
+                                        <select id="tipoLaminado" @disabledAdmin>
                                             @foreach (var TipoLaminado in Model.TiposLaminados)
                                             {
                                                 <option value="@TipoLaminado.ID" data-id="@TipoLaminado.ID">@TipoLaminado.Name</option>
@@ -245,6 +298,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                     <div class="col-xs-3">
+                                        <label>Vendedor:</label><div class="clearfix"></div>
+                                        <input id="vendedor" type="text" value="@vendedor" placeholder="Usuario Vendedor" class="txt noEditableField" @readOnly><div class="clearfix"></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-xs-4">
@@ -258,32 +315,24 @@
                                 </div>
                                 <div class="col-xs-12">
                                     <label>Fecha Entrega:</label><div class="clearfix"></div>
-                                    <input id="fechaEntrega" type="date" value="@fechaEntrega" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    <input id="fechaEntrega" type="date" value="" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
                                 </div>
                                 <div class="col-xs-12">
-                                    <label>Descuento:</label><div class="clearfix"></div>
-                                    <input id="descuento" type="text" value="@descuento" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <label>Subtotal:</label><div class="clearfix"></div>
-                                    <input id="subtotal" type="text" value="@subtotal" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <label>Impuesto:</label><div class="clearfix"></div>
-                                    <input id="impuesto" type="text" value="@impuesto" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <label>Total:</label><div class="clearfix"></div>
-                                    <input id="total" type="text" value="@total" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <label>Abono:</label><div class="clearfix"></div>
-                                    <input id="abono" type="text" value="@abono" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <label>Vendedor:</label><div class="clearfix"></div>
-                                    <input id="vendedor" type="text" value="@vendedor" placeholder="Usuario Vendedor" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
-                                </div>
+                                    <div class="col-xs-6">
+                                        <label>Descuento:</label><div class="clearfix"></div>
+                                        <input id="descuento" type="text" value="@descuento" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                        <label>Abono:</label><div class="clearfix"></div>
+                                        <input id="abono" type="text" value="@abono" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>                                    
+                                    <div class="col-xs-6">
+                                        <label>Subtotal:</label><div class="clearfix"></div>
+                                        <input id="subtotal" type="text" value="@subtotal" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                        <label>Impuesto:</label><div class="clearfix"></div>
+                                        <input id="impuesto" type="text" value="@impuesto" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                        <label>Total:</label><div class="clearfix"></div>
+                                        <input id="total" type="text" value="@total" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    </div>
+                                </div>                                
                             </div>
 
                             <div class="row">
@@ -315,12 +364,12 @@
                                         <label>Diseño:</label><div class="clearfix"></div>
                                         <input id="diseno" type="text" value="@diseno" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12">
                                     <div class="col-xs-2">
                                         <label>Express:</label><div class="clearfix"></div>
                                         <input id="express" type="text" value="@express" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
                                     </div>
+                                </div>
+                                <div class="col-xs-12">                                    
                                     <div class="col-xs-2">
                                         <label>Anticipo:</label><div class="clearfix"></div>
                                         <input id="anticipo" type="text" value="@anticipo" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
@@ -334,7 +383,7 @@
                             </div>
                             <div class="clearfix"></div><br /><br />
                             <div class="row">
-                                <div class="col-xs-12">
+                                <div class="col-xs-3">
                                     <label>Bancos:</label><div class="clearfix"></div>
                                     <select id="banco" @disabledAdmin>
                                         @foreach (var Banco in Model.Bancos)
@@ -343,12 +392,26 @@
                                         }
                                     </select>
                                 </div>
+                                <div class="col-xs-3">
+                                    <label>Tipo de Pago:</label><div class="clearfix"></div>
+                                    <select id="tipoPago" @disabledAdmin>
+                                        @foreach (var TipoPago in Model.TiposPagos)
+                                        {
+                                            <option value="@TipoPago.ID" data-id="@TipoPago.ID">@TipoPago.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>Cuenta:</label><div class="clearfix"></div>
+                                    <input id="cuenta" type="number" required="" placeholder="Cuenta bancaria" value="@cuenta" class="txt @styleViewOnly" @readOnly>
+                                </div>
                             </div>
                             <div class="clearfix"></div><br /><br />
                             <div class="row" style="padding:0">
-                                <div class="col-xs-6">
+                                <div class="col-xs-12">
                                     <label>Observaciones:</label><div class="clearfix"></div>
-                                    <input id="observaciones" type="text" placeholder="Observaciones de Nota de Venta" value="@vendedor" class="txt @styleViewOnly" @readOnly><div class="clearfix"></div>
+                                    <textarea rows="4" id="observaciones" placeholder="Observaciones de Nota de Venta" value="@observaciones" class="txt form-control @styleViewOnly" @readOnly>
+                                    </textarea><div class="clearfix"></div>
                                 </div>
                             </div>
                             <div class="clearfix"></div><br />
@@ -367,14 +430,22 @@
 
 <script type="text/JavaScript">
 
+    var vendedorId = @vendedorId;
+    var sucursalId = @sucursalId;
+
     var notaVentaID = @notaVentaID;
+    var selectedProductId = @productoId;
+    var productSelected = "";
+
+    var selectedCustomerId = @customerId;
+    var customerSelected = "";
 
     $(document).ready(function () {
 
-        //MODAL
+        //MODAL products
 
         // Get the modal
-        var modal = document.getElementById('myModal');
+        var modal = document.getElementById('modalProducts');
         // Get the button that opens the modal
         var btn = document.getElementById("btnProducto");
         // Get the <span> element that closes the modal
@@ -395,6 +466,136 @@
         }
 
         //END MODAL
+
+        if (notaVentaID==-1) {
+            $('#observaciones').val("");
+        }
+
+        //MODAL customers
+
+        // Get the modal
+        var modalCustomers = document.getElementById('modalCustomers');
+        // Get the button that opens the modal
+        var btnCliente = document.getElementById("btnCliente");
+        // Get the <span> element that closes the modal
+        var spanCustomers = document.getElementsByClassName("close")[1];
+        // When the user clicks the button, open the modal
+        btnCliente.onclick = function () {
+            modalCustomers.style.display = "block";
+        }
+        // When the user clicks on <span> (x), close the modal
+        spanCustomers.onclick = function () {
+            modalCustomers.style.display = "none";
+        }
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modalCustomers) {
+                modalCustomers.style.display = "none";
+            }
+        }
+
+        //END MODAL
+
+        /*
+            When selecting a row in the modal table
+         */
+        rowEventClic();
+
+        /*
+            When selecting a row in the modal customers table
+         */
+        rowCustomerEventClic();
+
+        document.getElementById('fechaEntrega').valueAsDate = new Date();        
+
+        //Set the product code in the modal
+        $("#producto").focusout(function () {
+            $("#codigoBuscar").val($("#producto").val());
+        });
+
+        $("#btnAddProduct").click(function (e) {
+
+            if (selectedProductId == -1) {
+                swal("Selecciona un producto para continuar");
+                return;
+            }
+            
+            //Add the product code to the field
+            $("#producto").val(productSelected);
+
+            //Reset the field
+            $("#codigoBuscar").val("");
+
+            //Close the modal
+            modal.style.display = "none";
+        });
+
+        $("#btnAddCustomer").click(function (e) {
+
+            if (selectedCustomerId == -1) {
+                swal("Selecciona un cliente para continuar");
+                return;
+            }            
+
+            //Add the product code to the field
+            $("#customer").val(customerSelected);
+
+            //Reset the field
+            $("#codigoSearchCustomer").val("");
+
+            //Close the modal
+            modalCustomers.style.display = "none";
+        });            
+
+        $("#btnCodeSearchCustomer").click(function (e) {
+
+            //If no customer code exists show error
+            var customerCode = $("#codigoSearchCustomer").val();
+            if (customerCode === "") {
+                swal("Ingresa un cliente para buscar");
+                return;
+            }
+
+            //Make the ajax request
+            $.ajax({
+                type: "POST",
+                url: "@Model.urlGetFilteredCustomers",
+                contentType: "application/json; charset=utf-8",
+                data: '{"code":"' + customerCode + '"}',
+                dataType: "html",
+                success: function (result) {
+                    var json = JSON.parse(result);
+                    if (json.Result_ == 1) {
+
+                        $("#modalCustomersTbody").empty();
+
+                        var row = 1;
+
+                        var Customers = json.Customers;                        
+
+                        if (Customers.length == 0) {
+                            swal("No se encontraron clientes con esos parametros de busqueda");
+                        }
+                        else {
+                            console.log(Customers[0]);
+                            for (x = 0; x < Customers.length; x++) {
+                                var Customer = Customers[x];
+                                addCustomerRowModal(Customer, row);
+                                row += 1;
+                            }
+                        }                        
+                    }
+                    else {
+                        swal(json.error);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+                    console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
+                }
+                    });
+
+        });
 
         $("#btnCodigoBuscar").click(function (e) {
 
@@ -420,13 +621,19 @@
 
                         var row = 1;
 
-                        var Products = json.Products;
-                        console.log(Products[0]);
-                        for (x = 0; x < Products.length; x++) {
-                            var Product = Products[x];
-                            addRowModal(Product, row);
-                            row += 1;
+                        var Products = json.Products;                        
+
+                        if (Products.length == 0) {
+                            swal("No se encontraron productos con esos parametros de busqueda");
                         }
+                        else {
+                            console.log(Products[0]);
+                            for (x = 0; x < Products.length; x++) {
+                                var Product = Products[x];
+                                addRowModal(Product, row);
+                                row += 1;
+                            }
+                        }                        
                     }
                     else {
                         swal(json.error);
@@ -447,17 +654,73 @@
 
             e.preventDefault();
 
-            /*
-                Validate all fields are filled
-             */
-            //var code = $("#code").val();
+            //Get the date from string splits
+            var stringFechaEntrega = $('#fechaEntrega').val();
+            console.log("stringFechaEntrega: " + stringFechaEntrega);
+            var splits = stringFechaEntrega.split("-");
+            var anio = splits[0];
+            console.log("anio: " + anio);
+            var mes = splits[1] - 1;
+            console.log("mes: " + mes);
+            var dia = splits[2];
+            console.log("dia: " + dia);
 
+            //Get the current date only
+            var curDate = new Date();
+            var dd = String(curDate.getDate()).padStart(2, '0');
+            var mm = String(curDate.getMonth() + 1).padStart(2, '0') - 1; 
+            var yyyy = curDate.getFullYear();
+            curDate = new Date(yyyy,mm,dd);
 
-            /*if (code === "" || code === 'undefined') {
-                swal("Ingresa el codigo");
-                $("#code").focus();
+            //Validate the deliver date
+            var dateFechaEntrega = new Date(anio,mes,dia);           
+            var diff = dateFechaEntrega - curDate;            
+            console.log("dateFechaEntrega: " + dateFechaEntrega);
+            console.log("curDate: " + curDate);
+            console.log("diff: " + diff);            
+            if (dateFechaEntrega - curDate != 0) {
+                if (dateFechaEntrega - curDate < 0) {
+                    swal("La fecha de entrega no puede ser menor al dia de hoy");
+                    return;
+                }
+            }            
+
+            if (selectedCustomerId == -1) {
+                swal("No hay cliente seleccionado");
                 return;
-            }*/
+            }
+
+            if (selectedProductId == -1) {
+                swal("No hay producto seleccionado");
+                return;
+            }
+
+            var ID = notaVentaID;
+            var fechaEntrega = $("#fechaEntrega").val();
+            var requiereFactura = $("#requiereFactura").prop('checked') == true ? 1 : 0;
+            var tipoArchivoID = $('#tipoArchivo').find(":selected").attr("data-id");
+            var customerID = selectedCustomerId;
+            var tipoLaminadoID = $('#tipoLaminado').find(":selected").attr("data-id");
+            var productID = selectedProductId;
+            var tipoPagoID = $('#tipoPago').find(":selected").attr("data-id");
+            var cuenta = $("#cuenta").val();
+            var vendedorID = vendedorId;
+            var bancoID = $('#banco').find(":selected").attr("data-id");
+            var observaciones = $("#observaciones").val();
+            var sucursalID = sucursalId;
+            var millar = $("#millar").val();
+            var impresion = $("#impresion").val();
+            var otro = $("#otro").val();
+            var descuento = $("#descuento").val();
+            var grabados = $("#grabados").val();
+            var diseno = $("#diseno").val();
+            var express = $("#express").val();
+            var subtotal = $("#subtotal").val();
+            var impuesto = $("#impuesto").val();
+            var total = $("#total").val();
+            var anticipo = $("#anticipo").val();
+            var saldo = $("#saldo").val();
+            var abono = $("#abono").val();
 
             /*
                 Validate if continue
@@ -481,54 +744,32 @@
                         type: "POST",
                         url: "@url",
                         contentType: "application/json; charset=utf-8",
-                        data: '{"code":"' + code + '",' +
-                            '"ID":"' + productID + '",' +
-                            '"medidaEje":"' + medidaEje + '",' +
-                            '"medidaDesarrollo":"' + medidaDesarrollo + '",' +
-                            '"repeticionesEje":"' + repeticionesEje + '",' +
-                            '"repeticionesDesarrollo":"' + repeticionesDesarrollo + '",' +
-                            '"separacionEje":"' + separacionEje + '",' +
-                            '"separacionDesarrollo":"' + separacionDesarrollo + '",' +
-                            '"numero":"' + numero + '",' +
-                            '"existencia":"' + existencia + '",' +
-                            '"existenciaRodillos":"' + existenciaRodillos + '",' +
-                            '"papelCoucheMillar":"' + papelCoucheMillar + '",' +
-                            '"papelCoucheMVMillar":"' + papelCoucheMVMillar + '",' +
-                            '"papelCoucheMVCosto":"' + papelCoucheMVCosto + '",' +
-                            '"papelCoucheLMMillar":"' + papelCoucheLMMillar + '",' +
-                            '"papelCoucheLMMinimo":"' + papelCoucheLMMinimo + '",' +
-                            '"papelCoucheD10AMillar":"' + papelCoucheD10AMillar + '",' +
-                            '"papelCoucheD10AMinimo":"' + papelCoucheD10AMinimo + '",' +
-                            '"papelCoucheD15AMillar":"' + papelCoucheD15AMillar + '",' +
-                            '"papelCoucheD15AMinimo":"' + papelCoucheD15AMinimo + '",' +
-                            '"papelCouchePlataMillar":"' + papelCouchePlataMillar + '",' +
-                            '"papelCouchePlataMVMillar":"' + papelCouchePlataMVMillar + '",' +
-                            '"papelCouchePlataMVCosto":"' + papelCouchePlataMVCosto + '",' +
-                            '"papelCouchePlataLMMillar":"' + papelCouchePlataLMMillar + '",' +
-                            '"papelCouchePlataLMMinimo":"' + papelCouchePlataLMMinimo + '",' +
-                            '"papelCouchePlataD10AMillar":"' + papelCouchePlataD10AMillar + '",' +
-                            '"papelCouchePlataD10AMinimo":"' + papelCouchePlataD10AMinimo + '",' +
-                            '"papelCouchePlataD15AMillar":"' + papelCouchePlataD15AMillar + '",' +
-                            '"papelCouchePlataD15AMinimo":"' + papelCouchePlataD15AMinimo + '",' +
-                            '"boppPoliesterBlancoTransMillar":"' + boppPoliesterBlancoTransMillar + '",' +
-                            '"boppPoliesterBlancoTransMVMillar":"' + boppPoliesterBlancoTransMVMillar + '",' +
-                            '"boppPoliesterBlancoTransMVCosto":"' + boppPoliesterBlancoTransMVCosto + '",' +
-                            '"boppPoliesterBlancoTransLMMillar":"' + boppPoliesterBlancoTransLMMillar + '",' +
-                            '"boppPoliesterBlancoTransLMMinimo":"' + boppPoliesterBlancoTransLMMinimo + '",' +
-                            '"boppPoliesterBlancoTransD10AMillar":"' + boppPoliesterBlancoTransD10AMillar + '",' +
-                            '"boppPoliesterBlancoTransD10AMinimo":"' + boppPoliesterBlancoTransD10AMinimo + '",' +
-                            '"boppPoliesterBlancoTransD10AMinimo":"' + boppPoliesterBlancoTransD10AMinimo + '",' +
-                            '"boppPoliesterBlancoTransD15AMinimo":"' + boppPoliesterBlancoTransD15AMinimo + '",' +
-                            '"boppPoliesterBlancoTransD15AMillar":"' + boppPoliesterBlancoTransD15AMillar + '",' +
-                            '"boppPoliesterPlataMillar":"' + boppPoliesterPlataMillar + '",' +
-                            '"boppPoliesterPlataMVMillar":"' + boppPoliesterPlataMVMillar + '",' +
-                            '"boppPoliesterPlataMVCosto":"' + boppPoliesterPlataMVCosto + '",' +
-                            '"boppPoliesterPlataLMMillar":"' + boppPoliesterPlataLMMillar + '",' +
-                            '"boppPoliesterPlataLMMinimo":"' + boppPoliesterPlataLMMinimo + '",' +
-                            '"boppPoliesterPlataD10AMillar":"' + boppPoliesterPlataD10AMillar + '",' +
-                            '"boppPoliesterPlataD10AMinimo":"' + boppPoliesterPlataD10AMinimo + '",' +
-                            '"boppPoliesterPlataD15AMillar":"' + boppPoliesterPlataD15AMillar + '",' +
-                            '"boppPoliesterPlataD15AMinimo":"' + boppPoliesterPlataD15AMinimo + '"}',
+                        data: '{"ID":"' + ID + '",' +
+                            '"fechaEntrega":"' + fechaEntrega + '",' +
+                            '"requiereFactura":"' + requiereFactura + '",' +
+                            '"tipoArchivoID":"' + tipoArchivoID + '",' +
+                            '"customerID":"' + customerID + '",' +
+                            '"tipoLaminadoID":"' + tipoLaminadoID + '",' +
+                            '"productID":"' + productID + '",' +
+                            '"tipoPagoID":"' + tipoPagoID + '",' +
+                            '"cuenta":"' + cuenta + '",' +
+                            '"vendedorID":"' + vendedorID + '",' +
+                            '"bancoID":"' + bancoID + '",' +
+                            '"observaciones":"' + observaciones + '",' +
+                            '"sucursalID":"' + sucursalID + '",' +
+                            '"millar":"' + millar + '",' +
+                            '"impresion":"' + impresion + '",' +
+                            '"otro":"' + otro + '",' +
+                            '"descuento":"' + descuento + '",' +
+                            '"grabados":"' + grabados + '",' +
+                            '"diseno":"' + diseno + '",' +
+                            '"express":"' + express + '",' +
+                            '"subtotal":"' + subtotal + '",' +
+                            '"impuesto":"' + impuesto + '",' +
+                            '"total":"' + total + '",' +
+                            '"anticipo":"' + anticipo + '",' +
+                            '"saldo":"' + saldo + '",' +
+                            '"abono":"' + abono + '"}',
                         dataType: "html",
                         success: function (result) {
                             var json = JSON.parse(result);
@@ -559,16 +800,87 @@
                 })
         });
 
+        function rowEventClic() {
+            /*
+                When selecting a row in the modal table
+             */
+            $(document).on("click", "#tableModal tbody tr", function (e) {
+                /*
+                    Change the selected color
+                 */
+                $("#tableModal tr").removeClass("highlight");
+                var selected = $(this).hasClass("highlight");
+                $("#data tr").removeClass("highlight");
+                if (!selected) {
+                    $(this).addClass("highlight");
+                }
+
+                selectedProductId = $(this).attr("data-id"); //Id of the product
+                productSelected = $(this).attr("data-code"); //Code of the product
+
+                /*
+                    Save the current row for deletion
+                 */
+                currentSelectedTD = $(this);
+            });
+        }
+
+
+        function rowCustomerEventClic() {
+            /*
+                When selecting a row in the modal table
+             */
+            $(document).on("click", "#tableModalCustomers tbody tr", function (e) {
+                /*
+                    Change the selected color
+                 */
+                $("#tableModalCustomers tr").removeClass("highlight");
+                var selected = $(this).hasClass("highlight");
+                $("#data tr").removeClass("highlight");
+                if (!selected) {
+                    $(this).addClass("highlight");
+                }
+
+                selectedCustomerId = $(this).attr("data-id"); //Id of the product
+                customerSelected = $(this).attr("data-code"); //Code of the product
+
+                /*
+                    Save the current row for deletion
+                 */
+                currentSelectedTD = $(this);
+            });
+        }
+
         function addRowModal(Product, fileNumber) {
 
-            var created = new Date(Product.Created);
-            $("#modalTbody").append("<tr>" +
+            $("#modalTbody").append("<tr data-id=" + Product.ID + " data-code=" + Product.code + " >" +
                                         "<th scope='row' data-productid=" + Product.ID + ">" + fileNumber + "</th>" +
                                         "<td>" + Product.code + "</td>" +
                                         "<td>" + Product.numero + "</td>" +
-                                        "<td>" + created + "</td>" +
-                                    "</tr>");
+                                        "<td>" + Product.CreatedString + "</td>" +
+                "</tr>");
 
+            /*
+                When selecting a row in the modal table
+             */
+            //rowEventClic();
+        }
+
+
+        function addCustomerRowModal(Customer, fileNumber) {
+
+            $("#modalCustomersTbody").append("<tr data-id=" + Customer.ID + " data-code=" + Customer.RazonSocial + " >" +
+                "<th scope='row' data-productid=" + Customer.ID + ">" + fileNumber + "</th>" +
+                "<td>" + Customer.RazonSocial + "</td>" +
+                "<td>" + Customer.Name + "</td>" +
+                "<td>" + Customer.RFC + "</td>" +
+                "<td>" + Customer.CreatedString + "</td>" +
+                "</tr>");
+
+            /*
+                When selecting a row in the modal table
+             */
+            //rowEventClic();
         }
     });
 

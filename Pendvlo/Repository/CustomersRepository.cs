@@ -25,6 +25,32 @@ namespace Pendvlo.Repository
         }
 
         /*
+         Get filtered customers
+             */
+        public List<Customer> getFilteredCustomers(string code)
+        {
+            List<Customer> Customers = DBContext.Customers.SqlQuery("Select ID," +
+                                                                        " RazonSocial," +
+                                                                        " Name," +
+                                                                        " RFC," +
+                                                                        " Address, " +
+                                                                        " CP, " +
+                                                                        " Phone," +
+                                                                        " City," +
+                                                                        " State, " +
+                                                                        " email," +
+                                                                        " Invoice," +
+                                                                        " SalesMan_ID," +
+                                                                        " Created from Customers where RazonSocial like('%" + code + "%')").ToList();
+            foreach (var Customer in Customers)
+            {
+                Customer.CreatedString = Customer.Created.ToString("dd-MM-yyyy");
+            }
+
+            return Customers;
+        }
+
+        /*
          Create test customers
              */
         public int createTestsCustomers()

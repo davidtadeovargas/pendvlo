@@ -46,7 +46,69 @@ namespace Pendvlo.Repository
              */
         public List<Product> getFilteredProducts(string code)
         {
-            List<Product> Products_ = Products_ = (from m in DBContext.Products where m.code.Contains(code) select m).ToList();
+            List<Product> Products_ = DBContext.Products.SqlQuery("Select ID," +
+                                                                        " code," +
+                                                                        " medidaEje," +
+                                                                        " medidaDesarrollo," +
+                                                                        " repeticionesEje, " +
+                                                                        " repeticionesDesarrollo, " +
+                                                                        " separacionEje," +
+                                                                        " separacionDesarrollo," +
+                                                                        " numero, " +
+                                                                        " existencia," +
+                                                                        " existenciaRodillos," +
+                                                                        " papelCoucheMillar," +
+                                                                        " papelCoucheMVMillar," +
+                                                                        " papelCoucheMVCosto, " +
+                                                                        " papelCoucheLMMillar," +
+                                                                        " papelCoucheLMMinimo, " +
+                                                                        " papelCoucheD10AMillar," +
+                                                                        " papelCoucheD10AMinimo, " +
+                                                                        " papelCoucheD15AMillar, " +
+                                                                        " papelCoucheD15AMinimo, " +
+                                                                        " papelCouchePlataMillar, " +
+                                                                        " papelCouchePlataMVMillar, " +
+                                                                        " papelCouchePlataMVCosto, " +
+                                                                        " papelCouchePlataLMMillar," +
+                                                                        " papelCouchePlataLMMinimo," +
+                                                                        " papelCouchePlataD10AMillar, " +
+                                                                        " papelCouchePlataD10AMinimo," +
+                                                                        " papelCouchePlataD15AMillar," +
+                                                                        " papelCouchePlataD15AMinimo," +
+                                                                        " boppPoliesterBlancoTransMillar," +
+                                                                        " boppPoliesterBlancoTransMVMillar," +
+                                                                        " boppPoliesterBlancoTransMVCosto," +
+                                                                        " boppPoliesterBlancoTransLMMillar," +
+                                                                        " boppPoliesterBlancoTransLMMinimo," +
+                                                                        " boppPoliesterBlancoTransD10AMillar," +
+                                                                        " boppPoliesterBlancoTransD10AMinimo," +
+                                                                        " boppPoliesterBlancoTransD15AMillar," + 
+                                                                        " boppPoliesterBlancoTransD15AMinimo," +
+                                                                        " boppPoliesterPlataMillar," +
+                                                                        " boppPoliesterPlataMVMillar," +
+                                                                        " boppPoliesterPlataMVCosto," +
+                                                                        " boppPoliesterPlataLMMillar," +
+                                                                        " boppPoliesterPlataLMMinimo," +
+                                                                        " boppPoliesterPlataD10AMillar," +
+                                                                        " boppPoliesterPlataD10AMinimo," +
+                                                                        " boppPoliesterPlataD15AMillar," +
+                                                                        " boppPoliesterPlataD15AMinimo," +
+                                                                        " descrip," +
+                                                                        " price," +
+                                                                        " tax," +
+                                                                        " material," +
+                                                                        " descuento," +
+                                                                        " precioXImpresion," +
+                                                                        " precioXGrabado," +
+                                                                        " precioXDiseno," +
+                                                                        " precioExpress," +
+                                                                        " avaible," +
+                                                                        " sales, " + 
+                                                                        " Created from Products where code like('%" + code + "%')").ToList();
+            foreach (var Product in Products_)
+            {
+                Product.CreatedString = Product.Created.ToString("dd-MM-yyyy");
+            }
 
             return Products_;
         }

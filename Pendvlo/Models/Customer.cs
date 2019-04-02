@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -20,6 +21,9 @@ namespace Pendvlo.Models
         public bool Invoice { get; set; }
         public User SalesMan { get; set; }
         public DateTime Created { get; set; }
+
+        [NotMapped]
+        public string CreatedString { set; get; }
 
         public Customer()
         {

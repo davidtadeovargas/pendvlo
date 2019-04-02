@@ -14,11 +14,14 @@ namespace Pendvlo.ViewModels
         public List<TiposLaminados> TiposLaminados { get; set; }
         public List<TiposPagos> TiposPagos { get; set; }
         public List<Banco> Bancos { get; set; }
-        public List<Product> Products { get; set; }
+        public List<Product> Products { get; set; }        
         public string fecha { get; set; }
         public string hora { get; set; }
         public string fechaEntrega { get; set; }
         public string sucursal { get; set; }
         public string urlGetFilteredProducts { get; set; }
+        public string urlGetFilteredCustomers { get; set; }
+        public string vendedor { get; set; }
+        public int vendedorID { get; set; }
     }
 }

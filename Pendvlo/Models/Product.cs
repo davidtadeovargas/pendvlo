@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -69,6 +70,9 @@ namespace Pendvlo.Models
         public bool avaible { get; set; }
         public bool sales  { get; set; }
         public DateTime Created { get; set; }
+
+        [NotMapped]
+        public string CreatedString { set; get; }
 
         public Product()
         {

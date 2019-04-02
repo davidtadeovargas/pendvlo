@@ -113,7 +113,7 @@ namespace Pendvlo.Controllers
         }
 
         /*
-            Edit a new user
+            Get list of filtered products
              */
         public ActionResult GetFilteredProducts(GetFilteredProductsRequestModel GetFilteredProductsRequestModel)
         {

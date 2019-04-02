@@ -38,10 +38,6 @@ namespace Pendvlo.Controllers
                 {
                     return Json(JSONManager.JsonFail("Need cuenta"));
                 }
-                if (NewNotaVentaRequestModel.referencia == null || NewNotaVentaRequestModel.referencia == "")
-                {
-                    return Json(JSONManager.JsonFail("Need referencia"));
-                }
                 if (NewNotaVentaRequestModel.observaciones == null || NewNotaVentaRequestModel.observaciones == "")
                 {
                     return Json(JSONManager.JsonFail("Need observaciones"));
@@ -91,6 +87,7 @@ namespace Pendvlo.Controllers
                 notaVenta.Product = Product;
                 notaVenta.Customer = Customer;
                 notaVenta.TipoPago = TipoPago;
+                notaVenta.cuenta = NewNotaVentaRequestModel.cuenta;
                 notaVenta.Vendedor = Vendedor;
                 notaVenta.Banco = Banco;
                 notaVenta.Sucursal = Sucursal;
@@ -248,8 +245,11 @@ namespace Pendvlo.Controllers
             NotaVentaIndexViewModel.Products = Products;
 
             var baseUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
-            baseUrl += "Products/GetFilteredProducts";
-            NotaVentaIndexViewModel.urlGetFilteredProducts = baseUrl;
+            var urlGetFilteredProducts = baseUrl + "Products/GetFilteredProducts";            
+            NotaVentaIndexViewModel.urlGetFilteredProducts = urlGetFilteredProducts;
+
+            var urlGetFilteredCustomers = baseUrl + "Customers/GetFilteredCustomers";
+            NotaVentaIndexViewModel.urlGetFilteredCustomers = urlGetFilteredCustomers;
 
             /*
                 Get the complete information from the nota de venta
@@ -269,12 +269,18 @@ namespace Pendvlo.Controllers
                 var hora = DateTime.UtcNow.ToString("HH:mm:ss");
                 NotaVentaIndexViewModel.hora = hora;
 
-                var fechaEntrega = today.ToString("yyyy-MM-dd");
+                var fechaEntrega = today.ToString("MM/dd/yyyy");
                 NotaVentaIndexViewModel.fechaEntrega = fechaEntrega;
 
                 User user = SessionManager.Instance.getUser();
                 var sucursal = user.Sucursal.Name;
                 NotaVentaIndexViewModel.sucursal = sucursal;
+
+                User Vendedor = SessionManager.Instance.getUser();
+                var vendedor = Vendedor.User_;
+                NotaVentaIndexViewModel.vendedor = vendedor;
+
+                NotaVentaIndexViewModel.vendedorID = Vendedor.ID;
             }
 
             return View("~/Views/NotasVenta/Index.cshtml", NotaVentaIndexViewModel);

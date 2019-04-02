@@ -396,7 +396,7 @@ select {
     border: 1px solid #ccc;
     margin: 10px 0;
     padding: 10px 0 10px 5px;
-    width: 100%;
+    min-width: 100%;
 }
 
 .txt[type="number"] {
@@ -417,7 +417,7 @@ select {
     border: 1px solid #ccc;
     margin: 10px 0;
     padding: 10px 0 10px 5px;
-    width: 100%;
+    min-width: 100%;
 }
 
 .txt2:hover {
@@ -432,4 +432,8 @@ tr td {
 
 .highlight {
     background-color: lightgrey;
+}
+
+.noEditableField {
+    background-color: lightgray;
 }

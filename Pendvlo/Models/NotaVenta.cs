@@ -18,6 +18,7 @@ namespace Pendvlo.Models
         public Product Product { get; set; }
         public Customer Customer { get; set; }
         public TiposPagos TipoPago { get; set; }
+        public string cuenta { get; set; }
         public User Vendedor { get; set; }
         public Banco Banco { get; set; }
         public string observaciones { get; set; }

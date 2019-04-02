@@ -106,6 +106,37 @@ namespace Pendvlo.Controllers
         }
 
         /*
+            Get list of filtered customers
+             */
+        public ActionResult GetFilteredCustomers(GetFilteredCustomersRequestModel GetFilteredCustomersRequestModel)
+        {
+            try
+            {
+                /*
+                    Validate all fields are filled
+                 */
+                if (GetFilteredCustomersRequestModel.code == null || GetFilteredCustomersRequestModel.code == "")
+                {
+                    return Json(JSONManager.JsonFail("Need code"));
+                }
+
+                /*
+                    Get all the customers from db
+                 */
+                var Customers = RepositoryManager.Instance.CustomersRepository.getFilteredCustomers(GetFilteredCustomersRequestModel.code);
+
+                /*
+                    Return result
+                 */
+                return Json(JSONManager.JsonFilteredCustomers(Customers));
+            }
+            catch (Exception e)
+            {
+                return Json(JSONManager.JsonFail(e.Message));
+            }
+        }
+
+        /*
             Create a new customer view
              */
         public ActionResult NewCustomerView()

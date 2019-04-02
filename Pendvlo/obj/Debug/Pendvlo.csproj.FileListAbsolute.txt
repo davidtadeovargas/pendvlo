@@ -165,4 +165,3 @@ C:\Users\Exigo_User\source\repos\pendvlo\Pendvlo\obj\Debug\Pendvlo.csproj.CoreCo
 C:\Users\Exigo_User\source\repos\pendvlo\Pendvlo\obj\Debug\Pendvlo.csproj.CopyComplete
 C:\Users\Exigo_User\source\repos\pendvlo\Pendvlo\obj\Debug\Pendvlo.dll
 C:\Users\Exigo_User\source\repos\pendvlo\Pendvlo\obj\Debug\Pendvlo.pdb
-C:\Users\Exigo_User\source\repos\pendvlo\Pendvlo\obj\Debug\Pendvlo.csprojAssemblyReference.cache

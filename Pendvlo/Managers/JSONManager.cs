@@ -38,5 +38,15 @@ namespace Pendvlo.Managers
 
             return GetFilteredProductsResponseModel;
         }
+
+        public static Result JsonFilteredCustomers(List<Customer> Customers)
+        {
+
+            GetFilteredCustomersResponseModel GetFilteredCustomersResponseModel = new GetFilteredCustomersResponseModel();
+            GetFilteredCustomersResponseModel.Result_ = 1;
+            GetFilteredCustomersResponseModel.Customers = Customers;
+
+            return GetFilteredCustomersResponseModel;
+        }
     }
 }
