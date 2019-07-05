@@ -45,6 +45,15 @@
 
     <script type="text/JavaScript">
 
+        //Autocomplete bug
+        function getRidOffAutocomplete(filters) {
+
+            var timer = window.setTimeout( function(){
+                $(filters).prop('disabled',false);
+                    clearTimeout(timer);
+                }, 800);
+    }
+
         $(document).ready(function () {
 
             var trigger = $('.hamburger'),
@@ -72,7 +81,7 @@
 
             $('[data-toggle="offcanvas"]').click(function () {
                 $('#wrapper').toggleClass('toggled');
-            });
+            });                       
 
             /*
                 Clic on logout menu

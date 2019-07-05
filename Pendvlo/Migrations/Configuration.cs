@@ -25,20 +25,39 @@ namespace Pendvlo.Migrations
             /*
                 Modules
              */
-            RepositoryManager.Instance.ModulesRepository.createProductionModule();
-            RepositoryManager.Instance.ModulesRepository.createWareohuseModule();
-            RepositoryManager.Instance.ModulesRepository.createSalesModule();
-            RepositoryManager.Instance.ModulesRepository.createAdministrationModule();
-            RepositoryManager.Instance.ModulesRepository.createDesignModule();
-            RepositoryManager.Instance.ModulesRepository.createAtenServCustomModule();
-            RepositoryManager.Instance.ModulesRepository.createAdminComprasModule();
+
+            context.Modules.AddOrUpdate(x => x.ID,
+               new Module { Name = "Ventas" }
+               );
+            context.Modules.AddOrUpdate(x => x.ID,
+               new Module { Name = "Produccion" }
+               );
+            context.Modules.AddOrUpdate(x => x.ID,
+               new Module { Name = "Almacen" }
+               );
+            context.Modules.AddOrUpdate(x => x.ID,
+               new Module { Name = "Administracion" }
+               );
+            context.Modules.AddOrUpdate(x => x.ID,
+               new Module { Name = "Diseño" }
+               );
+            context.Modules.AddOrUpdate(x => x.ID,
+               new Module { Name = "Atencion y servicio al cliente" }
+               );
+            context.Modules.AddOrUpdate(x => x.ID,
+               new Module { Name = "Administracion y compras" }
+               );            
 
             /*
                 Sucursales
              */
-            RepositoryManager.Instance.SucursalesRepository.createLibertadSucursal();
-            RepositoryManager.Instance.SucursalesRepository.createMiguelBlanco();
-
+            context.Sucursales.AddOrUpdate(x => x.ID,
+                new Sucursal { Name = "LIBERTAD" }
+                );
+            context.Sucursales.AddOrUpdate(x => x.ID,
+                new Sucursal { Name = "MIGUEL BLANCO" }
+                );
+            
             /*
                 Procedimientos de impresion
              */

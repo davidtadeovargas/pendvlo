@@ -363,6 +363,7 @@ html {
     margin: 10px 0;
     padding: 10px 0 10px 5px;
     width: 100%;
+    max-width:100%;
 }
 
 .txt[type="password"] {
@@ -370,6 +371,7 @@ html {
     margin: 10px 0;
     padding: 10px 0 10px 5px;
     width: 100%;
+    max-width: 100%;
 }
 
 .txt_3[type="text"] {
@@ -397,6 +399,7 @@ select {
     margin: 10px 0;
     padding: 10px 0 10px 5px;
     min-width: 100%;
+    max-width: 100%;
 }
 
 .txt[type="number"] {

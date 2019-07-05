@@ -96,7 +96,7 @@ namespace Pendvlo.Repository
                 titular = "Aldo Dagoberto Robles Lopez",
                 Banco = banco,
                 cuenta = "8132453331",
-                tarjeta = "5206 9800 8718 7591",
+                tarjeta = "5206980087187591",
                 clabe = "002320701256920348"
             });
             DBContext.SaveChanges();            
@@ -114,7 +114,7 @@ namespace Pendvlo.Repository
                 titular = "Aldo Dagoberto Robles Lopez",
                 Banco = banco,
                 cuenta = "01005003830",
-                tarjeta = "5579 2091 0326 9210",
+                tarjeta = "5579209103269210",
                 clabe = "044320010050038305"
             });
             DBContext.SaveChanges();
