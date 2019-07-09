@@ -134,15 +134,24 @@
                     </h4>
                     <div class="form">
                         <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
-                            <input id="razon" style="text-transform:uppercase" type="text" required="" placeholder="Razon Social" value="@razon" name="razon" class="txt @stylOnlyForView" @onlyForView>
-                            <input id="name" style="text-transform:uppercase" type="text" required="" placeholder="Nombre" value="@name" name="name" class="txt @stylOnlyForView" @onlyForView>
-                            <input id="rfc" style="text-transform:uppercase" type="text" required="" placeholder="RFC" value="@rfc" name="mob" class="txt @styleReadOnly @stylOnlyForView" @readOnly @onlyForView>
-                            <input id="address" type="text" required="" placeholder="Direccion" value="@address" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
-                            <input id="cp" type="number" required="" placeholder="C.P." value="@CP" name="CP" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
-                            <input id="phone" type="text" required="" placeholder="Telefono" value="@phone" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
-                            <input id="city" style="text-transform:uppercase" type="text" required="" placeholder="Ciudad" value="@city" name="city" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
-                            <input id="state" style="text-transform:uppercase" type="text" required="" placeholder="Estado" value="@state" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
-                            <input id="email" type="text" required="" placeholder="Email" value="@email" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
+                            <label>Razon Social</label>
+                            <input id="razon" style="text-transform:uppercase" type="text" required="" placeholder="" value="@razon" name="razon" class="txt @stylOnlyForView" @onlyForView>
+                            <label>Nombre</label>
+                            <input id="name" maxlength="60" style="text-transform:uppercase" type="text" required="" placeholder="" value="@name" name="name" class="txt @stylOnlyForView" @onlyForView>
+                            <label>RFC</label>                            
+                            <input id="rfc" maxlength="13" style="text-transform:uppercase" type="text" required="" placeholder="" value="@rfc" name="mob" class="txt @styleReadOnly @stylOnlyForView" @readOnly @onlyForView>
+                            <label>Direccion fiscal</label>
+                            <input id="address" maxlength="60" type="text" required="" placeholder="" value="@address" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
+                            <label>Codigo Postal</label>
+                            <input id="cp" maxlength="5" type="number" required="" placeholder="" value="@CP" name="CP" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
+                            <label>Telefono</label>
+                            <input id="phone" maxlength="25" type="text" required="" placeholder="" value="@phone" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
+                            <label>Ciudad</label>
+                            <input id="city" maxlength="20" style="text-transform:uppercase" type="text" required="" placeholder="" value="@city" name="city" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
+                            <label>Estado</label>
+                            <input id="state" maxlength="20" style="text-transform:uppercase" type="text" required="" placeholder="" value="@state" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
+                            <label>Email</label>
+                            <input id="email" maxlength="50" type="text" required="" placeholder="" value="@email" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>                            
                             <input id="invoice" type="checkbox" name="invoice" value="" @invoiceChecked @disableForView> Factura<div class="clearfix"></div><br />
                             Vendedor:
                             <select id="users" class="@stylOnlyForView" @onlyForView>
@@ -245,6 +254,12 @@
                 $("#email").focus();
                 return;
             }
+            if (cp.length != 5) {
+                swal("El codigo postal de ser de 5 posiciones");
+                $("#cp").focus();
+                return;
+            }
+
 
             /*
                 Validate if continue

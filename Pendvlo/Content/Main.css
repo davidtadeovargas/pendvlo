@@ -407,6 +407,7 @@ select {
     margin: 10px 0;
     padding: 10px 0 10px 5px;
     width: 100%;
+    max-width: 100%;
 }
 
 .txt[type="button"] {
