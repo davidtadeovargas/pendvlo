@@ -175,6 +175,18 @@
                 return;
             }
 
+            if (tarjeta.length != 16) {
+                swal("La longitud de la tarjeta debe de ser de 16 posiciones");
+                $("#tarjeta").focus();
+                return;
+            }
+
+            if (clabe.length != 18) {
+                swal("La longitud de la clabe debe de ser de 18 posiciones");
+                $("#clabe").focus();
+                return;
+            }
+
             /*
                 Validate if continue
                 */
@@ -206,6 +218,7 @@
                                 if (edition == 0) { //Only clear fields when it is a new user
                                     clearAllFields();
                                 }
+                                window.location.href = '/cuentasBancarias';
                             }
                             else {
                                 swal(json.error);

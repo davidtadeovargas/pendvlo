@@ -239,6 +239,12 @@
                 $("#email").focus();
                 return;
             }
+            
+            if (!email.includes("@@") || !email.includes(".")) {
+                swal("Ingresa un correo electronico invalido");
+                $("#email").focus();
+                return;
+            }
 
             /*
                 Validate if continue

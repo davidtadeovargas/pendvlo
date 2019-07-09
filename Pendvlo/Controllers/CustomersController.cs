@@ -66,7 +66,7 @@ namespace Pendvlo.Controllers
                 var Customer_ = RepositoryManager.Instance.CustomersRepository.getCustomerByRFC(NewCustomerRequestModel_.rfc);
                 if (Customer_ != null)
                 {
-                    return Json(JSONManager.JsonFail("El cliente ya existe"));
+                    return Json(JSONManager.JsonFail("El cliente ya existe para ese RFC"));
                 }
 
                 /*
