@@ -8,6 +8,9 @@ namespace Pendvlo.HttpModels
     public class NewCustomerRequestModel
     {
         public string razon { get; set; }
+
+        public string tipoPersona { get; set; }
+
         public string name { get; set; }
         public string rfc { get; set; }
         public string address { get; set; }

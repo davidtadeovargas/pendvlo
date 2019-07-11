@@ -14,6 +14,10 @@ namespace Pendvlo.Models
         [MaxLength(60)]
         public string RazonSocial { get; set; }
 
+        [MaxLength(1)]
+        [Required]
+        public string tipoPersona { get; set; }
+
         [MaxLength(60)]
         public string Name { get; set; }
 

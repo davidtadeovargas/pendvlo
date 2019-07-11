@@ -39,6 +39,10 @@ namespace Pendvlo.Controllers
                 {
                     return Json(JSONManager.JsonFail("Need RFC"));
                 }
+                if (NewCustomerRequestModel_.tipoPersona == null || NewCustomerRequestModel_.tipoPersona == "")
+                {
+                    return Json(JSONManager.JsonFail("Need Tipo Persona"));
+                }
                 if (NewCustomerRequestModel_.address == null || NewCustomerRequestModel_.address == "")
                 {
                     return Json(JSONManager.JsonFail("Need Address"));
@@ -80,6 +84,7 @@ namespace Pendvlo.Controllers
 
                 Customer_ = new Customer();
                 Customer_.RazonSocial = NewCustomerRequestModel_.razon;
+                Customer_.tipoPersona = NewCustomerRequestModel_.tipoPersona;
                 Customer_.Name = NewCustomerRequestModel_.name;
                 Customer_.RFC = NewCustomerRequestModel_.rfc;
                 Customer_.Address = NewCustomerRequestModel_.address;
@@ -181,6 +186,10 @@ namespace Pendvlo.Controllers
                 {
                     return Json(JSONManager.JsonFail("Need razon"));
                 }
+                if (EditCustomerRequestModel_.tipoPersona == null || EditCustomerRequestModel_.tipoPersona == "")
+                {
+                    return Json(JSONManager.JsonFail("Need Tipo Persona"));
+                }
                 if (EditCustomerRequestModel_.rfc == null || EditCustomerRequestModel_.rfc == "")
                 {
                     return Json(JSONManager.JsonFail("Need RFC"));
@@ -222,6 +231,7 @@ namespace Pendvlo.Controllers
                 User User_= RepositoryManager.Instance.UsersRepository.getUserByID(EditCustomerRequestModel_.ID);
 
                 Customer_.RazonSocial = EditCustomerRequestModel_.razon;
+                Customer_.tipoPersona = EditCustomerRequestModel_.tipoPersona;
                 Customer_.Name = EditCustomerRequestModel_.name;
                 Customer_.RFC = EditCustomerRequestModel_.rfc;
                 Customer_.Address = EditCustomerRequestModel_.address;

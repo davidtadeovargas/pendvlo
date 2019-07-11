@@ -22,6 +22,7 @@
         Form values
      */
     var razon = "";
+    var tipoPersona = "F";
     var name = "";
     var rfc = "";
     var address = "";
@@ -87,6 +88,7 @@
     {
         //Fill form values
         razon = Model.Customer.RazonSocial;
+        tipoPersona = Model.Customer.tipoPersona;
         name = Model.Customer.Name;
         rfc = Model.Customer.RFC;
         address = Model.Customer.Address;
@@ -136,9 +138,12 @@
                         <form action="contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
                             <label>Razon Social</label>
                             <input id="razon" style="text-transform:uppercase" type="text" required="" placeholder="" value="@razon" name="razon" class="txt @stylOnlyForView" @onlyForView>
+                            <label>Tipo de Persona</label><br>
+                            <input type="radio" name="tipo_persona" value="F" checked> Fisica<br>
+                            <input type="radio" name="tipo_persona" value="M"> Moral<br><br>
                             <label>Nombre</label>
                             <input id="name" maxlength="60" style="text-transform:uppercase" type="text" required="" placeholder="" value="@name" name="name" class="txt @stylOnlyForView" @onlyForView>
-                            <label>RFC</label>                            
+                            <label>RFC</label>
                             <input id="rfc" maxlength="13" style="text-transform:uppercase" type="text" required="" placeholder="" value="@rfc" name="mob" class="txt @styleReadOnly @stylOnlyForView" @readOnly @onlyForView>
                             <label>Direccion fiscal</label>
                             <input id="address" maxlength="60" type="text" required="" placeholder="" value="@address" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
@@ -151,7 +156,7 @@
                             <label>Estado</label>
                             <input id="state" maxlength="20" style="text-transform:uppercase" type="text" required="" placeholder="" value="@state" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
                             <label>Email</label>
-                            <input id="email" maxlength="50" type="text" required="" placeholder="" value="@email" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>                            
+                            <input id="email" maxlength="50" type="text" required="" placeholder="" value="@email" name="email" class="txt @stylOnlyForView" @onlyForView><div class="clearfix"></div>
                             <input id="invoice" type="checkbox" name="invoice" value="" @invoiceChecked @disableForView> Factura<div class="clearfix"></div><br />
                             Vendedor:
                             <select id="users" class="@stylOnlyForView" @onlyForView>
@@ -175,7 +180,7 @@
 
     var userID = @userID;
     var edition = @edition;
-
+    
 
     $(document).ready(function () {
 
@@ -184,6 +189,8 @@
             */
         if (userID != -1) {
             $("#users").val(userID);
+
+            $("input[name=tipo_persona][value='@tipoPersona']").prop("checked",true);
         }
 
         /*
@@ -197,6 +204,7 @@
                 Validate all fields are filled
              */
             var razon = $("#razon").val();
+            var tipoPersona = $('input[name=tipo_persona]:checked').val();
             var name = $("#name").val();
             var rfc = $("#rfc").val();
             var address = $("#address").val();
@@ -283,7 +291,7 @@
                         type: "POST",
                         url: "@url",
                         contentType: "application/json; charset=utf-8",
-                        data: '{"razon":"' + razon + '","name":"' + name + '","rfc":"' + rfc + '","address":"' + address + '","cp":"' + cp + '","phone":"' + phone + '","city":"' + city + '","state":"' + state + '","email":"' + email + '","invoice":"' + invoice + '","userID":"' + userID + '"}',
+                        data: '{"razon":"' + razon + '","tipoPersona":"' + tipoPersona + '","name":"' + name + '","rfc":"' + rfc + '","address":"' + address + '","cp":"' + cp + '","phone":"' + phone + '","city":"' + city + '","state":"' + state + '","email":"' + email + '","invoice":"' + invoice + '","userID":"' + userID + '"}',
                         dataType: "html",
                         success: function (result) {
                             var json = JSON.parse(result);

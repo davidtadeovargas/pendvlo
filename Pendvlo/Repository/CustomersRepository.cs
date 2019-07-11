@@ -20,7 +20,7 @@ namespace Pendvlo.Repository
              */
         public List<Customer> getCustomers()
         {
-            List<Customer> Customers_ = DBContext.Customers.ToList();
+            List<Customer> Customers_ = DBContext.Customers.OrderByDescending(q => q.ID).ToList();
             return Customers_;
         }
 
@@ -60,6 +60,7 @@ namespace Pendvlo.Repository
             Customer customer = new Customer();
             customer.RazonSocial = "Mi razon social";
             customer.Name = "Mi nombre";
+            customer.tipoPersona = "F";
             customer.RFC = "VAVY910708LNA";
             customer.Address = "Rio tinto colonia centro";
             customer.CP = 44150;
@@ -75,6 +76,7 @@ namespace Pendvlo.Repository
             customer = new Customer();
             customer.RazonSocial = "Mi razon social";
             customer.Name = "Mi nombre";
+            customer.tipoPersona = "F";
             customer.RFC = "VAVY910708LNA";
             customer.Address = "Rio tinto colonia centro";
             customer.CP = 44150;
@@ -90,6 +92,7 @@ namespace Pendvlo.Repository
             customer = new Customer();
             customer.RazonSocial = "Mi razon social";
             customer.Name = "Mi nombre";
+            customer.tipoPersona = "F";
             customer.RFC = "VAVY910708LNA";
             customer.Address = "Rio tinto colonia centro";
             customer.CP = 44150;
@@ -104,6 +107,7 @@ namespace Pendvlo.Repository
 
             customer = new Customer();
             customer.RazonSocial = "Mi razon social";
+            customer.tipoPersona = "F";
             customer.Name = "Mi nombre";
             customer.RFC = "VAVY910708LNA";
             customer.Address = "Rio tinto colonia centro";
@@ -119,6 +123,7 @@ namespace Pendvlo.Repository
 
             customer = new Customer();
             customer.RazonSocial = "Mi razon social";
+            customer.tipoPersona = "F";
             customer.Name = "Mi nombre";
             customer.RFC = "VAVY910708LNA";
             customer.Address = "Rio tinto colonia centro";
@@ -134,6 +139,7 @@ namespace Pendvlo.Repository
 
             customer = new Customer();
             customer.RazonSocial = "Mi razon social";
+            customer.tipoPersona = "F";
             customer.Name = "Mi nombre";
             customer.RFC = "VAVY910708LNA";
             customer.Address = "Rio tinto colonia centro";
@@ -149,6 +155,7 @@ namespace Pendvlo.Repository
 
             customer = new Customer();
             customer.RazonSocial = "Mi razon social";
+            customer.tipoPersona = "F";
             customer.Name = "Mi nombre";
             customer.RFC = "VAVY910708LNA";
             customer.Address = "Rio tinto colonia centro";
@@ -164,6 +171,7 @@ namespace Pendvlo.Repository
 
             customer = new Customer();
             customer.RazonSocial = "Mi razon social";
+            customer.tipoPersona = "F";
             customer.Name = "Mi nombre";
             customer.RFC = "VAVY910708LNA";
             customer.Address = "Rio tinto colonia centro";
@@ -179,6 +187,7 @@ namespace Pendvlo.Repository
 
             customer = new Customer();
             customer.RazonSocial = "Mi razon social";
+            customer.tipoPersona = "F";
             customer.Name = "Mi nombre";
             customer.RFC = "VAVY910708LNA";
             customer.Address = "Rio tinto colonia centro";
@@ -194,6 +203,7 @@ namespace Pendvlo.Repository
 
             customer = new Customer();
             customer.RazonSocial = "Mi razon social";
+            customer.tipoPersona = "F";
             customer.Name = "Mi nombre";
             customer.RFC = "VAVY910708LNA";
             customer.Address = "Rio tinto colonia centro";
@@ -209,6 +219,7 @@ namespace Pendvlo.Repository
 
             customer = new Customer();
             customer.RazonSocial = "Mi razon social";
+            customer.tipoPersona = "F";
             customer.Name = "Mi nombre";
             customer.RFC = "VAVY910708LNA";
             customer.Address = "Rio tinto colonia centro";
@@ -224,6 +235,7 @@ namespace Pendvlo.Repository
 
             customer = new Customer();
             customer.RazonSocial = "Mi razon social";
+            customer.tipoPersona = "F";
             customer.Name = "Mi nombre";
             customer.RFC = "VAVY910708LNA";
             customer.Address = "Rio tinto colonia centro";
@@ -239,6 +251,7 @@ namespace Pendvlo.Repository
 
             customer = new Customer();
             customer.RazonSocial = "Mi razon social";
+            customer.tipoPersona = "F";
             customer.Name = "Mi nombre";
             customer.RFC = "VAVY910708LNA";
             customer.Address = "Rio tinto colonia centro";
