@@ -20,7 +20,7 @@ namespace Pendvlo.Repository
              */
         public List<User> getUsers()
         {
-            List<User> Users_ = DBContext.Users.Include("Sucursal").Include("Module").ToList();
+            List<User> Users_ = DBContext.Users.Include("Sucursal").Include("Module").OrderByDescending(s => s.ID).ToList();
             return Users_;
         }
 

@@ -20,7 +20,7 @@ namespace Pendvlo.Repository
              */
         public List<Cuenta> getAll()
         {
-            List<Cuenta> list_ = DBContext.Cuentas.Include("Banco").OrderBy(s => s.ID).ToList();
+            List<Cuenta> list_ = DBContext.Cuentas.Include("Banco").OrderByDescending(s => s.ID).ToList();
             return list_;
         }
 
